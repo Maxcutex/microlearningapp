@@ -1,13 +1,18 @@
 source "https://rubygems.org"
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
-
-# Specify your gem's dependencies in microlearningapp.gemspec
-gemspec
+gem 'bundler'
+gem 'require_all'
 gem 'sinatra'
 gem 'twilio-ruby'
 gem 'rack'
+gem 'rake'
+gem 'rack-flash3'
+gem 'rspec'
 gem 'rack-test'
 gem 'shotgun'
 gem 'haml'
 gem 'rubocop'
+gem 'pg'
+gem 'activerecord'
+gem 'sinatra-activerecord'
+gem 'sqlite3'
