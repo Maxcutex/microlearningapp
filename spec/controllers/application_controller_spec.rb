@@ -10,9 +10,8 @@ describe ApplicationController do
 end
 
 describe 'hello world' do
-  it 'says hellow' do
+  it 'says hello' do
     get '/'
     expect(last_response).to be_ok
   end
-
 end

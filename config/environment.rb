@@ -6,7 +6,6 @@ require 'rack-flash'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
 configure :development do
-  
   ActiveRecord::Base.establish_connection(
     :adapter => 'sqlite3',
     :show_exceptions => true,
