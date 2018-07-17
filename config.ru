@@ -13,6 +13,6 @@ require './config/environment'
 #   end
 # end
 use Rack::MethodOverride
-# suse UserController
+# use UserController
 # use CourseController
 run ApplicationController
