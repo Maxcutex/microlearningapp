@@ -5,7 +5,6 @@ require 'base64'
 
 # Main Controller for the microlearning application
 class ApplicationController < Sinatra::Base
-
   configure do
     register Sinatra::ActiveRecordExtension
     enable :sessions
@@ -19,9 +18,7 @@ class ApplicationController < Sinatra::Base
     headers 'Content-Type' => 'text/html; charset=utf-8'
   end
 
-  get "/" do
-    "Hello world"
-  end 
-  
+  get '/' do
+    'Hello world'
+  end
 end
-
