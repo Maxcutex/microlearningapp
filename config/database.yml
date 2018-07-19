@@ -1,21 +1,22 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
 
 test:
   <<: *default
-  database: db/test.sqlite3
+  DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
 
 production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
   database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
   username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>

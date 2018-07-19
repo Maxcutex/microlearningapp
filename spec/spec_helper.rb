@@ -1,15 +1,36 @@
-# spec/spec_helper.rb
+ENV["SINATRA_ENV"] = "test"
+
+require_relative '../config/environment'
 require 'rack/test'
-require 'rspec'
+require 'capybara/rspec'
+require 'capybara/dsl'
 
-ENV['RACK_ENV'] = 'test'
-
-module RSpecMixin
-  include Rack::Test::Methods
-  def app
-    ApplicationController
-  end
+if ActiveRecord::Base.connection.migration_context.needs_migration?
+  raise 'Migrations are pending. Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
 end
 
-# For RSpec 2.x and 3.x
-RSpec.configure { |c| c.include RSpecMixin }
+ActiveRecord::Base.logger = nil
+
+RSpec.configure do |config|
+  config.run_all_when_everything_filtered = true
+  config.filter_run :focus
+  config.include Rack::Test::Methods
+  config.include Capybara::DSL
+  DatabaseCleaner.strategy = :truncation
+
+  config.before do
+    DatabaseCleaner.clean
+  end
+
+  config.after do
+    DatabaseCleaner.clean
+  end
+
+  config.order = 'default'
+end
+
+def app
+  Rack::Builder.parse_file('config.ru').first
+end
+
+Capybara.app = app
