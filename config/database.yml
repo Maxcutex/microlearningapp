@@ -16,9 +16,9 @@ test:
   <<: *default
 #  database: db/test.sqlite3
   host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
-  database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
-  username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
-  password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
+  database: <%= ENV['DATABASE_NAME'] || 'circle_test' %>
+  username: <%= ENV['DATABASE_USER'] || 'ubuntu' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || '' %>
 
 production:
   adapter: postgresql
