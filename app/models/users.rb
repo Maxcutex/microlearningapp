@@ -5,5 +5,5 @@ class User < ActiveRecord::Base
   has_many :userEnrollments
   has_many :userLearntTracks
 
-  validates :full_name, :username, :email, presence: true
+  validates :first_name, :last_name, :username, :email, presence: true
 end

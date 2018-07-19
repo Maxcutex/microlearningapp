@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_16_143945) do
+ActiveRecord::Schema.define(version: 2018_07_18_190356) do
 
   create_table "course_details", force: :cascade do |t|
     t.integer "day_number", default: 0
@@ -26,6 +26,11 @@ ActiveRecord::Schema.define(version: 2018_07_16_143945) do
     t.integer "level"
     t.integer "instructor_id"
     t.integer "no_days"
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.string "faq_title"
+    t.string "faq_description"
   end
 
   create_table "user_enrollments", force: :cascade do |t|
@@ -45,12 +50,15 @@ ActiveRecord::Schema.define(version: 2018_07_16_143945) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "full_name"
+    t.string "first_name"
+    t.string "last_name"
     t.string "username"
     t.string "email"
+    t.string "user_image"
     t.string "password_digest"
     t.string "biography"
     t.boolean "instructor"
+    t.boolean "is_admin"
   end
 
 end
