@@ -13,7 +13,7 @@ configure :development do
   )
 end
 configure :production do
-  db = URI.parse(ENV['DATABASE_URL'] || 'postgresql://microlearnadmin:MicroLearn@1@localhost:5432/microlearndb')
+  db = URI.parse(ENV['DATABASE_URL'] || 'microlearndbpostgresql://microlearnadmin:MicroLearn@1@localhost:5432/')
 
   ActiveRecord::Base.establish_connection(
     :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
