@@ -19,7 +19,7 @@ jobs:
        - image: circleci/postgres:9.4
          environment:
           DATABASE_URL: postgresql://sinatra:sinatra@127.0.0.1:5432/sinatra
-          
+
        - image: redis:4.0.6
 
     working_directory: ~/microlearningapp #~/repo
@@ -45,7 +45,7 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
         
       # Database setup
-      - run: bundle exec rake db:create
+      - run: bundle exec rake db:migrate
       - run: bundle exec rake db:schema:load
 
       # run tests!

@@ -1,12 +1,13 @@
 default: &default
   adapter: postgresql
+  encoding: unicode
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
   #database: db/development.sqlite3
-  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
   database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
   username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
@@ -14,7 +15,7 @@ development:
 test:
   <<: *default
 #  database: db/test.sqlite3
-  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
   database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
   username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
@@ -23,7 +24,7 @@ production:
   adapter: postgresql
   encoding: unicode
   pool: 5
-  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
   database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
   username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
   password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
