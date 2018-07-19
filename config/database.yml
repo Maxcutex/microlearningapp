@@ -1,15 +1,23 @@
 default: &default
-  adapter: sqlite3
+  adapter: postgresql
   pool: 5
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  #database: db/development.sqlite3
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
+  username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
 
 test:
   <<: *default
-  database: db/test.sqlite3
+#  database: db/test.sqlite3
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  database: <%= ENV['DATABASE_NAME'] || 'sinatra' %>
+  username: <%= ENV['DATABASE_USER'] || 'sinatra' %>
+  password: <%= ENV['DATABASE_PASSWORD'] || 'sinatra' %>
 
 production:
   adapter: postgresql
