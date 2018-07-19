@@ -5,14 +5,14 @@ require 'bundler/setup'
 require 'rack-flash'
 Bundler.require(:default, ENV['SINATRA_ENV'])
 
-configure :development do
-  ActiveRecord::Base.establish_connection(
-    :adapter => 'sqlite3',
-    :show_exceptions => true,
-    :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
-  )
-end
-configure :production do
+# configure :development do
+#   ActiveRecord::Base.establish_connection(
+#     :adapter => 'sqlite3',
+#     :show_exceptions => true,
+#     :database => "db/#{ENV['SINATRA_ENV']}.sqlite"
+#   )
+# end
+configure :production, :development, :test do
   db = URI.parse(ENV['DATABASE_URL'] || 'microlearndbpostgresql://microlearnadmin:MicroLearn@1@localhost:5432/')
 
   ActiveRecord::Base.establish_connection(
