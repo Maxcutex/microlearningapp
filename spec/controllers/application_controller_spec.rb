@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
-require_relative '../../app/controllers/application_controller.rb'
+# require_relative '../../app/controllers/application_controller.rb'
 
-describe ApplicationController do
+describe "test home" do
   it 'should display hello world' do
     get '/'
     expect(last_response.status).to eq 200

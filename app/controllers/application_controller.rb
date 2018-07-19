@@ -3,10 +3,11 @@ require 'sinatra/base'
 require 'haml'
 require 'base64'
 require_relative '../helpers/session_helper'
+require_relative '../helpers/application_helper'
 
 # Main Controller for the microlearning application
 class ApplicationController < Sinatra::Base
-  # helpers Sinatra::AppHelpers
+  helpers Sinatra::AppHelpers
   include SessionHelpers
   configure do
     register Sinatra::ActiveRecordExtension
