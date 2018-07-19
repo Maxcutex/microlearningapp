@@ -13,7 +13,7 @@ Bundler.require(:default, ENV['SINATRA_ENV'])
 #   )
 # end
 configure :production, :development do
-  db = URI.parse(ENV['DATABASE_URL'] || 'postgresql://microlearnadmin:MicroLearn@1@localhost:5432/microlearndb')
+  db = URI.parse(ENV['DATABASE_URL'] || 'postgres://microlearnadmin:MicroLearn1@localhost:5432/microlearndb')
 
   ActiveRecord::Base.establish_connection(
     :adapter  => db.scheme == 'postgres' ? 'postgresql' : db.scheme,
