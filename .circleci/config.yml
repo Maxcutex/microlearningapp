@@ -10,7 +10,7 @@ jobs:
        - image: circleci/ruby:2.4.1-node-browsers
          environment:
           PGHOST: 127.0.0.1
-          PGUSER: myapp-test
+          PGUSER: ubuntu
           RAILS_ENV: test
       
       # Specify service dependencies here if necessary
