@@ -1,7 +1,7 @@
 # spec/spec_helper.rb
 require 'rack/test'
 require 'rspec'
-require_relative '../../app/controllers/application_controller.rb'
+require_relative '../app/controllers/application_controller.rb'
 
 ENV['RACK_ENV'] = 'test'
 
