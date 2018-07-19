@@ -16,8 +16,10 @@ class UserController < ApplicationController
     postuser = params[:user]
     @user = User.new(postuser)
     @user.instructor = false
-    if params[:user]['image']
-      file = params[:user]['image']
+    @user.is_admin = false
+    @user.user_image = ''
+    if params[:user]['user_image']
+      file = params[:user]['user_image']
       file_name = file[:filename]
       temp_file = file[:tempfile]
 
@@ -25,25 +27,26 @@ class UserController < ApplicationController
         f.write(temp_file.read)
       end
 
-      postuser['image'] = file_name
+      @user.user_image = file_name
     end
     if @user.save
+      
       session[:user_id] = @user.id
-      redirect to '/courses'
+      redirect to '/dashboard'
     else
-      flash[:error] = 'Kindly fill in all required fields correctly!'
-      redirect to '/signup'
+      #flash[:error] = "Please ensure you have filled in all required fields correctly!"
+      #redirect to "/signup"
+      erb :'/users/error', :locals=> { user: @user.errors.full_messages }
     end
   end
 
   # User currently logged in will view the Courses page directly
   get '/login' do
     if logged_in?
-      redirect to '/courses'
+      redirect to '/dashboard'
     else
-      page_title = 'Login To App'
-      class_title = 'login-page'
-      erb :'/users/login', :layout => :layout_login_reg, :locals => { :page_title => page_title, :class_title => class_title }
+      local_values = { page_title: 'Login To App', class_title: 'login-page' }
+      erb :'/users/login', :layout => :layout_login_reg, :locals => local_values
     end
   end
 
@@ -52,10 +55,11 @@ class UserController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to '/courses'
+      redirect to '/dashboard'
     else
-      flash[:error] = 'Sorry, invalid username and password.'
-      redirect to '/login'
+      # flash[:error] = 'Sorry, invalid username and password.'
+      # redirect to '/login'
+      erb :'/users/error', :locals=> { user: @user.errors.full_messages }
     end
   end
 
@@ -73,7 +77,7 @@ class UserController < ApplicationController
   # Dashboard View
   get '/dashboard' do
     if logged_in?
-      erb :'/users/index'
+      erb :'/users/index', :layout => :layout_admin
     else
       redirect to '/'
     end
