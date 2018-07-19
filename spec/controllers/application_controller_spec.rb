@@ -1,11 +1,11 @@
 require_relative '../spec_helper'
 # require_relative '../../app/controllers/application_controller.rb'
 
-describe "test home" do
+describe 'testing home page' do
   it 'should display hello world' do
     get '/'
     expect(last_response.status).to eq 200
-    expect(last_response.body).to include('Hello world')
+    expect(last_response.body).to include('Learning One Step At a Time')
   end
 end
 
