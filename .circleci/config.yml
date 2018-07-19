@@ -17,7 +17,7 @@ jobs:
           POSTGRES_USER: circleci-demo-go
           POSTGRES_DB: microlearningapp
 
-    working_directory: ~/circleci-microlearningapp-sinatra #~/repo
+    working_directory: ~/microlearningapp #~/repo
 
     steps:
       - checkout
