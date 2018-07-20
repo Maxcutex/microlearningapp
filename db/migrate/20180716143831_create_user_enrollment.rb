@@ -8,6 +8,7 @@ class CreateUserEnrollment < ActiveRecord::Migration[5.2]
       t.integer :course_id
       t.datetime :start_date
       t.datetime :end_date
+      t.boolean :is_active
     end
   end
 end

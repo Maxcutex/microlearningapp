@@ -9,8 +9,6 @@ class CreateUsers < ActiveRecord::Migration[5.2]
       t.string :user_image
       t.string :password_digest
       t.string :biography
-      t.boolean :instructor
-      t.boolean :is_admin
     end
   end
 end

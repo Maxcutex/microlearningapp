@@ -4,11 +4,17 @@ module SessionHelpers
     !!current_user
   end
 
+  def is_admin?
+    !!confirm_admin
+  end
   # Find current user
   def current_user
     @current_user ||= User.find_by_id(session[:user_id])
   end
-
+  def confirm_admin
+    @confirm_admin ||= UserRole.where("role_id = ? AND user_id = ? AND is_active = ?", 1, session[:user_id],true).first
+    # @confirm_admin ||= UserRole.find_by_user_id(session[:user_id])
+  end
   # Find a course based on id
   def find_course(id)
     @course ||= Course.find_by_id(id)
