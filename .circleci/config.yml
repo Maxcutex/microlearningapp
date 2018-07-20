@@ -9,18 +9,13 @@ jobs:
       # specify the version you desire here
        - image: circleci/ruby:2.4.1-node-browsers
          environment:
-          PGHOST: 127.0.0.1
-          PGUSER: myapp-test
           RAILS_ENV: test
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-       - image: circleci/postgres:9.5-alpine
+          PGHOST: 127.0.0.1
+          DATABASE_URL: "postgres://ubuntu@localhost:5432/circle_test"
+       - image: circleci/postgres:9.4
          environment:
-          DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
-          COVERALLS_REPO_TOKEN: jtXkU4g6xAkBD6feVcI20oWmxWxMK6CY9
-          COVERALLS_PARALLEL: 'true'
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
 
        - image: redis:4.0.6
 
