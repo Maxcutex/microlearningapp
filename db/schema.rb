@@ -10,16 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_18_190356) do
+ActiveRecord::Schema.define(version: 2018_07_20_084623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "course_categories", force: :cascade do |t|
+    t.string "category_name"
+    t.boolean "is_active"
+  end
 
   create_table "course_details", force: :cascade do |t|
     t.integer "day_number", default: 0
     t.string "day_topic"
     t.string "day_details"
     t.integer "course_id"
+    t.string "topic_image"
+    t.string "topic_thumbnail"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -29,11 +36,20 @@ ActiveRecord::Schema.define(version: 2018_07_18_190356) do
     t.integer "level"
     t.integer "instructor_id"
     t.integer "no_days"
+    t.integer "category_id"
+    t.string "course_image"
+    t.string "course_thumbnail"
+    t.boolean "is_active"
   end
 
   create_table "faqs", force: :cascade do |t|
     t.string "faq_title"
     t.string "faq_description"
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string "role_name"
+    t.string "role_description"
   end
 
   create_table "user_enrollments", force: :cascade do |t|
@@ -43,6 +59,7 @@ ActiveRecord::Schema.define(version: 2018_07_18_190356) do
     t.integer "course_id"
     t.datetime "start_date"
     t.datetime "end_date"
+    t.boolean "is_active"
   end
 
   create_table "user_learnt_tracks", force: :cascade do |t|
@@ -50,6 +67,12 @@ ActiveRecord::Schema.define(version: 2018_07_18_190356) do
     t.integer "day_number"
     t.integer "next_day_number"
     t.integer "course_id"
+  end
+
+  create_table "user_roles", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "role_id"
+    t.boolean "is_active"
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,8 +83,6 @@ ActiveRecord::Schema.define(version: 2018_07_18_190356) do
     t.string "user_image"
     t.string "password_digest"
     t.string "biography"
-    t.boolean "instructor"
-    t.boolean "is_admin"
   end
 
 end

@@ -13,11 +13,12 @@ gem "tux"
 gem 'rack-flash3'
 gem 'rubocop'
 gem 'pg'
-gem 'shotgun'
 gem 'haml'
 gem 'rspec'
+gem 'faker'
+gem 'rufo'
 
-group :test do
+group :test,:development do
   gem 'capybara'
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'

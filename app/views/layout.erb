@@ -68,18 +68,7 @@
                 <li><a href="/users">View users</a></li>
                 <li><a href="/courses">View courses</a></li>
 
-                <%#  menu links for instructor %>
-                <% if current_user.is_admin%>
-                  <li><a href="/courses/new">Create new course</a></li>
-                  <li><a href="/teaching">My courses</a></li>
-                <% elsif current_user.instructor%>
-                  <li><a href="/courses/new">Create new course</a></li>
-                  <li><a href="/teaching">My courses</a></li>
-
-                <%#  menu links for student  %>  
-                <%else%>
-                  <li><a href="/enrolled">My enrollment</a></li>
-                <%end%>
+                
                 <li><a href="/logout">Log out</a></li>
               </ul>
             </div>
