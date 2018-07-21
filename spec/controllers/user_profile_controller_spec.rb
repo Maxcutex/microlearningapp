@@ -1,0 +1,51 @@
+require 'spec_helper'
+
+describe UserProfileController do
+  describe 'VIEW action' do
+    context 'View user profile' do
+      it 'loads the manage courses page for a logged in an admin' do
+        user_values = { 
+          :first_name => 'Nili',
+          :last_name => 'Ach',
+          :username => 'nili678',
+          :email => 'niliach@example.com',
+          :user_image =>'myimage.jpg', :biography =>'asdfa fasdf asf asfd asdf ', 
+          :password => 'iesha', :password_confirmation => 'iesha' 
+        }
+        user = User.create(user_values)
+        visit '/login'
+        fill_in(:username, :with => "nili678")
+        fill_in(:password, :with => "iesha")
+        click_button 'Submit'
+        
+        visit "/profile"
+        expect(page.status_code).to eq(200)
+        expect(page.body).to include("Nili Ach")
+      end 
+    end
+  end
+  describe 'Edit action' do
+    context 'Edit user profile' do
+      it "let a logged in user see a section to update their own information" do
+        user_values = { 
+            :first_name => 'Nili',
+            :last_name => 'Ach',
+            :username => 'nili678',
+            :email => 'niliach@example.com',
+            :user_image =>'myimage.jpg', :biography =>'asdfa fasdf asf asfd asdf ', 
+            :password => 'iesha', :password_confirmation => 'iesha' 
+          }
+        user = User.create(user_values)
+        visit '/login'    
+        fill_in(:username, :with => "nili678")
+        fill_in(:password, :with => "iesha")
+        click_button 'Submit'
+        session = {}
+        session[:user_id] = user.id
+        visit "/profile"
+        expect(page.body).to include("User Profile")
+        expect(page.body).to include("Nili Ach")
+      end
+    end
+  end
+end

@@ -11,4 +11,5 @@ use Rack::MethodOverride
 use UserController
 use CourseController
 use BackEndManageController
+use UserProfileController
 run ApplicationController
