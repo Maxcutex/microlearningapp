@@ -12,28 +12,35 @@ class UserProfileController < ApplicationController
   end
 
   post '/editprofile' do
-    userval = params[:user]
     file_name = ''
     begin
-    if params[:user]['user_image']
-      file = params[:user]['user_image']
-      file_name = file[:filename]
-      temp_file = file[:tempfile]
+      if params[:user_image]
+        file = params[:user_image]
+        file_name = file[:filename]
+        temp_file = file[:tempfile]
 
-      File.open("./public/images/#{file_name}", 'wb') do |f|
-        f.write(temp_file.read)
+        File.open("./public/images/#{file_name}", 'wb') do |f|
+          f.write(temp_file.read)
+        end
       end
-    end
-    @user_update = User.find_by_id(session[:user_id])
-    @user_update.user_image = file_name
-    updated_values = { 
+      @user_update = User.find_by_id(session[:user_id])
+      @user_update.user_image = file_name
+      updated_values = {}
+      if file_name==''
+        updated_values = { 
+        first_name: params[:first_name],
+        last_name: params[:last_name],
+        biography: params[:biography]
+      }
+      else
+        updated_values = { 
         user_image: file_name, 
-        first_name: userval[:first_name],
-        last_name: userval[:last_name],
-        username: userval[:username],
-        email: userval[:email],
-        biography: userval[:biography]
-    }
+        first_name: params[:first_name],
+        last_name: params[:last_name],
+        biography: params[:biography]
+      }
+    end
+    
     @user_update.update(updated_values)
     redirect to '/profile'
     rescue Exception => e

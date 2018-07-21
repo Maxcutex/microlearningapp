@@ -25,7 +25,8 @@
               <h3 class="profile-username text-center"><%=current_user.first_name %> <%=current_user.last_name %></h3>
 
               <p class="text-muted text-center"><%=current_user.userrole.role.role_name%></p>
-
+<input type="text" class="form-control" name="tester" placeholder="Last Name" >
+                   
             </div>
             <!-- /.box-body -->
           </div>
@@ -52,12 +53,12 @@
         <div class="col-md-9">
           <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-              <li class="active"><a href="#timeline" data-toggle="tab" aria-expanded="true">Timeline</a></li>
-              <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Edit Profile</a></li>
+              <li class=""><a href="#timeline" data-toggle="tab" aria-expanded="true">Timeline</a></li>
+              <li class="active"><a href="#settings" data-toggle="tab" aria-expanded="false">Edit Profile</a></li>
             </ul>
             <div class="tab-content">
               
-              <div class="tab-pane active" id="timeline">
+              <div class="tab-pane" id="timeline">
                 <!-- The timeline -->
                 <ul class="timeline timeline-inverse">
                   <!-- timeline time label -->
@@ -153,34 +154,34 @@
               </div>
               <!-- /.tab-pane -->
 
-              <div class="tab-pane" id="settings">
-                <form action='/editprofile' class="form-horizontal" method="POST" enctype="multipart/form-data">
+              <div class="tab-pane active" id="settings">
+                <form action='/editprofile' id="editprofile" class="form-horizontal" method="POST" enctype="multipart/form-data">
                   <div class="form-group">
                     <label for="first_name" class="col-sm-2 control-label">First Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="first_name" name="user[first_name]"  placeholder="First Name" value="<%=current_user.first_name%>">
+                      <input name="first_name"  type="text" class="form-control" id="first_name"  placeholder="First Name" value="<%=current_user.first_name%>">
                     </div>
                   </div> 
                   <div class="form-group">
                     <label for="last_name" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="last_name" name="user[last_name]" placeholder="Last Name" value="<%=current_user.last_name%>">
+                      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="<%=current_user.last_name%>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">UserName</label>
 
                     <div class="col-sm-10">
-                      <input type="text" disabled class="form-control" id="username" name="user[username]" value="<%=current_user.username%>">
+                      <input type="text" disabled class="form-control" id="username" name="username" value="<%=current_user.username%>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="inputEmail" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" disabled class="form-control" id="email" name='user[email]' value="<%=current_user.email%>">
+                      <input type="email" disabled class="form-control" id="email" name='email' value="<%=current_user.email%>">
                     </div>
                   </div>
                   
@@ -188,7 +189,7 @@
                     <label for="inputExperience" class="col-sm-2 control-label">About Me</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="biography" name='user[biography]' placeholder="About Me"><%=current_user.biography%></textarea>
+                      <textarea class="form-control" id="biography" name='biography' placeholder="About Me"><%=current_user.biography%></textarea>
                     </div>
                   </div>
                  
@@ -197,7 +198,7 @@
                     <label for="user_image" class="col-sm-2 control-label"> Image Upload</label>
 
                     <div class="col-sm-10">
-                     <input type="file" id="user_image" name="user[user_image]">
+                     <input type="file" id="user_image" name="user_image">
 
                     </div>
                   </div>
