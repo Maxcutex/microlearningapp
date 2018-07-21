@@ -76,7 +76,7 @@ class UserController < ApplicationController
     if logged_in?
       erb :'/users/index', :layout => :layout_admin
     else
-      redirect to '/'
+      redirect to '/login'
     end
   end
 end
