@@ -1,7 +1,7 @@
 require 'faker'
-require 'database_cleaner'
+#require 'database_cleaner'
 
-DatabaseCleaner.clean_with :truncation
+#DatabaseCleaner.clean_with :truncation
 Role.destroy_all
 Role.create(
   [

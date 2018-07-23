@@ -18,7 +18,7 @@ RSpec.configure do |config|
   config.include Rack::Test::Methods
   config.include Capybara::DSL
   DatabaseCleaner.strategy = :truncation
-
+  #config.infer_spec_type_from_file_location!
   config.before do
     DatabaseCleaner.clean
   end
