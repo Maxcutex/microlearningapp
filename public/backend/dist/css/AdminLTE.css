@@ -13,6 +13,7 @@ html,
 body {
   height: 100%;
 }
+.cust_height{ height: 70px;}
 .layout-boxed html,
 .layout-boxed body {
   height: 100%;

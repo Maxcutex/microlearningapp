@@ -1,0 +1,190 @@
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+         
+        <%=@course.name %>
+         
+        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Courses</a></li>
+        <li class="active">Administer Course</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-6">
+          <!-- general form elements -->
+          <div class="box box-primary">
+            <div class="box-header with-border">
+              <h3 class="box-title">Course Details</h3>
+               <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-course-edit">
+               Edit Course Details
+              </button>
+            </div>
+            <!-- /.box-header -->
+            
+              <div class="box-body">
+               <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
+
+              <div class="pad" ><p> <%= @course.description %></p></div>
+              <span class="pull-right text-muted"><%=course_difficulty(@course.level) %> </span>
+              <span class="pull-right">Level: &nbsp;&nbsp;</span>
+              </div>
+              <!-- /.box-body -->
+
+               
+            
+          </div>
+          <!-- /.box -->
+
+         
+
+        </div>
+        <!--/.col (left) -->
+        <!-- right column -->
+        <div class="col-md-6">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Course Topics</h3>
+              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-topic-add">
+               Add New Topic
+              </button>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>Topic(s)</th>
+                 
+                  <th style="width: 110px"></th>
+                </tr>
+                <% a = 0 %>
+                <% @coursedetails.each do |cd|%>
+                <% a = a + 1 %>
+                <tr>
+                  <td><%=a%></td>
+                  <td><%=cd.day_topic%></td>
+                  
+                  <td>
+                  <button type="button" class="badge bg-blue " data-toggle="modal" data-target="#modal-topic-view">
+                    View 
+                  </button> &nbsp;
+                  <button type="button" class="badge bg-orange " data-toggle="modal" data-target="#modal-topic-edit">
+                    Edit
+                  </button>
+                </td>
+                </tr>
+                <% end %>
+              
+              </tbody></table>
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+              </div>
+              <!-- /.box-footer -->
+           
+          </div>
+          <!-- /.box -->
+         
+        </div>
+        <!--/.col (right) -->
+      </div>
+      <!-- /.row -->
+
+      <div class="modal fade" id="modal-course-edit" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Default Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+      </div>
+
+      <div class="modal fade" id="modal-topic-add" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Default Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modal-topic-edit" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Default Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+        <div class="modal fade" id="modal-topic-view" style="display: none;">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span></button>
+                <h4 class="modal-title">Default Modal</h4>
+              </div>
+              <div class="modal-body">
+                <p>One fine body…</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
