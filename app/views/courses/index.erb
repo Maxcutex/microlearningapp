@@ -1,0 +1,68 @@
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        Courses
+        <small>Preview page</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Courses</li>
+      </ol>
+    </section>
+    
+    
+
+    <!-- Main content -->
+    <section class="content">
+
+
+      <h2 class="page-header">Course</h2>
+
+
+      <div class="row">
+      <% i = 0 %>
+      <% @courses.each do |course|%>
+        <%i  = i+1 %>
+            <div class="col-md-3">
+          <!-- Box Comment -->
+          <div class="box box-widget">
+            <div class="box-header with-border">
+              <div class="user-block">
+                <img class="img-circle" src="backend/dist/img/user1-128x128.jpg" alt="User Image">
+                <span class="username"><a href="#"><%= course.instructor.first_name %>  &nbsp; <%= course.instructor.last_name %> </a></span>
+                <span class="description">Shared publicly - 7:30 PM Today</span>
+              </div>
+              <!-- /.user-block -->
+              
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+            <h5>Course name:</h5> <h5> <a href="/courses/view/<%=course.id%>"><%= course.name%> </a> <%= course.icon%></h5>
+              <img class="img-responsive pad" src="backend/dist/img/photo2.png" alt="Photo">
+
+              <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
+              <span class="pull-right text-muted"><%=course_difficulty(course.level) %> </span>
+            </div>
+            <!-- /.box-body -->
+           
+           
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.col -->
+        <% if i==4  %>
+        <% i = 0  %>
+        </div><div class="row">
+        <% end %>
+        <%end%>
+        
+       
+      </div>
+      <!-- /.row -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

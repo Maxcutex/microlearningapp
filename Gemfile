@@ -17,6 +17,7 @@ gem 'haml'
 gem 'rspec'
 gem 'faker'
 gem 'rufo'
+gem 'coveralls', require: false
 
 group :test,:development do
   gem 'capybara'

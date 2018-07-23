@@ -5,7 +5,7 @@ class UserProfileController < ApplicationController
     if logged_in?
       page_title = 'Profile Management'
 
-      erb :'/users/profile', :layout => :layout_admin_pages, :locals => { :page_title => page_title }  
+      erb :'/users/profile', :locals => { :page_title => page_title }  
     else
       redirect to '/dashboard'
     end

@@ -69,9 +69,10 @@ describe UserProfileController do
         expect(page.body).to include("Nili Ach")
         expect(page.body).to include("Edit Profile")
         
+       
         #find('#editprofile') do 
         #page.find(:fillable_field, 'first_name').set('text')
-        # fill_in('first_name', :with => "Editedfirstname")
+        fill_in(:tester, :with => "Editedfirstname")
         #  fill_in('last_name', :with => "editedlastname")
         #  click_button 'Submit'
         #end
