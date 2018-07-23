@@ -1,7 +1,9 @@
 # Micro-Learning App
-
+[![Coverage Status](https://coveralls.io/repos/github/Maxcutex/microlearningapp/badge.svg?branch=develop)](https://coveralls.io/github/Maxcutex/microlearningapp?branch=develop)
 
 Micro-Learning App is a responsive web application that sends you one or multiple pages per day about things you want to learn.
+
+https://rubymicrolearningapp.herokuapp.com/
 
 The application provides a user with a choice of specifying interests and through this, appropriate pages are found and sent via the user's email.
 
