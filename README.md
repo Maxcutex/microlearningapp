@@ -1,4 +1,5 @@
 # Micro-Learning App
+[![CircleCI](https://circleci.com/gh/maxcutex/microlearningapp.svg?style=svg)](https://circleci.com/gh/maxcutex/microlearningapp)
 [![Coverage Status](https://coveralls.io/repos/github/Maxcutex/microlearningapp/badge.svg?branch=develop)](https://coveralls.io/github/Maxcutex/microlearningapp?branch=develop)
 
 Micro-Learning App is a responsive web application that sends you one or multiple pages per day about things you want to learn.
