@@ -22,7 +22,8 @@ describe CourseController do
       click_button 'Submit'
 
       visit "/courses"
-      expect(page.status_code).to eq(200)
+      #expect(page.status_code).to eq(200)
+      expect(page.body).to include("Course")
     end    
 
     it 'does not let a user not logged in to  view the course page' do
