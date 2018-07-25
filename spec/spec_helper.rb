@@ -1,4 +1,4 @@
-ENV["SINATRA_ENV"] = "test"
+ENV['SINATRA_ENV'] = 'test'
 require 'coveralls'
 Coveralls.wear!
 require_relative '../config/environment'
@@ -7,7 +7,10 @@ require 'capybara/rspec'
 require 'capybara/dsl'
 
 if ActiveRecord::Base.connection.migration_context.needs_migration?
-  raise 'Migrations are pending. Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
+  st = 'Migrations are pending. '
+  art = 'Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
+  start = st + art
+  raise start
 end
 
 ActiveRecord::Base.logger = nil

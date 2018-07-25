@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe UserProfileController do
   describe 'VIEW action' do
@@ -70,17 +71,13 @@ describe UserProfileController do
         expect(page.body).to include("Edit Profile")
         
        
-        #find('#editprofile') do 
-        #page.find(:fillable_field, 'first_name').set('text')
-        #fill_in(:tester, :with => "Editedfirstname")
-        #  fill_in('last_name', :with => "editedlastname")
-        #  click_button 'Submit'
+        fill_in('#first_name', :with => "Editedfirstname")
+        fill_in('#last_name', :with => "editedlastname")
+        click_button 'Submit'
         #end
         # click_button 'Submit'
-
-        # expect(page.body).to include("User Profile")
-        # expect(page.body).to include("Editedfirstname editedlastname")
-        # expect(page.body).to include("Edit Profile")
+        visit "/profile"
+        expect(page.body).to include("Editedfirstname editedlastname")
       end
     end
   end

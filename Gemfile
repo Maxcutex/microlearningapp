@@ -20,7 +20,8 @@ gem 'rufo'
 gem 'coveralls', require: false
 
 group :test,:development do
-  gem 'capybara'
+  gem 'pry'
+  gem 'capybara', "~> 2.15"
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
