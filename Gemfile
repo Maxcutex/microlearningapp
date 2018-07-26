@@ -22,7 +22,7 @@ gem 'coveralls', require: false
 
 group :test,:development do
   gem 'pry'
-  gem 'capybara', "~> 2.15"
+  gem 'capybara', "2.15.1"
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end
