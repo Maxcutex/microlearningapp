@@ -48,3 +48,4 @@ class CategoryController < ApplicationController
     redirect to '/managecategories'
   end
 end
+

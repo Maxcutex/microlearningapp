@@ -74,6 +74,7 @@ describe UserProfileController do
         fill_in('#first_name', :with => "Editedfirstname")
         fill_in('#last_name', :with => "editedlastname")
         click_button 'Submit'
+
         #end
         # click_button 'Submit'
         visit "/profile"
