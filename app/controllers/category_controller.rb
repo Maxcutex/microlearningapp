@@ -1,22 +1,51 @@
-# Category Controller for managing category of courses
+# Category controller for managing categories
 class CategoryController < ApplicationController
-  # View all courses
-  get '/managecategories' do
+  get '/managecategories/?:id?' do
     if logged_in?
+      if is_admin?
         begin
-            if is_admin?
-              @categories = CourseCategory.all
-              erb :'/courses/managecategories' , :layout => :layout_admin_pages
-            else
-              flash[:error] = 'You are not currently logged in!'
-              redirect to :'/accessdenied'
-            end
-          rescue Exception =>e
-             erb :'/users/error', :locals=> { user: e.message }
-          end
+          @category = CourseCategory.find(params[:id]) if params[:id]
+          @categories = CourseCategory.all
+          loc = { category_id: @category ? @category.id : nil }
+          erb :'/courses/managecategories', locals: loc
+        rescue ActiveRecord::RecordNotFound => e
+          erb :'/users/error', locals: { user: 'Error:' + e.message }
+        rescue StandardError => f
+          erb :'/users/error', locals: { user: f.message }
+        end
+      else
+        flash[:error] = 'You are not currently logged in!'
+        redirect to :'/accessdenied'
+      end
+
     else
       flash[:error] = 'You are not currently logged in!'
       redirect to :'/login'
     end
   end
-end 
+
+  post '/postcategory' do
+    variables = {
+      category_name: params[:category_name],
+      is_active: params[:is_active]
+    }
+    if params[:action_type] == 'Add'
+      @category = CourseCategory.create(variables)
+    else
+      @category = CourseCategory.find(params[:id]) if params[:id]
+      @category.category_name = params[:category_name]
+      @category.is_active = params[:is_active]
+    end
+    save_category
+  end
+
+  def save_category
+    if @category.save
+      session[:category_id] = @category.id
+    else
+      flash[:error] = 'Kindly fill in all required fields correctly!'
+    end
+    redirect to '/managecategories'
+  end
+end
+

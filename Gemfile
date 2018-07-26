@@ -14,13 +14,15 @@ gem 'rack-flash3'
 gem 'rubocop'
 gem 'pg'
 gem 'haml'
+gem 'rerun'
 gem 'rspec'
 gem 'faker'
 gem 'rufo'
 gem 'coveralls', require: false
 
 group :test,:development do
-  gem 'capybara'
+  gem 'pry'
+  gem 'capybara', "2.15.1"
   gem 'rack-test'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end

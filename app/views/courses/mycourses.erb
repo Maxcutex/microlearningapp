@@ -28,7 +28,7 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="backend/dist/img/user1-128x128.jpg" alt="User Image">
+                <img class="img-circle" src="/backend/dist/img/user1-128x128.jpg" alt="User Image">
                 <span class="username"><a href="#"><%= course.instructor.first_name %>  &nbsp; <%= course.instructor.last_name %> </a></span>
                 <span class="description">Shared publicly - 7:30 PM Today</span>
               </div>
@@ -37,11 +37,19 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <h5>Course name:</h5> <h5> <a href="/courses/administer/<%=course.id%>"><%= course.name%> </a> <%= course.icon%></h5>
-              <img class="img-responsive pad" src="backend/dist/img/photo2.png" alt="Photo">
+            <a href="/courses/view/<%=course.id%>"><%= course.name%> </a>
+            <h5>Course name:</h5> <h5> 
+           
+
+             <%= course.icon%></h5>
+              <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
 
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
-              <span class="pull-right text-muted"><%=course_difficulty(course.level) %> </span>
+              <span class="pull-left text-muted">
+               <% if course.instructor.id == current_user.id %>
+            <a href="/managecourses/<%=course.id%>"> Manage Course </a>
+            <% end %>
+            </span> <span class="pull-right text-muted"><%=course_difficulty(course.level) %> </span> <span class="pull-right">Level: &nbsp;&nbsp;</span>
             </div>
             <!-- /.box-body -->
            
@@ -80,7 +88,7 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="backend/dist/img/user1-128x128.jpg" alt="User Image">
+                <img class="img-circle" src="/backend/dist/img/user1-128x128.jpg" alt="User Image">
                 <span class="username"><a href="#"><%= course.instructor.first_name %>  &nbsp; <%= course.instructor.last_name %> </a></span>
                 <span class="description">Shared publicly - 7:30 PM Today</span>
               </div>
@@ -90,7 +98,7 @@
             <!-- /.box-header -->
             <div class="box-body">
             <h5>Course name:</h5> <h5> <a href="/courses/view/<%=course.id%>"><%= course.name%> </a> <%= course.icon%></h5>
-              <img class="img-responsive pad" src="backend/dist/img/photo2.png" alt="Photo">
+              <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
 
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
               <span class="pull-right text-muted"><%=course_difficulty(course.level) %> </span>  <span class="pull-right">Level:&nbsp;&nbsp;</span> 
@@ -114,7 +122,8 @@
 
     </section>
     <!-- /.content -->
+     <% end %>
   </div>
   <!-- /.content-wrapper -->
 
-  <% end %>
+ 

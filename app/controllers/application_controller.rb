@@ -27,7 +27,7 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect to '/courses'
     else
-      erb :index, :layout => :layout_web
+      erb :index, layout: :layout_web
     end
   end
 end

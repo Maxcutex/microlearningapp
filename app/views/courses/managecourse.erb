@@ -1,0 +1,90 @@
+<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+         
+      Manage Courses
+         
+        
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li><a href="#">Courses</a></li>
+        <li class="active">Administer Courses</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- Horizontal Form -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Courses</h3>
+              <a type="button" class="btn btn-success pull-right" href="/managecourses/0">
+               Add New Course
+              </a>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <table class="table table-bordered">
+                <tbody><tr>
+                  <th style="width: 10px">#</th>
+                  <th>Title</th>
+                 <th>Instructor</th> <th>Category</th>
+                 <th>No. Days</th>
+                 <th>Status</th>
+                  <th style="width: 110px"></th>
+                  <th style="width: 100px">
+                </tr>
+                <% a = 0 %>
+                <% @courses.each do |cd|%>
+                <% a = a + 1 %>
+                <tr>
+                  <td><%=a%></td>
+                  <td><%=cd.name%></td>
+                  <td><%=cd.instructor.first_name%> &nbsp; <%=cd.instructor.last_name%></td>
+                  <td><%=cd.coursecategory.category_name%></td>
+                  <td><%=cd.no_days%></td>
+                   <td><%=cd.is_active ? 'Active' : 'Not Active'%></td>
+                  <td>
+                  <a   class="badge bg-orange " href="/managecourses/<%=cd.id%>">
+                     Edit
+                  </a> &nbsp; <a   class="badge bg-blue " href="/courses/view/<%=cd.id%>">
+                     View
+                  </a> &nbsp;
+               
+                </td>
+                <td><a class="badge bg-gray " href="/coursedetail/<%=cd.id%>/add">Add Topics</a></td>
+                </tr>
+                <% end %>
+              
+              </tbody></table>
+              
+              </div>
+              <!-- /.box-body -->
+              <div class="box-footer">
+                
+               
+              </div>
+              <!-- /.box-footer -->
+           
+          </div>
+          <!-- /.box -->
+         
+        </div>
+        
+        <!--/.col (left) -->
+      
+      </div>
+      <!-- /.row -->
+
+    
+        </div>
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->

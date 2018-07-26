@@ -5,7 +5,7 @@ class UserProfileController < ApplicationController
     if logged_in?
       page_title = 'Profile Management'
 
-      erb :'/users/profile', :locals => { :page_title => page_title }  
+      erb :'/users/profile', locals: { page_title: page_title }
     else
       redirect to '/dashboard'
     end
@@ -25,26 +25,17 @@ class UserProfileController < ApplicationController
       end
       @user_update = User.find_by_id(session[:user_id])
       @user_update.user_image = file_name
-      updated_values = {}
-      if file_name==''
-        updated_values = { 
+      updated_values = {
+        user_image: file_name,
         first_name: params[:first_name],
         last_name: params[:last_name],
         biography: params[:biography]
       }
-      else
-        updated_values = { 
-        user_image: file_name, 
-        first_name: params[:first_name],
-        last_name: params[:last_name],
-        biography: params[:biography]
-      }
+
+      @user_update.update(updated_values)
+      redirect to '/profile'
+    rescue StandardError => e
+      erb :'/users/error', locals: { user: e.message }
     end
-    
-    @user_update.update(updated_values)
-    redirect to '/profile'
-    rescue Exception => e
-        
-    end 
-  end 
+  end
 end
