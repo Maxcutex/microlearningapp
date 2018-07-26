@@ -55,11 +55,11 @@
                 <div class="form-group">
                 <label for="course_category" class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-3">
-                  <select class="form-control" id="course_category" name="course_catgory">
+                  <select class="form-control" id="course_category" name="course_category">
                     <option>Select Category</option>
                      <% @categories.each do |cd|%>
                        <% if @course %>
-                        <% if @course.id == cd.id %>
+                        <% if @course.id.to_s == cd.id.to_s %>
                          <option value="<%=cd.id%>" selected ><%=cd.category_name%></option>
                           <% else %>
                          <option value="<%=cd.id%>"  ><%=cd.category_name%></option>
@@ -79,7 +79,7 @@
                     <% i = 0 %>
                      <% 30.times do |cd|%>
                      <% i += 1 %>
-                        <% if @course.no_days == i %>
+                        <% if  !@course.nil? && @course.no_days == i %>
                          <option value="<%=i%>" selected ><%=i%></option>
                        
                       <% else %>
@@ -112,8 +112,11 @@
                   <div class="col-sm-offset-2 col-sm-10">
                     <div class="checkbox">
                       <label>
-                        <input type="checkbox" <%=@course.is_active ? 'checked' : '' %>  id="is_active" name="is_active">  Is Active
-                   
+                        <% if !@course.nil? && @course.is_active %>
+                        <input type="checkbox" checked id="is_active" name="is_active">  Is Active
+                        <% else %>
+                        <input type="checkbox"   id="is_active" name="is_active">  Is Active
+                        <% end %>
                       </label>
                     </div>
                   </div>

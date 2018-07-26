@@ -74,9 +74,11 @@
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Course Topics</h3>
-              <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#modal-topic-add">
+               <% if @course.instructor.id == current_user.id %>
+              <a href="/coursedetail/<%=@course.id%>/add" class="btn btn-success pull-right">
                Add New Topic
-              </button>
+              </a>
+              <% end %>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -84,7 +86,10 @@
                 <tbody><tr>
                   <th style="width: 90px">Day Num</th>
                  <th>Topic(s)</th>
-                  <th style="width: 150px"></th>
+                  <% if @course.instructor.id == current_user.id %> <th style="width: 150px"></th>
+                  <% else %>
+                 <th style="width: 90px"></th>
+                  <% end %>
                 </tr>
                 <% a = 0 %>
                 <% @coursedetails.each do |cd|%>
@@ -95,12 +100,14 @@
                   <td><%=cd.day_topic%></td>
                   
                   <td>
-                  <button type="button" class="badge bg-blue " data-toggle="modal" data-target="#modal-topic-view">
+                  <a  class="badge bg-blue " href="/coursedetail/<%=cd.id%>"  >
                     View 
-                  </button> &nbsp;
-                  <button type="button" class="badge bg-orange " data-toggle="modal" data-target="#modal-topic-edit">
+                  </a>  
+                  <% if @course.instructor.id == current_user.id %>&nbsp;
+                  <a   class="badge bg-orange " href="/coursedetail/<%=cd.course_id%>/edit/<%=cd.id%>" >
                     Edit
-                  </button>
+                  </a>
+                  <% end %>
                 </td>
                 </tr>
                 <% end %>

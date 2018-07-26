@@ -10,11 +10,12 @@ class CourseController < ApplicationController
       redirect to :'/login'
     end
   end
+
   # View course details and the topic assigned
   get '/courses/view/:id' do
     if logged_in?
       @course = find_course(params[:id])
-      @coursedetails = CourseDetails.where(course_id: params[:id])
+      @coursedetails = CourseDetails.where(course_id: params[:id]).order(:day_number)
       @userenrolled = UserEnrollment.where(course_id: params[:id], is_active: true)
       erb :'/courses/view_course'
     else
@@ -22,6 +23,7 @@ class CourseController < ApplicationController
       redirect to :'/login'
     end
   end
+
   # View course details and administer them by an instructor
   get '/courses/administer/:id' do
     if logged_in?
@@ -42,6 +44,7 @@ class CourseController < ApplicationController
       redirect to :'/login'
     end
   end
+
   # View all courses assigned by an instructor or subscribed by a student
   get '/mycourses' do
     if logged_in?
@@ -66,43 +69,4 @@ class CourseController < ApplicationController
       redirect to :'/login'
     end
   end
-
-  #  Course Details view
-  get '/coursedetail/:detail_id' do
-
-  end
-
-  #  Course Details Add
-  get '/coursedetail/:course_id/add' do
-    @course = find_course(params[:course_id])
-    @coursedetail = CourseDetails.where(course_id: params[:course_id]).order(:day_number).last
-    if @coursedetail 
-     last_number = @coursedetail.day_number
-    else 
-      last_number=0
-    end 
-    loc = { course_id: params[:course_id], action_type: 'Add', last_number: last_number }
-    erb :'/courses/course_detail', layout: :layout_admin, locals: loc
-  end
-
-  #  Course Details Post Add
-  post '/postcoursedetail' do
-    ce = params[:action_type]
-    if ce == 'Add'
-      
-    else 
-
-    end 
-
-  end
-
-  #  Course Details Edit
-  get '/coursedetail/:course_id/edit/:detail_id' do
-    @course = find_course(params[:course_id])
-    @coursedetailedit = CourseDetails.where(id: params[:detail_id])
-    loc = { course_id: params[:course_id], action_type: 'Edit' }
-    erb :'/courses/course_detail.erb', layout: :layout_admin, locals: loc
-  end
-
-  
 end

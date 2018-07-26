@@ -10,6 +10,7 @@ puts $LOAD_PATH
 use Rack::MethodOverride
 use UserController
 use CourseController
+use CourseDetailController
 use BackEndManageController
 use UserProfileController
 use CategoryController
