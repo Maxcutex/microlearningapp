@@ -57,7 +57,8 @@ class BackEndManageController < ApplicationController
           f.write(temp_file.read)
         end
       end
-      vari = {name: params[:course_name],
+      vari = {
+        name: params[:course_name],
         description: params[:course_description],
         is_active: params[:is_active],
         icon: '',
@@ -65,7 +66,8 @@ class BackEndManageController < ApplicationController
         no_days: params[:course_days],
         category_id: params[:course_category],
         level: params[:course_level],
-        course_image: file_name}
+        course_image: file_name
+      }
       if params[:action_type] == 'Add'
         @course = Course.create(vari)
       else
@@ -73,17 +75,18 @@ class BackEndManageController < ApplicationController
         @course.update(vari)
       end
       if @course.save
-        redirect to '/managecourses' 
+        redirect to '/managecourses'
       else
         flash[:error] = 'Kindly fill in all required fields correctly!'
-        erb :'/users/error', locals: { user: 'Error:' + @course.errors.full_messages + @course }
+        erb :'/users/error', locals: {
+          user: 'Error:' + @course.errors.full_messages
+        }
       end
     rescue ActiveRecord::RecordNotFound => e
       erb :'/users/error', locals: { user: 'Error:' + e.message }
     rescue StandardError => e
       erb :'/users/error', locals: { user: e.message }
     end
-    
   end
 
   get '/accessdenied' do

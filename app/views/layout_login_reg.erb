@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="backend/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="backend/plugins/iCheck/square/blue.css">
+  <link href="/backend/toastr.css" rel="stylesheet"/>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -32,6 +33,7 @@
 
 <!-- jQuery 3 -->
 <script src="backend/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="/backend/toastr.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="backend/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- iCheck -->
@@ -45,5 +47,13 @@
     });
   });
 </script>
+<% if flash[:error]%>
+<script>
+$(document).ready(function() {
+    // show when page load
+    toastr.error('<%=flash[:error]%>','<%=flash[:error_title]%>');
+});
+</script>
+<% end %>
 </body>
 </html>

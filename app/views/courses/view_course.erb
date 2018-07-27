@@ -78,7 +78,17 @@
               <a href="/coursedetail/<%=@course.id%>/add" class="btn btn-success pull-right">
                Add New Topic
               </a>
+              <% else %>
+               <% if @userenrolled.nil? %>
+               <a href="/courses/<%=@course.id%>/enroll" class="btn btn-info pull-right">
+               Enroll For Course
+              </a>
+              <% else %>
+                <a href="/courses/<%=@course.id%>/unsubscribe" class="btn btn-danger pull-right">Unsubscribe from Course</a>
+
+               <% end %>
               <% end %>
+               
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -100,9 +110,11 @@
                   <td><%=cd.day_topic%></td>
                   
                   <td>
+                  <% if !@userenrolled.nil? || @course.instructor.id==current_user.id  %>
                   <a  class="badge bg-blue " href="/coursedetail/<%=cd.id%>"  >
                     View 
                   </a>  
+                  <% end %>
                   <% if @course.instructor.id == current_user.id %>&nbsp;
                   <a   class="badge bg-orange " href="/coursedetail/<%=cd.course_id%>/edit/<%=cd.id%>" >
                     Edit
