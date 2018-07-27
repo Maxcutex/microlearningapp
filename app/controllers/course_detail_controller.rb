@@ -4,8 +4,16 @@ class CourseDetailController < ApplicationController
   get '/coursedetail/:detail_id' do
     begin
       @coursedetail = CourseDetails.where(id: params[:detail_id]).first
+      @userenrolled = UserEnrollment.where(
+        user_id: session[:user_id],
+        course_id: @coursedetail.course_id
+      ).first
       @course = find_course(@coursedetail.course_id)
-      erb :'courses/course_detail_view'
+      if current_user.id == @course.instructor_id || !@userenrolled.nil?
+        erb :'courses/course_detail_view'
+      else
+        erb :'courses/access_denied'
+      end
     rescue ActiveRecord::RecordNotFound => e
       erb :'/users/error', locals: { user: 'Error:' + e.message }
     rescue StandardError => f
@@ -16,16 +24,18 @@ class CourseDetailController < ApplicationController
   #  Course Details Add
   get '/coursedetail/:course_id/add' do
     @course = find_course(params[:course_id])
-        
     @coursedetail = CourseDetails.where(
       course_id: params[:course_id]
     ).order(:day_number).last
     if @coursedetail.nil?
       last_number = 0
     else
-     last_number = @coursedetail.day_number
+      last_number = @coursedetail.day_number
     end
-    loc = { course_id: params[:course_id], action_type: 'Add', last_number: last_number }
+    loc = {
+      course_id: params[:course_id], action_type: 'Add',
+      last_number: last_number
+    }
     erb :'/courses/course_detail', locals: loc
   end
 
@@ -42,8 +52,10 @@ class CourseDetailController < ApplicationController
           f.write(temp_file.read)
         end
       end
-      @checkdet = CourseDetails.where(day_number: params[:day_num], course_id: params[:course_id]).first     
-      
+      @checkdet = CourseDetails.where(
+        day_number: params[:day_num], course_id: params[:course_id]
+      ).first
+
       if ce == 'Add'
         if !@checkdet.nil?
           flash[:error] = 'Topic for the day already exists!'

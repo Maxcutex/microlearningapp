@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="/backend/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/backend/bower_components/font-awesome/css/font-awesome.min.css">
+  <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="/backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  
   <!-- Ionicons -->
   <link rel="stylesheet" href="/backend/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
@@ -87,6 +90,8 @@
 <!-- daterangepicker -->
 <script src="/backend/bower_components/moment/min/moment.min.js"></script>
 <script src="/backend/bower_components/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- date picker -->
+<script src="/backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- datepicker -->
 <script src="/backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
@@ -101,5 +106,24 @@
 <script src="/backend/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="/backend/dist/js/demo.js"></script>
+<% if flash[:error]%>
+<script>
+$(document).ready(function() {
+    // show when page load
+    toastr.error('<%=flash[:error]%>','<%=flash[:error_title]%>');
+});
+</script>
+<% end %>
+<script>
+  $(function () {
+    
+    //Date picker
+    $('#datepicker').datepicker({
+      autoclose: true, format:'dd/mm/yyyy'
+    })
+
+    
+  })
+</script>
 </body>
 </html>
