@@ -57,7 +57,7 @@ class CourseDetailController < ApplicationController
       ).first
 
       if ce == 'Add'
-        if !@checkdet.nil?
+        unless @checkdet.nil?
           flash[:error] = 'Topic for the day already exists!'
           flash[:error_title] = 'Error Adding'
           redirect to "/coursedetail/#{params[:course_id]}/add"
@@ -72,7 +72,7 @@ class CourseDetailController < ApplicationController
         @coursedet = CourseDetails.create(variables)
 
       else
-        if !@checkdet.nil?
+        unless @checkdet.nil?
           flash[:error] = 'Topic for the day already exists!'
           flash[:error_title] = 'Error Updating'
           redirect to "/coursedetail/#{params[:course_id]}/edit/#{params[:detail_id]}"

@@ -184,6 +184,7 @@ DEPENDENCIES
   rubocop
   rufo
   shotgun
+  simplecov
   sinatra
   sinatra-activerecord
   thin
