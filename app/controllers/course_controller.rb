@@ -12,7 +12,7 @@ class CourseController < ApplicationController
         domain: 'localhost.localdomain'
       }
     }
-    Pony.mail(to: recipient)
+    Pony.mail(to: recipient, from: 'ennyboy@gmail.com')
   end
 
   # View all courses

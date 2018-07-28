@@ -102,7 +102,7 @@
               <% if @userenrolled.nil? %>   <a href="/courses" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-info pull-right">Register Course</button>
                 <% else %>
-                <a href="/courses/<%=@course.id%>/unsubscribe" class="btn btn-error pull-right">Unsubscribe from Course</a>
+                <a href="/courses/<%=@course.id%>/unsubscribe" class="btn btn-danger pull-right">Unsubscribe from Course</a>
                 <% end %>
               </div>
               <!-- /.box-footer -->
