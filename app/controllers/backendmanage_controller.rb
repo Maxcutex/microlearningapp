@@ -100,6 +100,8 @@ class BackEndManageController < ApplicationController
   end
 
   get '/accessdenied' do
-    erb :'/admin/accessdenied', layout: :layout_admin
+    erb :'/admin/accessdenied', layout: :layout_admin, locals: {
+      page_title: 'Error', data_table: false
+    }
   end
 end

@@ -31,14 +31,14 @@ module ActionHelpers
     @user = User.new(user)
   end
 
-  def process_update
-    @user = User.find_by_id(session[:user_id])
-    @user.user_image = fname
+  def process_update(id)
+    @user = User.find_by_id(id)
+    @user.user_image = @fname
     updated_values = {
-      user_image: file_name,
-      first_name: params[:first_name],
-      last_name: params[:last_name],
-      biography: params[:biography], updated_at: DateTime.now
+      user_image: @fname,
+      first_name: params[:user][:first_name],
+      last_name: params[:user][:last_name], is_active: params[:user][:is_active],
+      biography: params[:user][:biography], updated_at: DateTime.now
     }
     @user.update(updated_values)
   end
@@ -95,6 +95,7 @@ module ActionHelpers
       redirect to '/users'
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
+      flash[:error] += @user.errors.full_messages
       redirect to '/users/new'
     end
   end
@@ -105,8 +106,14 @@ module ActionHelpers
       flash[:success] = 'Process successfully updated!'
       redirect to '/users'
     else
-      flash[:error] = 'Kindly fill in all required fields correctly!'
-      redirect to "/users/edit/#{@user.id}"
+      # flash[:error] = 'Kindly fill in all required fields correctly!'
+      # flash[:error] = @user.errors.full_messages.to_s
+      # redirect to "/users/edit/#{@user.id}"
+      erb :'/users/error', locals: {
+        user: @user.errors.full_messages,
+        page_title: 'Error Display',
+        data_table: false
+      }
     end
   end
 end

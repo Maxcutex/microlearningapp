@@ -14,8 +14,9 @@ class UserProfileController < ApplicationController
 
   post '/editprofile' do
     begin
+      params[:user][:is_active] = true
       upload_image
-      process_update
+      process_update(session[:user_id])
       save_process
     rescue StandardError => e
       erb :'/users/error', locals: { user: e.message, page_title: 'Error', data_table: false }

@@ -45,7 +45,7 @@ class UserManageController < ApplicationController
 
   post '/edituser' do
     upload_image
-    process_edit
+    process_update(params[:id])
     edit_process_admin
   end
 end
