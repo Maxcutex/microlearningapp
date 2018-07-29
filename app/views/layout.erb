@@ -3,13 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | User Profile</title>
+  <title>Asentus Learning App | <%=page_title ? page_title : ''%></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="/backend/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="/backend/bower_components/font-awesome/css/font-awesome.min.css">
+   <!-- bootstrap datepicker -->
+  <link rel="stylesheet" href="/backend/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
+  
   <!-- Ionicons -->
   <link rel="stylesheet" href="/backend/bower_components/Ionicons/css/ionicons.min.css">
   <!-- Theme style -->
@@ -43,14 +46,8 @@
   </aside>
 
 <%=yield%>
-  <footer class="main-footer">
-    <div class="pull-right hidden-xs">
-      <b>Version</b> 2.4.0
-    </div>
-    <strong>Copyright &copy; 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
-
+  
+<%= erb :"footer" %>
  
 </div>
 <!-- ./wrapper -->
@@ -61,6 +58,10 @@
 
 <!-- Bootstrap 3.3.7 -->
 <script src="/backend/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- date picker -->
+<script src="/backend/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="/backend/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="/backend/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
 <script src="/backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <!-- FastClick -->
@@ -77,6 +78,14 @@ $(document).ready(function() {
 });
 </script>
 <% end %>
+<% if flash[:success] %>
+<script>
+$(document).ready(function() {
+    // show when page load
+    toastr.success('<%=flash[:success]%>','<%=flash[:success_title]%>');
+});
+</script>
+<% end %>
 <script>
   $(function () {
     
@@ -88,5 +97,20 @@ $(document).ready(function() {
     
   })
 </script>
+<% if data_table %>
+<script>
+  $(function () {
+    $('#example1').DataTable()
+    $('#example2').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false
+    })
+  })
+</script>
+<% end %>
 </body>
 </html>

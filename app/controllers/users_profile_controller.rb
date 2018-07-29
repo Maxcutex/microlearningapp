@@ -1,41 +1,25 @@
+require_relative '../helpers/action_helper'
 # Users Profile Controller inheriting from application controller
 class UserProfileController < ApplicationController
+  include ActionHelpers
+  @page_title = 'Profile Management'
   # Only new user will see the signup page
   get '/profile' do
     if logged_in?
-      page_title = 'Profile Management'
-
-      erb :'/users/profile', locals: { page_title: page_title }
+      erb :'/users/profile', locals: { page_title: @page_title, data_table: false }
     else
       redirect to '/dashboard'
     end
   end
 
   post '/editprofile' do
-    file_name = ''
     begin
-      if params[:user_image]
-        file = params[:user_image]
-        file_name = file[:filename]
-        temp_file = file[:tempfile]
-
-        File.open("./public/images/#{file_name}", 'wb') do |f|
-          f.write(temp_file.read)
-        end
-      end
-      @user_update = User.find_by_id(session[:user_id])
-      @user_update.user_image = file_name
-      updated_values = {
-        user_image: file_name,
-        first_name: params[:first_name],
-        last_name: params[:last_name],
-        biography: params[:biography]
-      }
-
-      @user_update.update(updated_values)
-      redirect to '/profile'
+      params[:user][:is_active] = true
+      upload_image
+      process_update(session[:user_id])
+      save_process
     rescue StandardError => e
-      erb :'/users/error', locals: { user: e.message }
+      erb :'/users/error', locals: { user: e.message, page_title: 'Error', data_table: false }
     end
   end
 end

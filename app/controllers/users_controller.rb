@@ -1,41 +1,25 @@
+require_relative '../helpers/action_helper'
 # Users Controller inheriting from application controller
 class UserController < ApplicationController
+  include ActionHelpers
+  @page_title = 'Register for Course'
   # Only new user will see the signup page
   get '/signup' do
     if logged_in?
       redirect to '/dashboard'
     else
-      page_title = 'Register For Course'
       class_title = 'register-page'
-      loc = { page_title: page_title, class_title: class_title }
+      loc = { page_title: @page_title, class_title: class_title, data_table: false }
       erb :'/users/new', layout: :layout_login_reg, locals: loc
     end
   end
 
   # CREATE a new user based on form information
   post '/signup' do
-    postuser = params[:user]
-    @user = User.new(postuser)
-    @user.user_image = ''
-    # if params[:user]['user_image']
-    #   file = params[:user]['user_image']
-    #   file_name = file[:filename]
-    #   temp_file = file[:tempfile]
-
-    #   File.open("./public/images/#{file_name}", 'wb') do |f|
-    #     f.write(temp_file.read)
-    #   end
-
-    #   @user.user_image = file_name
-    # end
-    if @user.save
-      session[:user_id] = @user.id
-      redirect to '/dashboard'
-    else
-      flash[:error] = 'Kindly fill in all required fields correctly!'
-      redirect to '/signup'
-      # erb :'/users/error', :locals=> { user: @user.errors.full_messages }
-    end
+    set_session_create_values
+    upload_image
+    process_new
+    save_process
   end
 
   # User currently logged in will view the dashboard
@@ -43,7 +27,7 @@ class UserController < ApplicationController
     if logged_in?
       redirect to '/dashboard'
     else
-      local_values = { page_title: 'Login To App', class_title: 'login-page' }
+      local_values = { page_title: 'Login To App', class_title: 'login-page', data_table: false }
       erb :'/users/login', layout: :layout_login_reg, locals: local_values
     end
   end
@@ -75,7 +59,7 @@ class UserController < ApplicationController
   # Dashboard View
   get '/dashboard' do
     if logged_in?
-      erb :'/users/index', layout: :layout_admin
+      erb :'/users/index', layout: :layout_admin, locals: { page_title: 'Dashboard', data_table: false }
     else
       redirect to '/login'
     end

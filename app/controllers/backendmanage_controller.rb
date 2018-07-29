@@ -1,15 +1,18 @@
 # admin manage controller
 class BackEndManageController < ApplicationController
+  @page_title = ''
   get '/managecourses' do
     if logged_in?
       if is_instructor?
         begin
           @courses = Course.all.order(:id)
-          erb :'/courses/managecourse'
-        rescue ActiveRecord::RecordNotFound => e
-          erb :'/users/error', locals: { user: 'Error:' + e.message }
+          erb :'/courses/managecourse', locals: {
+            page_title: 'Manage Categories', data_table: false
+          }
         rescue StandardError => f
-          erb :'/users/error', locals: { user: f.message }
+          erb :'/users/error', locals: {
+            user: f.message, page_title: 'Error', data_table: false
+          }
         end
       else
         flash[:error] = 'You are not currently logged in!'
@@ -28,12 +31,14 @@ class BackEndManageController < ApplicationController
         begin
           @course = find_course(params[:id]) if params[:id]
           @categories = CourseCategory.all
-          loc = { course_id: @course ? @course.id : nil }
+          loc = { course_id: @course ? @course.id : nil, page_title: 'Manage Categories', data_table: false }
           erb :'/courses/managecourse_edit', layout: :layout_admin, locals: loc
         rescue ActiveRecord::RecordNotFound => e
-          erb :'/users/error', locals: { user: 'Error:' + e.message }
-        rescue StandardError => f
-          erb :'/users/error', locals: { user: f.message }
+          erb :'/users/error', locals: {
+            user: 'Error:' + e.message,
+            page_title: 'Error',
+            data_table: false
+          }
         end
       else
         flash[:error] = 'You are not currently logged in!'
@@ -79,17 +84,24 @@ class BackEndManageController < ApplicationController
       else
         flash[:error] = 'Kindly fill in all required fields correctly!'
         erb :'/users/error', locals: {
-          user: 'Error:' + @course.errors.full_messages
+          user: 'Error:' + @course.errors.full_messages, page_title: 'Error',
+          data_table: false
         }
       end
     rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
+      erb :'/users/error', locals: {
+        user: 'Error:' + e.message, page_title: 'Error', data_table: false
+      }
     rescue StandardError => e
-      erb :'/users/error', locals: { user: e.message }
+      erb :'/users/error', locals: {
+        user: e.message, page_title: 'Error', data_table: false
+      }
     end
   end
 
   get '/accessdenied' do
-    erb :'/admin/accessdenied', layout: :layout_admin
+    erb :'/admin/accessdenied', layout: :layout_admin, locals: {
+      page_title: 'Error', data_table: false
+    }
   end
 end

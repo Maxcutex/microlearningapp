@@ -1,5 +1,6 @@
 # course controller
 class CourseDetailController < ApplicationController
+  @page_title = ''
   #  Course Details view
   get '/coursedetail/:detail_id' do
     begin
@@ -27,11 +28,11 @@ class CourseDetailController < ApplicationController
     @coursedetail = CourseDetails.where(
       course_id: params[:course_id]
     ).order(:day_number).last
-    if @coursedetail.nil?
-      last_number = 0
-    else
-      last_number = @coursedetail.day_number
-    end
+    last_number = if @coursedetail.nil?
+                    0
+                  else
+                    @coursedetail.day_number
+                  end
     loc = {
       course_id: params[:course_id], action_type: 'Add',
       last_number: last_number

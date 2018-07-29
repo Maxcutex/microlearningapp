@@ -33,7 +33,8 @@ describe UserController do
           password: 'stellenbosch',
           password_confirmation: 'stellenbosch'
         }
-        post '/signup', params
+        xvar = { user: params }
+        post '/signup', xvar
         expect(last_response.location).to include('/signup')
       end
       it 'does not let a user sign up without a username' do

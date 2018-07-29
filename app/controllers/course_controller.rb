@@ -1,7 +1,7 @@
 require 'pony'
 # course controller
 class CourseController < ApplicationController
-
+  @page_title = ''
   def sendmail(recipient, topic, message)
     Pony.options = {
       via: :smtp, headers: { 'Content-Type' => 'text/html' },
@@ -23,7 +23,9 @@ class CourseController < ApplicationController
         is_active: true,
         user_id: session[:user_id]
       )
-      erb :'/courses/index'
+      erb :'/courses/index', locals: {
+        page_title: 'Courses', data_table: false
+      }
     else
       flash[:error] = 'You are not currently logged in!'
       redirect to :'/login'
@@ -124,7 +126,9 @@ class CourseController < ApplicationController
       @student_courses = @subscribed.compact.map do |c|
         Course.find_by_id(c)
       end
-      erb :'/courses/mycourses'
+      erb :'/courses/mycourses', locals: {
+        page_title: 'My Courses', data_table: false
+      }
     else
       flash[:error] = 'You are not currently logged in!'
       redirect to :'/login'

@@ -6,12 +6,16 @@ class CategoryController < ApplicationController
         begin
           @category = CourseCategory.find(params[:id]) if params[:id]
           @categories = CourseCategory.all
-          loc = { category_id: @category ? @category.id : nil }
+          page_title = 'Manage Categories'
+          loc = {
+            category_id: @category ? @category.id : nil,
+            page_title: page_title, data_table: false
+          }
           erb :'/courses/managecategories', locals: loc
         rescue ActiveRecord::RecordNotFound => e
-          erb :'/users/error', locals: { user: 'Error:' + e.message }
+          erb :'/users/error', locals: { user: 'Error:' + e.message, page_title: 'Error', data_table: false }
         rescue StandardError => f
-          erb :'/users/error', locals: { user: f.message }
+          erb :'/users/error', locals: { user: f.message, page_title: 'Error', data_table: false }
         end
       else
         flash[:error] = 'You are not currently logged in!'

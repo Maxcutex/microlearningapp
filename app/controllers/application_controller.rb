@@ -27,7 +27,8 @@ class ApplicationController < Sinatra::Base
     if logged_in?
       redirect to '/courses'
     else
-      erb :index, layout: :layout_web
+      @page_title = 'Welcome to Asentus Course Management'
+      erb :index, layout: :layout_web, locals: { page_title: @page_title }
     end
   end
 end
