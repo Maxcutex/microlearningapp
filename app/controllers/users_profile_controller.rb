@@ -6,7 +6,7 @@ class UserProfileController < ApplicationController
   # Only new user will see the signup page
   get '/profile' do
     if logged_in?
-      erb :'/users/profile', locals: { page_title: @page_title }
+      erb :'/users/profile', locals: { page_title: @page_title, data_table: false }
     else
       redirect to '/dashboard'
     end
@@ -18,7 +18,7 @@ class UserProfileController < ApplicationController
       process_update
       save_process
     rescue StandardError => e
-      erb :'/users/error', locals: { user: e.message }
+      erb :'/users/error', locals: { user: e.message, page_title: 'Error', data_table: false }
     end
   end
 end

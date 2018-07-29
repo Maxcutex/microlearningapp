@@ -13,7 +13,11 @@ module ActionHelpers
       @fname = file_name
     end
   end
-
+  
+  def set_session_create_values
+    session[:user] = params[:user]
+  end
+  
   def process_new
     postuser = params[:user]
     user = {

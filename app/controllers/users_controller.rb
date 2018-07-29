@@ -9,7 +9,7 @@ class UserController < ApplicationController
       redirect to '/dashboard'
     else
       class_title = 'register-page'
-      loc = { page_title: @page_title, class_title: class_title }
+      loc = { page_title: @page_title, class_title: class_title, data_table: false }
       erb :'/users/new', layout: :layout_login_reg, locals: loc
     end
   end
@@ -27,7 +27,7 @@ class UserController < ApplicationController
     if logged_in?
       redirect to '/dashboard'
     else
-      local_values = { page_title: 'Login To App', class_title: 'login-page' }
+      local_values = { page_title: 'Login To App', class_title: 'login-page', data_table: false }
       erb :'/users/login', layout: :layout_login_reg, locals: local_values
     end
   end
@@ -59,7 +59,7 @@ class UserController < ApplicationController
   # Dashboard View
   get '/dashboard' do
     if logged_in?
-      erb :'/users/index', layout: :layout_admin, locals: { page_title: 'Dashboard' }
+      erb :'/users/index', layout: :layout_admin, locals: { page_title: 'Dashboard', data_table: false }
     else
       redirect to '/login'
     end
