@@ -1,5 +1,6 @@
 # admin manage controller
 class BackEndManageController < ApplicationController
+  @page_title = ''
   get '/managecourses' do
     if logged_in?
       if is_instructor?

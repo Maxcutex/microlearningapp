@@ -28,25 +28,29 @@ User.create(
       first_name: 'Nili', last_name: 'Ach1', username: 'nili678',
       email: 'niliach1@example.com',
       user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-      password: 'iesha1', password_confirmation: 'iesha1'
+      password: 'iesha1', password_confirmation: 'iesha1', is_active: true,
+      created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'David', last_name: 'Plate', username: 'nili6782',
       email: 'niliach2@example.com',
       user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-      password: 'iesha2', password_confirmation: 'iesha2'
+      password: 'iesha2', password_confirmation: 'iesha2', is_active: true,
+      created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Femi', last_name: 'Lanre', username: 'nili6783',
       email: 'niliach3@example.com',
       user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-      password: 'iesha3', password_confirmation: 'iesha3'
+      password: 'iesha3', password_confirmation: 'iesha3', is_active: true,
+      created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Steve', last_name: 'Nuria', username: 'nili6784',
       email: 'niliach4@example.com',
       user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-      password: 'iesha4', password_confirmation: 'iesha4'
+      password: 'iesha4', password_confirmation: 'iesha4', is_active: true,
+      created_at: DateTime.now, updated_at: DateTime.now
     }
   ]
 )
@@ -92,8 +96,8 @@ Course.destroy_all
 CourseDetails.destroy_all
 id = 0
 20.times do
-  id = id + 1
-  no_days = Faker::Number.between(5,21)
+  id += 1
+  no_days = Faker::Number.between(5, 21)
   Course.create(
     [
       {
@@ -108,16 +112,16 @@ id = 0
     ]
   )
 
-  looper = Faker::Number.between(6,21)
+  looper = Faker::Number.between(6, 21)
   start = 0
   looper.times do
-    start = start + 1
+    start += 1
     rword = Faker::Lorem.word
     CourseDetails.create(
       [
         {
-          day_number: start ,
-          day_topic: Faker::Lorem.sentence(7,false,0),
+          day_number: start,
+          day_topic: Faker::Lorem.sentence(7, false, 0),
           day_details: Faker::Lorem.paragraph,
           course_id: id,
           topic_image: Faker::Avatar.image(rword, '300x300', 'jpg'),
@@ -126,7 +130,6 @@ id = 0
       ]
     )
   end
-
 end
 
 # faq
@@ -139,35 +142,35 @@ FAQ.destroy_all
         faq_title: Faker::Lorem.question, faq_description: Faker::Lorem.paragraph
       }
     ]
-    )
+  )
 end
 
 UserEnrollment.destroy_all
 UserEnrollment.create(
   [
     {
-      user_id: 4, course_id: Faker::Number.between(1,20), confirmation: 1, notes: Faker::Lorem.sentence(8,false,0), 
+      user_id: 4, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 2, course_id: Faker::Number.between(1,20), confirmation: 1, notes: Faker::Lorem.sentence(8,false,0), 
+      user_id: 2, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 4, course_id: Faker::Number.between(1,20), confirmation: 1, notes: Faker::Lorem.sentence(8,false,0), 
+      user_id: 4, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 2, course_id: Faker::Number.between(1,20), confirmation: 1, notes: Faker::Lorem.sentence(8,false,0), 
+      user_id: 2, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 4, course_id: Faker::Number.between(1,20), confirmation: 1, notes: Faker::Lorem.sentence(8,false,0), 
-      start_date:Faker::Date.between(2.days.ago, Date.today),
+      user_id: 4, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
+      start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     }
 

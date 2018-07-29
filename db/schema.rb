@@ -83,6 +83,9 @@ ActiveRecord::Schema.define(version: 2018_07_20_084623) do
     t.string "user_image"
     t.string "password_digest"
     t.string "biography"
+    t.boolean "is_active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

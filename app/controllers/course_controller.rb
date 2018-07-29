@@ -1,7 +1,7 @@
 require 'pony'
 # course controller
 class CourseController < ApplicationController
-
+  @page_title = ''
   def sendmail(recipient, topic, message)
     Pony.options = {
       via: :smtp, headers: { 'Content-Type' => 'text/html' },

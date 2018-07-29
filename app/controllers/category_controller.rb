@@ -1,5 +1,6 @@
 # Category controller for managing categories
 class CategoryController < ApplicationController
+  @page_title = ''
   get '/managecategories/?:id?' do
     if logged_in?
       if is_admin?

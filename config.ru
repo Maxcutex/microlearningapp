@@ -1,6 +1,6 @@
 require './config/environment'
 require 'sinatra/base'
-$LOAD_PATH.unshift File.expand_path(".", "app")
+$LOAD_PATH.unshift File.expand_path('.', 'app')
 
 if ActiveRecord::Base.connection.migration_context.needs_migration?
   raise 'Migrations are pending. Run `rake db:migrate` to resolve the issue.'
@@ -11,6 +11,7 @@ use Rack::MethodOverride
 use UserController
 use CourseController
 use CourseDetailController
+use UserManageController
 use BackEndManageController
 use UserProfileController
 use CategoryController
