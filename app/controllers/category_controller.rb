@@ -13,9 +13,9 @@ class CategoryController < ApplicationController
           }
           erb :'/courses/managecategories', locals: loc
         rescue ActiveRecord::RecordNotFound => e
-          erb :'/users/error', locals: { user: 'Error:' + e.message, page_title: "Error", data_table: false }
+          erb :'/users/error', locals: { user: 'Error:' + e.message, page_title: 'Error', data_table: false }
         rescue StandardError => f
-          erb :'/users/error', locals: { user: f.message, page_title: "Error", data_table: false }
+          erb :'/users/error', locals: { user: f.message, page_title: 'Error', data_table: false }
         end
       else
         flash[:error] = 'You are not currently logged in!'

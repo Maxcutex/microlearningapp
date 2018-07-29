@@ -13,7 +13,7 @@ describe BackEndManageController do
       }
       user = User.create(user_values)
 
-      roles1 = Role.create(
+      Role.create(
         role_name: 'Administrator',
         role_description: 'Administrator on the system'
       )

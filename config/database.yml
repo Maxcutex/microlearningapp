@@ -17,15 +17,15 @@ development:
   # password: <%= ENV['DATABASE_PASSWORD'] || 'MicroLearn1' %>
 
 test:
-  # <<: *default
-  # DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
-  adapter: postgresql
-  encoding: unicode
-  pool: 5
-  host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
-  database: <%= ENV['DATABASE_NAME'] || 'microlearndb' %>
-  username: <%= ENV['DATABASE_USER'] || 'microlearnadmin' %>
-  password: <%= ENV['DATABASE_PASSWORD'] || 'MicroLearn1' %>
+  <<: *default
+  DATABASE_URL: postgresql://ubuntu:@127.0.0.1:5432/circle_test
+  # adapter: postgresql
+  # encoding: unicode
+  # pool: 5
+  # host: <%= ENV['DATABASE_HOST'] || 'localhost' %>
+  # database: <%= ENV['DATABASE_NAME'] || 'microlearndb' %>
+  # username: <%= ENV['DATABASE_USER'] || 'microlearnadmin' %>
+  # password: <%= ENV['DATABASE_PASSWORD'] || 'MicroLearn1' %>
 
 production:
   adapter: postgresql
