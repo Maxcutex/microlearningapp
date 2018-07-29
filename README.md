@@ -3,6 +3,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/Maxcutex/microlearningapp/badge.svg?branch=develop)](https://coveralls.io/github/Maxcutex/microlearningapp?branch=develop)
 [![Maintainability](https://api.codeclimate.com/v1/badges/2f782861537bdec6b229/maintainability)](https://codeclimate.com/github/Maxcutex/microlearningapp/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2f782861537bdec6b229/test_coverage)](https://codeclimate.com/github/Maxcutex/microlearningapp/test_coverage)
+
+
 Micro-Learning App is a responsive web application that sends you one or multiple pages per day about things you want to learn.
 
 https://rubymicrolearningapp.herokuapp.com/
@@ -49,12 +51,12 @@ http://localhost:8282
 ### Installation Guide
 - Install Ruby here and install it.
 - Install RVM(Ruby Version Manager)
-- Clone this repository with "git clone https://github.com/sasili-adetunji/micro-learning.git"
+- Clone this repository with "git clone https://github.com/maxcutex/microlearningapp.git"
 - run `bundle install` to install the dependencies.
 - Navigate into the cloned project directory.
 - Edit the `env-sample` file with your gmail creadentials and save it as `.env`
 - run `rackup`
-- Navigate to `localhost:9393`
+- Navigate to `localhost:9292`
 
 ### Testing
 Tests can be run using
