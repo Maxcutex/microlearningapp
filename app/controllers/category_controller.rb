@@ -18,7 +18,7 @@ class CategoryController < ApplicationController
           erb :'/users/error', locals: { user: f.message, page_title: 'Error', data_table: false }
         end
       else
-        flash[:error] = 'You are not currently logged in!'
+        flash[:error] = 'You do not have access!'
         redirect to :'/accessdenied'
       end
 

@@ -19,7 +19,7 @@ class UserController < ApplicationController
     set_session_create_values
     upload_image
     process_new
-    save_process
+    save_process('Add','/signup')
   end
 
   # User currently logged in will view the dashboard
@@ -49,7 +49,7 @@ class UserController < ApplicationController
   get '/logout' do
     if logged_in?
       session.clear
-      flash[:message] = 'You have logged out successfully!'
+      flash[:error] = 'You have logged out successfully!'
       redirect to '/login'
     else
       redirect to '/'

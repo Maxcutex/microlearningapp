@@ -76,16 +76,19 @@ module ActionHelpers
     @user_role.save
   end
 
-  def save_process
+  def save_process(typeprocess, page_redirect)
     if @user.save
       session[:user_id] = @user.id
-      add_role(3, session[:user_id])
-      flash[:success] = 'Profile successfully created!'
-      redirect to '/dashboard'
+      if typeprocess == 'Add'
+        add_role(3, session[:user_id])
+        flash[:success] = 'Profile successfully created!'
+      else
+        flash[:success] = 'Profile successfully updated!'
+      end
     else
-      flash[:error] = 'Kindly fill in all required fields correctly!'
-      redirect to '/signup'
+      flash[:error] = @user.errors.full_messages # Kindly fill in all required fields correctly!'
     end
+    redirect to page_redirect
   end
 
   def save_process_admin

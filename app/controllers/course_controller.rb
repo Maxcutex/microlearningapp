@@ -24,7 +24,7 @@ class CourseController < ApplicationController
         user_id: session[:user_id]
       )
       erb :'/courses/index', locals: {
-        page_title: 'Courses', data_table: false
+        page_title: 'Courses', data_table: true
       }
     else
       flash[:error] = 'You are not currently logged in!'
@@ -41,7 +41,9 @@ class CourseController < ApplicationController
         user_id: session[:user_id],
         course_id: @course.id
       ).first
-      erb :'/courses/register_course', layout: :layout_admin
+      erb :'/courses/register_course', layout: :layout_admin, locals: {
+        page_title: 'Courses', data_table: false
+      }
     else
       flash[:error] = 'You are not currently logged in!'
       redirect to :'/login'

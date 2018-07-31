@@ -160,28 +160,28 @@
                     <label for="first_name" class="col-sm-2 control-label">First Name</label>
 
                     <div class="col-sm-10">
-                      <input name="first_name"  type="text" class="form-control" id="first_name"  placeholder="First Name" value="<%=current_user.first_name%>">
+                      <input name="user[first_name]"  type="text" class="form-control" id="first_name"  placeholder="First Name" value="<%=current_user.first_name%>">
                     </div>
                   </div> 
                   <div class="form-group">
                     <label for="last_name" class="col-sm-2 control-label">Last Name</label>
 
                     <div class="col-sm-10">
-                      <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" value="<%=current_user.last_name%>">
+                      <input type="text" class="form-control" id="last_name" name="user[last_name]" placeholder="Last Name" value="<%=current_user.last_name%>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="username" class="col-sm-2 control-label">UserName</label>
 
                     <div class="col-sm-10">
-                      <input type="text" disabled class="form-control" id="username" name="username" value="<%=current_user.username%>">
+                      <input type="text" disabled class="form-control" id="username" name="user[username]" value="<%=current_user.username%>">
                     </div>
                   </div>
                   <div class="form-group">
                     <label for="email" class="col-sm-2 control-label">Email</label>
 
                     <div class="col-sm-10">
-                      <input type="email" disabled class="form-control" id="email" name='email' value="<%=current_user.email%>">
+                      <input type="email" disabled class="form-control" id="email" name='user[email]' value="<%=current_user.email%>">
                     </div>
                   </div>
                   
@@ -189,8 +189,8 @@
                     <label for="biography" class="col-sm-2 control-label">About Me</label>
 
                     <div class="col-sm-10">
-                      <textarea class="form-control" id="biography" name='biography' placeholder="About Me"><%=current_user.biography%></textarea>
-                    </div>
+                      <textarea class="textarea"  style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;" id="biography" name='user[biography]' placeholder="About Me"><%=current_user.biography%></textarea>
+                   </div>
                   </div>
                  
 
@@ -198,7 +198,7 @@
                     <label for="user_image" class="col-sm-2 control-label">Image Upload</label>
 
                     <div class="col-sm-10">
-                     <input type="file" id="user_image" name="user_image">
+                     <input type="file" id="user_image" name="user[user_image]">
 
                     </div>
                   </div>

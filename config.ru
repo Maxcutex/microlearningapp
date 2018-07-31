@@ -14,5 +14,6 @@ use CourseDetailController
 use UserManageController
 use BackEndManageController
 use UserProfileController
+use FaqsController
 use CategoryController
 run ApplicationController
