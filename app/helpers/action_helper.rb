@@ -13,11 +13,11 @@ module ActionHelpers
       @fname = file_name
     end
   end
-  
+
   def set_session_create_values
     session[:user] = params[:user]
   end
-  
+
   def process_new
     postuser = params[:user]
     user = {
@@ -76,15 +76,19 @@ module ActionHelpers
     @user_role.save
   end
 
-  def save_process
+  def save_process(typeprocess, page_redirect, page_redirect_error)
     if @user.save
       session[:user_id] = @user.id
-      add_role(3, session[:user_id])
-      flash[:success] = 'Profile successfully created!'
-      redirect to '/dashboard'
+      if typeprocess == 'Add'
+        add_role(3, session[:user_id])
+        flash[:success] = 'Profile successfully created!'
+      else
+        flash[:success] = 'Profile successfully updated!'
+      end
+      redirect to page_redirect
     else
-      flash[:error] = 'Kindly fill in all required fields correctly!'
-      redirect to '/signup'
+      flash[:error] = @user.errors.full_messages # Kindly fill in all required fields correctly!'
+      redirect to page_redirect_error
     end
   end
 
