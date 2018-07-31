@@ -58,12 +58,13 @@ class FaqsController < ApplicationController
 
   post '/postnew' do
     begin
-      faqvals = { faq_title: params[:faq_title], faq_description: params[:faq_description]}
+      faqvals = { faq_title: params[:faq_title], faq_description: params[:faq_description] }
       @faqs = FAQ.create(faqvals)
-      if @faqs.save
-        redirect to '/managefaqs'
-      else 
-      end 
+
+      until @faqs.save
+        flash[:error] = 'Something went wrong!!!.'
+      end
+      redirect to '/managefaqss'
     rescue StandardError => f
       erb :'/users/error', locals: {
         user: f.message, page_title: 'Error',
@@ -77,10 +78,9 @@ class FaqsController < ApplicationController
       faqvals = { faq_title: params[:faq_title], faq_description: params[:faq_description]}
       @faqs = FAQ.where(id: params[:id]).first
       @faqs.update(faqvals)
-      if @faqs.save
-        redirect to '/managefaqs'
-      else
-        flash[:error] = 'Kindly fill the form details!!!'
+
+      until @faqs.save
+        flash[:error] = 'Something went wrong!!!.'
       end
     rescue StandardError => f
       erb :'/users/error', locals: {
