@@ -84,14 +84,25 @@ describe UserController do
         expect(last_response.location).to include('/signup')
       end
       it 'signup directs user to dashboard index page' do
-        user_values = {
+        user_values = { user:{
           first_name: 'Nili', last_name: 'Ach', username: 'nili678', email: 'niliach@example.com',
-          user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
+          biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
           password_confirmation: 'iesha'
-        }
-        params = {}
-        params[:user] = user_values
-        post '/signup', params
+        }}
+        Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        Role.create(
+          role_name: 'Instructor',
+          role_description: 'instructor on the system'
+        )
+        Role.create(
+          role_name: 'Student',
+          role_description: 'student on the system'
+        )
+        post '/signup', user_values
+
         expect(last_response.location).to include('/dashboard')
       end
       it 'does not let a logged in user view the signup page' do

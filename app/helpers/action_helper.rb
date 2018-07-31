@@ -13,11 +13,11 @@ module ActionHelpers
       @fname = file_name
     end
   end
-  
+
   def set_session_create_values
     session[:user] = params[:user]
   end
-  
+
   def process_new
     postuser = params[:user]
     user = {
@@ -76,7 +76,7 @@ module ActionHelpers
     @user_role.save
   end
 
-  def save_process(typeprocess, page_redirect)
+  def save_process(typeprocess, page_redirect, page_redirect_error)
     if @user.save
       session[:user_id] = @user.id
       if typeprocess == 'Add'
@@ -85,10 +85,11 @@ module ActionHelpers
       else
         flash[:success] = 'Profile successfully updated!'
       end
+      redirect to page_redirect
     else
       flash[:error] = @user.errors.full_messages # Kindly fill in all required fields correctly!'
+      redirect to page_redirect_error
     end
-    redirect to page_redirect
   end
 
   def save_process_admin

@@ -19,7 +19,7 @@ class UserController < ApplicationController
     set_session_create_values
     upload_image
     process_new
-    save_process('Add','/signup')
+    save_process('Add', '/dashboard', '/signup')
   end
 
   # User currently logged in will view the dashboard
