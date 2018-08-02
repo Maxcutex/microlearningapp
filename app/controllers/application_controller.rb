@@ -1,14 +1,17 @@
 require './config/environment'
 require 'sinatra/base'
-require 'haml'
 require 'base64'
 require_relative '../helpers/session_helper'
+require_relative '../helpers/file_helper'
+require_relative '../mailers/mail_sender'
 require_relative '../helpers/application_helper'
 
 # Main Controller for the microlearning application
 class ApplicationController < Sinatra::Base
   helpers Sinatra::AppHelpers
   include SessionHelpers
+  include MailSender
+  include FileHelper
   configure do
     register Sinatra::ActiveRecordExtension
     enable :sessions

@@ -82,12 +82,13 @@ module ActionHelpers
       if typeprocess == 'Add'
         add_role(3, session[:user_id])
         flash[:success] = 'Profile successfully created!'
+        construct_new_mail_send(@user.email, @user.first_name, @user.last_name)
       else
         flash[:success] = 'Profile successfully updated!'
       end
       redirect to page_redirect
     else
-      flash[:error] = @user.errors.full_messages # Kindly fill in all required fields correctly!'
+      flash[:error] = @user.errors.full_messages
       redirect to page_redirect_error
     end
   end
