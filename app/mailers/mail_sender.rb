@@ -60,8 +60,7 @@ module MailSender
   def construct_unsuscribe_instructor_course_mail_send
     message_to_instructor = "Dear #{@course.instructor.first_name}"\
     "#{@course.instructor.last_name},\n\n A student has successfully"\
-    "unsubscribed for the #{@course.name}."\
-    "Starting date for his/her lecture is on #{@user_enroll.start_date}."\
+    "unsubscribed for the #{@course.name}. \n\n Thank you"\
     '\n\n Regards,'
     sendmail(@course.instructor.email, 'Subscription by Student', message_to_instructor)
   end
