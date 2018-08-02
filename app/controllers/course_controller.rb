@@ -1,20 +1,6 @@
-require 'pony'
 # course controller
 class CourseController < ApplicationController
   @page_title = ''
-  def sendmail(recipient, topic, message)
-    Pony.options = {
-      via: :smtp, headers: { 'Content-Type' => 'text/html' },
-      body: message, subject: topic, via_options: {
-        address: 'smtp.gmail.com', port: '587',
-        enable_starttls_auto: true, user_name: ENV['GMAIL_ID'],
-        password: ENV['GMAIL_PASS'], authentication: :plain,
-        domain: 'localhost.localdomain'
-      }
-    }
-    Pony.mail(to: recipient, from: 'ennyboy@gmail.com')
-  end
-
   # View all courses
   get '/courses' do
     if logged_in?
@@ -65,21 +51,8 @@ class CourseController < ApplicationController
       is_active: true
     )
     if @user_enroll.save
-      # send mail to student
-      message_to_student = "Dear #{current_user.first_name} #{current_user.last_name},"\
-       'you have successfully'\
-       "registered for the #{@course.name}. Your instructor will approve this"\
-       'and you can start learning'
-
-      sendmail(current_user.email, 'Subscription for course', message_to_student)
-      # send mail to instructor
-      message_to_instructor = "Dear #{@course.instructor.first_name} #{course.instructor.last_name},"\
-      'A student has successfully'\
-      "registered for the #{@course.name}. Your instructor kindly approve this"\
-      'application so that the student can  start learning'\
-      "Click on the link below to approve <br> <a href='f'>Click Here</a>"
-      sendmail(@course.instructor.email, 'Subscription by Student', message_to_instructor)
-
+      construct_new_course_mail_send
+      construct_instructor_course_mail_send
       redirect to '/courses'
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
