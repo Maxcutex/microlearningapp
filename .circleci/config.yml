@@ -30,7 +30,11 @@ jobs:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
-
+      - run:
+          name: Define Environment Variable at Runtime
+          command: |
+            echo 'export SENDGRID_API_KEY=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' >> $BASH_ENV
+            source $BASH_ENV
       - run:
           name: install dependencies
           command: |
