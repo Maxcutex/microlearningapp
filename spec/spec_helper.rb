@@ -7,6 +7,11 @@ require_relative '../config/environment'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
+# require 'support/factory_bot'
+
+Dir[File.join(File.dirname(__FILE__), '.', 'factories', '**/*.rb')].sort.each do |file|
+  require file
+end
 
 if ActiveRecord::Base.connection.migration_context.needs_migration?
   st = 'Migrations are pending. '
@@ -22,6 +27,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.include Rack::Test::Methods
   config.include Capybara::DSL
+  config.include FactoryBot::Syntax::Methods
   DatabaseCleaner.strategy = :truncation
   # config.infer_spec_type_from_file_location!
   config.before do
