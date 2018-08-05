@@ -7,7 +7,6 @@ gem 'rake'
 gem 'require_all'
 gem 'thin'
 gem 'shotgun'
-gem 'pry'
 gem 'bcrypt'
 gem "tux"
 gem 'rack-flash3'
@@ -21,6 +20,7 @@ gem 'rerun'
 gem 'rspec'
 gem 'faker'
 gem 'rufo'
+gem 'whenever', require: false
 gem 'coveralls', require: false
 
 

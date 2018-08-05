@@ -13,10 +13,33 @@ module MailSender
     puts mail.to_json
 
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'], host: 'https://api.sendgrid.com')
-    response = sg.client.mail._('send').post(request_body: mail.to_json)
-    puts response.status_code
-    puts response.body
-    puts response.headers
+    sg.client.mail._('send').post(request_body: mail.to_json)
+  end
+
+  def sendmail_html(recipient, topic, message)
+    mail = Mail.new
+    mail.from = Email.new(email: 'admin@arentus.com')
+    mail.subject = topic
+    personalization = Personalization.new
+    personalization.add_to(Email.new(email: recipient, name: recipient))
+    personalization.subject = topic
+    personalization.add_header(Header.new(key: 'X-Test', value: 'True'))
+    personalization.add_header(Header.new(key: 'X-Mock', value: 'False'))
+    personalization.add_substitution(Substitution.new(key: '%name%', value: 'Example User'))
+    personalization.add_substitution(Substitution.new(key: '%city%', value: 'Denver'))
+    personalization.add_custom_arg(CustomArg.new(key: 'user_id', value: '343'))
+    personalization.add_custom_arg(CustomArg.new(key: 'type', value: 'marketing'))
+    mail.add_personalization(personalization)
+
+    mail.add_content(Content.new(type: 'text/plain', value: 'The content of this page can be viewed from your profile'))
+    mail.add_content(Content.new(type: 'text/html', value: message))
+
+    # puts JSON.pretty_generate(mail.to_json)
+    puts mail.to_json
+
+    sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'], host: 'https://api.sendgrid.com')
+    sg.client.mail._('send').post(request_body: mail.to_json)
+    
   end
 
   def construct_new_mail_send(recipient, first_name, last_name)
