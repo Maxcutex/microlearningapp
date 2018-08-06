@@ -43,7 +43,7 @@ module ActionHelpers
     @user.update(updated_values)
   end
 
-  def add_role(role_id,user_id)
+  def add_role(role_id, user_id)
     if check_role(role_id)
       @error = 'User has role already'
       false
@@ -80,12 +80,15 @@ module ActionHelpers
     if @user.save
       session[:user_id] = @user.id
       if typeprocess == 'Add'
-        add_role(3, session[:user_id])
+        add_role(3, @user.id)
+        binding.pry 
+
         flash[:success] = 'Profile successfully created!'
         construct_new_mail_send(@user.email, @user.first_name, @user.last_name)
       else
         flash[:success] = 'Profile successfully updated!'
       end
+      binding.pry
       redirect to page_redirect
     else
       flash[:error] = @user.errors.full_messages
