@@ -81,14 +81,11 @@ module ActionHelpers
       session[:user_id] = @user.id
       if typeprocess == 'Add'
         add_role(3, @user.id)
-        binding.pry 
-
         flash[:success] = 'Profile successfully created!'
         construct_new_mail_send(@user.email, @user.first_name, @user.last_name)
       else
         flash[:success] = 'Profile successfully updated!'
       end
-      binding.pry
       redirect to page_redirect
     else
       flash[:error] = @user.errors.full_messages
@@ -114,9 +111,6 @@ module ActionHelpers
       flash[:success] = 'Process successfully updated!'
       redirect to '/users'
     else
-      # flash[:error] = 'Kindly fill in all required fields correctly!'
-      # flash[:error] = @user.errors.full_messages.to_s
-      # redirect to "/users/edit/#{@user.id}"
       erb :'/users/error', locals: {
         user: @user.errors.full_messages,
         page_title: 'Error Display',

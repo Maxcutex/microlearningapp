@@ -1,6 +1,6 @@
 require 'spec_helper'
-RSpec.describe User, :type => :model do
-  before(:all) do
+describe User, :type => :model do
+  before do
     @user1 = create(:user)
   end
 

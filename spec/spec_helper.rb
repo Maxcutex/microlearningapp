@@ -7,9 +7,11 @@ require_relative '../config/environment'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
-# require 'support/factory_bot'
 
 Dir[File.join(File.dirname(__FILE__), '.', 'factories', '**/*.rb')].sort.each do |file|
+  require file
+end
+Dir[File.join(File.dirname(__FILE__), '.', 'support', '**/*.rb')].sort.each do |file|
   require file
 end
 
@@ -39,6 +41,10 @@ RSpec.configure do |config|
   end
 
   config.order = 'default'
+end
+
+RSpec.configure do |config|
+  config.include Features::SessionHelpers, type: :feature
 end
 
 def app
