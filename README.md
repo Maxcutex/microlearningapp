@@ -20,6 +20,9 @@ To clone the respository execute the following command.
 ```
 git clone https://github.com/maxcutex/microlearningapp.git
 ```
+Navigate into the cloned project directory.
+
+Edit the `env-sample` file with your gmail creadentials and save it as `.env`
 
 Execute the following code to install all the application dependencies.
 ```
@@ -48,15 +51,6 @@ http://localhost:8282
 - Add/edit and disable instructors by admin
 - Add/edit and disable categories of courses by admin
 
-### Installation Guide
-- Install Ruby here and install it.
-- Install RVM(Ruby Version Manager)
-- Clone this repository with "git clone https://github.com/maxcutex/microlearningapp.git"
-- run `bundle install` to install the dependencies.
-- Navigate into the cloned project directory.
-- Edit the `env-sample` file with your gmail creadentials and save it as `.env`
-- run `rackup`
-- Navigate to `localhost:9292`
 
 ### Testing
 Tests can be run using

@@ -29,5 +29,6 @@ group :test,:development do
   gem 'simplecov', require: false
   gem 'capybara', "2.15.1"
   gem 'rack-test'
+  gem 'factory_bot'
   gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
 end

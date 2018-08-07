@@ -84,8 +84,8 @@ describe UserController do
         expect(last_response.location).to include('/signup')
       end
       it 'signup directs user to dashboard index page' do
-        user_values = { 
-          user:{
+        user_values = {
+          user: {
             first_name: 'Nili', last_name: 'Ach', username: 'nili678', email: 'niliach@example.com',
             biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
             password_confirmation: 'iesha'
@@ -106,6 +106,9 @@ describe UserController do
         post '/signup', user_values
 
         expect(last_response.location).to include('/dashboard')
+        # visit '/dashboard'
+        # expect(page.body).to have_text('Dashboard')
+
       end
       it 'does not let a logged in user view the signup page' do
         user_values = {

@@ -8,6 +8,13 @@ require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
 
+Dir[File.join(File.dirname(__FILE__), '.', 'factories', '**/*.rb')].sort.each do |file|
+  require file
+end
+Dir[File.join(File.dirname(__FILE__), '.', 'support', '**/*.rb')].sort.each do |file|
+  require file
+end
+
 if ActiveRecord::Base.connection.migration_context.needs_migration?
   st = 'Migrations are pending. '
   art = 'Run `rake db:migrate SINATRA_ENV=test` to resolve the issue.'
@@ -22,6 +29,7 @@ RSpec.configure do |config|
   config.filter_run :focus
   config.include Rack::Test::Methods
   config.include Capybara::DSL
+  config.include FactoryBot::Syntax::Methods
   DatabaseCleaner.strategy = :truncation
   # config.infer_spec_type_from_file_location!
   config.before do
@@ -33,6 +41,10 @@ RSpec.configure do |config|
   end
 
   config.order = 'default'
+end
+
+RSpec.configure do |config|
+  config.include Features::SessionHelpers, type: :feature
 end
 
 def app
