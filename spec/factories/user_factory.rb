@@ -5,7 +5,7 @@ FactoryBot.define do
   sequence :email do |n|
     "00#{n}@mi6.com"
   end
-  
+
   factory :user, class: 'User' do
     first_name 'User1'
     last_name 'Behive1'
@@ -21,8 +21,8 @@ FactoryBot.define do
   #   password 'aliceno'
   # end
   factory :dynamic_user, parent: :user do
-    first_name { Faker::Name::first_name }
-    last_name { Faker::Name::last_name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     username
     email
     password 'aliceno'
@@ -40,8 +40,8 @@ FactoryBot.define do
   end
 
   factory :user_student, parent: :user do
-    first_name { Faker::Name::first_name }
-    last_name { Faker::Name::last_name }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
     username
     email
     password 'aliceno'

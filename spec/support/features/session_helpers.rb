@@ -1,10 +1,26 @@
 module Features
   module SessionHelpers
-    def sign_up_with(email, password)
+    def generate_user_values
+      password = Faker::Internet.password
+      {
+        first_name: Faker::Name.first_name, last_name: Faker::Name.last_name,
+        username: Faker::Internet.username, email: Faker::Internet.email,
+        password: password, password_confirmation: password,
+        biography: Faker::Lorem.paragraph(2, true, 4)
+      }
+    end
+
+    def sign_up(user_values)
       visit sign_up_path
-      fill_in 'Email', with: email
-      fill_in 'Password', with: password
-      click_button 'Sign up'
+      fill_in('user_first_name', with: user_values[:first_name])
+      fill_in('user_last_name', with: user_values[:last_name])
+      fill_in('user_username', with: user_values[:username])
+      fill_in('user_email', with: user_values[:email])
+      fill_in('user_password', with: user_values[:password])
+      fill_in('user_password_confirmation', with: user_values[:password])
+      fill_in('user_biography', with: user_values[:biography])
+      attach_file('Image Upload', 'spec/uploads/him.jpg')
+      click_button 'Register'
     end
 
     def sign_in_with(username, password)
