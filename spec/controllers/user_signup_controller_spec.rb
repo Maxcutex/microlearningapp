@@ -83,33 +83,7 @@ describe UserController do
         post '/signup', xvar
         expect(last_response.location).to include('/signup')
       end
-      it 'signup directs user to dashboard index page' do
-        user_values = {
-          user: {
-            first_name: 'Nili', last_name: 'Ach', username: 'nili678', email: 'niliach@example.com',
-            biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
-            password_confirmation: 'iesha'
-          }
-        }
-        Role.create(
-          role_name: 'Administrator',
-          role_description: 'Administrator on the system'
-        )
-        Role.create(
-          role_name: 'Instructor',
-          role_description: 'instructor on the system'
-        )
-        Role.create(
-          role_name: 'Student',
-          role_description: 'student on the system'
-        )
-        post '/signup', user_values
-
-        expect(last_response.location).to include('/dashboard')
-        # visit '/dashboard'
-        # expect(page.body).to have_text('Dashboard')
-
-      end
+     
       it 'does not let a logged in user view the signup page' do
         user_values = {
           first_name: 'Nili', last_name: 'Ach', username: 'nili678',
@@ -126,7 +100,7 @@ describe UserController do
         session = {}
         session[:user_id] = user.id
         get '/signup'
-        expect(last_response.location).to include('/dashboard')
+        expect(last_response.location).to include('/user/dashboard')
       end
     end
   end

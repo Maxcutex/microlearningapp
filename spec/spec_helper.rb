@@ -7,6 +7,9 @@ require_relative '../config/environment'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
+require "selenium/webdriver"
+require 'faker'
+
 
 Dir[File.join(File.dirname(__FILE__), '.', 'factories', '**/*.rb')].sort.each do |file|
   require file
@@ -51,4 +54,14 @@ def app
   Rack::Builder.parse_file('config.ru').first
 end
 
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
+Capybara.register_driver :headless_chrome do |app|
+   Capybara::Selenium::Driver.new app,
+    browser: :chrome
+end
+Capybara.javascript_driver = :selenium
 Capybara.app = app
+

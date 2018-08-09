@@ -25,6 +25,41 @@ class ApplicationController < Sinatra::Base
     headers 'Content-Type' => 'text/html; charset=utf-8'
   end
 
+  before '/admin/*' do
+    check_logged_in
+    check_if_admin
+  end
+
+  before '/instructor/*' do
+    check_logged_in
+    check_if_instructor
+  end
+
+  before '/user/*' do
+    check_logged_in
+  end
+
+  def check_logged_in
+    unless logged_in?
+      flash[:error] = 'You are not currently logged in!'
+      redirect to :'/login'
+    end
+  end
+
+  def check_if_instructor
+    unless is_instructor?
+      flash[:error] = 'You do not have access to this page!'
+      redirect to :'/accessdenied'
+    end
+  end
+
+  def check_if_admin
+    unless is_admin?
+      flash[:error] = 'You do not have access to this page!'
+      redirect to :'/accessdenied'
+    end
+  end
+
   # User will only see homepage IF they are not currently logged in
   get '/' do
     if logged_in?

@@ -50,8 +50,8 @@
                     <% i = 0 %>
                      <% 30.times do |cd|%>
                       <% i = i +1 %>>
-                          <% if @coursedetailedit %>
-                        <% if @coursedetailedit.day_number == i%>
+                          <% if @course_detail %>
+                        <% if @course_detail.day_number == i%>
                          <option value="<%=i%>" selected >Day <%=i%></option>
                           <% else %>
                          <option value="<%=i%>"  > Day <%=i%></option>
@@ -72,7 +72,7 @@
                     <input type="text" class="form-control" id="day_topic" name="day_topic" placeholder="Topic for the day" value="<%=@coursedetailedit ? @coursedetailedit.day_topic : ''%>">
                     <input type="hidden" id="action_type" name="action_type" value="<%=action_type%>">
                     <input type="hidden" id="course_id" name="course_id" value="<%=@course ? @course.id : nil%>">
-                    <input type="hidden" id="detail_id" name="detail_id" value="<%=@coursedetailedit ? @coursedetailedit.id : nil%>">
+                    <input type="hidden" id="detail_id" name="detail_id" value="<%=@course_detail ? @course_detail.id : nil%>">
                   </div>
                 </div>
                  

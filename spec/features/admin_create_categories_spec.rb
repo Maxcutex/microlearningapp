@@ -1,33 +1,26 @@
 require 'spec_helper'
-require 'pry'
-feature 'Admin creates categories' do
-  scenario 'with any category name' do
-    user_values = {
-      first_name: 'Nili',
-      last_name: 'Ach',
-      username: 'nili678',
-      email: 'niliach@example.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-      password: 'iesha', password_confirmation: 'iesha'
-    }
-    user = User.create(user_values)
-    roles1 = Role.create(
-      role_name: 'Administrator',
-      role_description: 'Administrator on the system'
-    )
-    UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
-    CourseCategory.create(
-      category_name: 'My Category1',
-      is_active: true
-    )
-    visit '/login'
-    fill_in(:username, with: 'nili678')
-    fill_in(:password, with: 'iesha')
-    click_button 'Submit'
+feature 'Admin can' do
+  let(:user) { create(:fake_user) }
+  let(:admin_role) { create(:role_admin) }
+  let(:administrator) { create(:administrator, role: admin_role, user: user) }
 
-    visit '/managecategories'
+  scenario 'view category management' do
+    sign_in_with administrator.user.username, administrator.user.password
 
+    visit '/admin/managecategories'
+    expect(page).to have_content('Administer Categories')
+  end
+
+  scenario 'add category with any category name', :js do
+    sign_in_with administrator.user.username, administrator.user.password
+    visit '/admin/managecategories/new'
+    # binding.pry
     fill_in :category_name, with: 'My Category'
-    click_button 'Submit'
+    check 'is_active'
+    click_on 'Add'
+    # find_button('Add').click
+    expect(current_path).to eq('/admin/managecategories')
+    expect(page.body).to have_content('My Category')
+    # expect(page.body).to have_content('My Category')
   end
 end

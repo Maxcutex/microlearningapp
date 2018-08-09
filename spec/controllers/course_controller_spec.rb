@@ -23,13 +23,13 @@ describe CourseController do
       fill_in(:password, with: 'iesha')
       click_button 'Submit'
 
-      visit '/courses'
+      visit '/user/courses'
       # expect(page.status_code).to eq(200)
       expect(page.body).to include('Course')
     end
 
     it 'does not let a user not logged in to  view the course page' do
-      get '/courses'
+      get '/user/courses'
       expect(last_response.location).to include('/login')
     end
 
@@ -81,7 +81,7 @@ describe CourseController do
       fill_in(:username, with: 'nili678')
       fill_in(:password, with: 'iesha')
       click_button 'Submit'
-      visit '/mycourses'
+      visit '/user/mycourses'
       expect(page.status_code).to eq(200)
     end
 

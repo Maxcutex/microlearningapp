@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe BackEndManageController do
+describe UserController do
   describe 'Admin Manage Courses' do
     it 'loads the manage courses page for a logged in an admin' do
       user_values = {
@@ -28,7 +28,7 @@ describe BackEndManageController do
       fill_in(:password, with: 'iesha')
       click_button 'Submit'
 
-      visit '/managecourses'
+      visit '/instructor/managecourses'
       expect(page.status_code).to eq(200)
     end
 

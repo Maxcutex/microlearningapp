@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe CategoryController do
-  describe 'Admin Manage Courses' do
+  describe 'Admin Manage Courses', :js, driver: :chrome do
     it 'lets an administraator create a category for courses' do
       user_values = {
         first_name: 'Nili',
@@ -26,9 +26,12 @@ describe CategoryController do
       fill_in(:password, with: 'iesha')
       click_button 'Submit'
 
-      visit '/managecategories'
+      visit '/admin/managecategories/new'
       fill_in(:category_name, with: 'My Category')
+      check 'is_active'
       click_button 'Submit'
+
+      expect(current_path).to eq('/admin/managecategories')
     end
   end
 end

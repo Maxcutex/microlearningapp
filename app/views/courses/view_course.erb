@@ -79,7 +79,7 @@
                Add New Topic
               </a>
               <% else %>
-               <% if @userenrolled.nil? %>
+               <% if @user_enrolled.nil? %>
                <a href="/courses/<%=@course.id%>/enroll" class="btn btn-info pull-right">
                Enroll For Course
               </a>
@@ -102,7 +102,7 @@
                   <% end %>
                 </tr>
                 <% a = 0 %>
-                <% @coursedetails.each do |cd|%>
+                <% @course_details.each do |cd|%>
                 <% a = a + 1 %>
                 <tr>
                    
@@ -110,7 +110,7 @@
                   <td><%=cd.day_topic%></td>
                   
                   <td>
-                  <% if !@userenrolled.nil? || @course.instructor.id==current_user.id  %>
+                  <% if !@user_enrolled.nil? || @course.instructor.id==current_user.id  %>
                   <a  class="badge bg-blue " href="/coursedetail/<%=cd.id%>"  >
                     View 
                   </a>  

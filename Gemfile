@@ -22,6 +22,7 @@ gem 'faker'
 gem 'rufo'
 gem 'whenever', require: false
 gem 'coveralls', require: false
+gem 'selenium-webdriver'
 
 
 group :test,:development do

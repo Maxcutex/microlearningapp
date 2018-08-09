@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 feature 'Signed in User signs out' do
-  let(:user) { create(:dynamic_user) }
+  let(:user) { create(:fake_user) }
   let(:student_role) { create(:role_student) }
   let(:student) { create(:student, role: student_role, user: user) }
 
@@ -11,5 +11,4 @@ feature 'Signed in User signs out' do
     get '/logout'
     expect(last_response.location).to include('/')
   end
-
 end

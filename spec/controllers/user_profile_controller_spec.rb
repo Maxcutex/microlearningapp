@@ -20,7 +20,7 @@ describe UserProfileController do
         click_button 'Submit'
         session = {}
         session[:user_id] = user.id
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('Nili Ach')
       end
     end
@@ -43,7 +43,7 @@ describe UserProfileController do
         click_button 'Submit'
         session = {}
         session[:user_id] = user.id
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('User Profile')
         expect(page.body).to include('Nili Ach')
         expect(page.body).to include('Edit Profile')
@@ -71,7 +71,7 @@ describe UserProfileController do
         session = {}
         session[:user_id] = user.id
 
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('User Profile')
         expect(page.body).to include('Nili Ach')
         expect(page.body).to include('Edit Profile')

@@ -45,7 +45,7 @@
  </a> 
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
               <% ex = 0 %>
-              <% @userenrolled.each do |enroll| %>
+              <% @user_enrolled.each do |enroll| %>
             
               <% if enroll.course_id == course.id %>
               <% ex = enroll.course_id %>

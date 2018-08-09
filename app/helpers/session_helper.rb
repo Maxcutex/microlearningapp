@@ -1,15 +1,15 @@
 # Module for handling session variables
 module SessionHelpers
   def logged_in?
-    !!current_user
+    current_user
   end
 
   def is_admin?
-    !!confirm_admin
+    confirm_admin
   end
 
   def is_instructor?
-    !!confirm_instructor
+    confirm_instructor
   end
 
   # Find current user
@@ -27,6 +27,10 @@ module SessionHelpers
     @confirm_instructor ||= UserRole.where('role_id = ? AND user_id = ? AND is_active = ?', 2, session[:user_id], true).first
   end
 
+  # confirm if user is a student
+  def student?
+    @student ||= UserRole.where('role_id = ? AND user_id = ? AND is_active = ?', 3, session[:user_id], true).first
+  end
   # Find a course based on id
   def find_course(id)
     @course ||= Course.find_by_id(id)
