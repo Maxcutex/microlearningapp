@@ -12,4 +12,11 @@ class Course < ActiveRecord::Base
   def self.get_by_id(id)
     where(id: id)
   end
+  def self.active_courses
+    where(is_active: true)
+  end
+
+  def self.active_course_by_instructor(id)
+    where(is_active: true, instructor_id: id)
+  end
 end

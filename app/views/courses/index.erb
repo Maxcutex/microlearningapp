@@ -30,9 +30,9 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div class="user-block">
-                <img class="img-circle" src="backend/dist/img/user1-128x128.jpg" alt="User Image">
+                <img class="img-circle" src="/backend/dist/img/user1-128x128.jpg" alt="User Image">
                 <span class="username"><a href="#"><%= course.instructor.first_name %>  &nbsp; <%= course.instructor.last_name %> </a></span>
-                <span class="description"><%= course.coursecategory.category_name %></span>
+                <span class="description"><%= course.course_category.category_name %></span>
               </div>
               <!-- /.user-block -->
               
@@ -41,7 +41,7 @@
             <div class="box-body">
            <span class="box-title"><%= course.name%>
             <%= course.icon%></span>
-            <a href="/courses/view/<%=course.id%>">  <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
+            <a href="/user/courses/view/<%=course.id%>">  <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
  </a> 
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
               <% ex = 0 %>
@@ -52,11 +52,11 @@
               <% end %>
               <% end %>
               <% if ex==course.id %>
-               <a href="/courses/view/<%=course.id%>" class="btn btn-success pull-left">
+               <a href="/user/courses/view/<%=course.id%>" class="btn btn-success pull-left">
                 Enrolled
                </a>
                <% else %>
-              <a href="/courses/<%=course.id%>/enroll" class="btn btn-warning pull-left">
+              <a href="/user/courses/<%=course.id%>/enroll" class="btn btn-warning pull-left">
                 Sign Up
                </a>
                <% end %>
