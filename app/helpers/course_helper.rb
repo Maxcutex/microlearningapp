@@ -19,9 +19,9 @@ module CourseHelpers
     if params[:course_image]
       file = params[:course_image]
       file_name = file[:filename]
-      temp_file = file[:tempfile]
+      course_temp_file = file[:tempfile]
       File.open("./public/images/#{file_name}", 'wb') do |f|
-        f.write(temp_file.read)
+        f.write(course_temp_file.read)
       end
     end
     parameters = {
@@ -38,12 +38,6 @@ module CourseHelpers
   end
 
   def save_and_redirect
-    if params[:action_type] == 'Add'
-      @course = Course.create(parameters)
-    else
-      @course = find_course(params[:id]) if params[:id]
-      @course.update(parameters)
-    end
     if @course.save
       redirect to '/instructor/managecourses'
     else

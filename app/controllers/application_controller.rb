@@ -63,7 +63,7 @@ class ApplicationController < Sinatra::Base
   # User will only see homepage IF they are not currently logged in
   get '/' do
     if logged_in?
-      redirect to '/courses'
+      redirect to '/user/courses'
     else
       @page_title = 'Welcome to Asentus Course Management'
       erb :index, layout: :layout_web, locals: { page_title: @page_title }

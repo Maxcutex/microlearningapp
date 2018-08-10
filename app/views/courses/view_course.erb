@@ -46,7 +46,7 @@
 
               <div class="pad" style="height:70px;"><p> <%= @course.description %></p></div>
                   <% if @course.instructor.id == current_user.id %>
-            <a href="/managecourses/<%=@course.id%>"> Edit Course </a>
+            <a href="/instructor/managecourses/<%=@course.id%>"> Edit Course </a>
             <% end %>
               <span class="pull-right text-muted"><%=course_difficulty(@course.level) %> </span>
                <span class="pull-right">Level: &nbsp;&nbsp;</span>
@@ -75,16 +75,16 @@
             <div class="box-header with-border">
               <h3 class="box-title">Course Topics</h3>
                <% if @course.instructor.id == current_user.id %>
-              <a href="/coursedetail/<%=@course.id%>/add" class="btn btn-success pull-right">
+              <a href="/instructor/coursedetail/<%=@course.id%>/add" class="btn btn-success pull-right">
                Add New Topic
               </a>
               <% else %>
                <% if @user_enrolled.nil? %>
-               <a href="/courses/<%=@course.id%>/enroll" class="btn btn-info pull-right">
+               <a href="/user/courses/<%=@course.id%>/enroll" class="btn btn-info pull-right">
                Enroll For Course
               </a>
               <% else %>
-                <a href="/courses/<%=@course.id%>/unsubscribe" class="btn btn-danger pull-right">Unsubscribe from Course</a>
+                <a href="/user/courses/<%=@course.id%>/unsubscribe" class="btn btn-danger pull-right">Unsubscribe from Course</a>
 
                <% end %>
               <% end %>
@@ -111,12 +111,12 @@
                   
                   <td>
                   <% if !@user_enrolled.nil? || @course.instructor.id==current_user.id  %>
-                  <a  class="badge bg-blue " href="/coursedetail/<%=cd.id%>"  >
+                  <a  class="badge bg-blue " href="/user/coursedetail/<%=cd.id%>"  >
                     View 
                   </a>  
                   <% end %>
                   <% if @course.instructor.id == current_user.id %>&nbsp;
-                  <a   class="badge bg-orange " href="/coursedetail/<%=cd.course_id%>/edit/<%=cd.id%>" >
+                  <a   class="badge bg-orange " href="/instructor/coursedetail/<%=cd.course_id%>/edit/<%=cd.id%>" >
                     Edit
                   </a>
                   <% end %>

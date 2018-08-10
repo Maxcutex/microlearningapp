@@ -15,7 +15,7 @@ class CourseController < ApplicationController
     begin
       @course = find_course(params[:id]) if params[:id]
       @categories = CourseCategory.all
-      loc = { course_id: @course ? @course.id : nil, page_title: 'Manage Categories', data_table: false }
+      loc = { course_id: @course ? @course.id : nil, page_title: 'Manage Courses', data_table: false }
       erb :'/courses/managecourse_edit', layout: :layout_admin, locals: loc
     rescue ActiveRecord::RecordNotFound => e
       erb :'/users/error', locals: {
@@ -28,7 +28,13 @@ class CourseController < ApplicationController
 
   post '/postcourse' do
     begin
-      process_file_parameters
+      parameters = process_file_parameters
+      if params[:action_type] == 'Add'
+        @course = Course.create(parameters)
+      else
+        @course = find_course(params[:id]) if params[:id]
+        @course.update(parameters)
+      end
       save_and_redirect
     rescue StandardError => e
       erb :'/users/error', locals: {

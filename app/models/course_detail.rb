@@ -17,11 +17,11 @@ class CourseDetail < ActiveRecord::Base
   end
 
   def self.get_by_detail_id(detail_id)
-    where(detail_id: detail_id).first
+    where(id: detail_id).first
   end
 
   def self.get_last(course_id)
-    where(course_id: course_id).order(day_number).last
+    where(course_id: course_id).order(:day_number).last
   end
 
   def self.get_existing(day_number, course_id)

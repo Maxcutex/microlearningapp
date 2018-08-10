@@ -27,7 +27,7 @@ class CategoryController < ApplicationController
   end
 
   get '/admin/managecategories/edit/:id' do
-    @category = CourseCategory.get_category_by_id(id) if params[:id]
+    @category = CourseCategory.get_category_by_id(params[:id]) if params[:id]
     page_title = 'Manage Categories'
     loc = {
       category_id: @category.id,
@@ -37,15 +37,13 @@ class CategoryController < ApplicationController
   end
 
   post '/post_edit_category' do
-    binding.pry
     isactive = true
     if params[:is_active].nil?
       isactive = false
     end
-    @category = CourseCategory.get_category_by_id(id) if params[:id]
+    @category = CourseCategory.get_category_by_id(params[:id]) if params[:id]
     @category.category_name = params[:category_name]
     @category.is_active = true
-    binding.pry
     save_category
   end
 

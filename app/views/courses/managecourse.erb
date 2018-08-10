@@ -24,7 +24,7 @@
           <div class="box box-info">
             <div class="box-header with-border">
               <h3 class="box-title">Courses</h3>
-              <a type="button" class="btn btn-success pull-right" href="/managecourses/0">
+              <a  id="AddNewCourse" class="btn btn-success pull-right" href="/instructor/managecourses/0">
                Add New Course
               </a>
             </div>
@@ -51,14 +51,14 @@
                   <td><%=cd.no_days%></td>
                    <td><%=cd.is_active ? 'Active' : 'Not Active'%></td>
                   <td>
-                  <a   class="badge bg-orange " href="/managecourses/<%=cd.id%>">
+                  <a   class="badge bg-orange " href="/instructor/managecourses/<%=cd.id%>">
                      Edit
-                  </a> &nbsp; <a   class="badge bg-blue " href="/courses/view/<%=cd.id%>">
+                  </a> &nbsp; <a   class="badge bg-blue " href="/user/courses/view/<%=cd.id%>">
                      View
                   </a> &nbsp;
                
                 </td>
-                <td><a class="badge bg-gray " href="/coursedetail/<%=cd.id%>/add">Add Topics</a></td>
+                <td><a class="badge bg-gray " href="/instructor/coursedetail/<%=cd.id%>/add">Add Topics</a></td>
                 </tr>
                 <% end %>
               

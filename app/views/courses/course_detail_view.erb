@@ -7,7 +7,7 @@
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="/mycourses">Courses</a></li>
+        <li><a href="/user/mycourses">Courses</a></li>
          
         <li class="active">View Topic</li>
       </ol>
@@ -25,7 +25,7 @@
           <div class="box box-widget">
             <div class="box-header with-border">
               <div  >
-             <h4 class="username"> <%= @coursedetail.day_topic %></h4>
+             <h4 class="username"> <%= @course_detail.day_topic %></h4>
               </div>
               <!-- /.user-block -->
             
@@ -39,9 +39,9 @@
             <div class="col-md-12">
            
 
-              <div class="pad" style="height:70px;"><p> <%= @coursedetail.day_details %></p></div>
+              <div class="pad" style="height:70px;"><p> <%= @course_detail.day_details %></p></div>
                   <% if @course.instructor.id == current_user.id %>
-            <a href="/coursedetail/<%=@coursedetail.course_id%>/edit/<%=@coursedetail.id%>"> Edit Details </a>
+            <a href="/coursedetail/<%=@course_detail.course_id%>/edit/<%=@course_detail.id%>"> Edit Details </a>
             <% end %>
               
             </div>

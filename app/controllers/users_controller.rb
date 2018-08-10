@@ -37,6 +37,7 @@ class UserController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      session[:role_name] = @user.user_role.role.role_name
       redirect to '/user/dashboard'
     else
       flash[:error] = 'Sorry, invalid username and password.'

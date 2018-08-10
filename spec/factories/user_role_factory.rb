@@ -7,12 +7,12 @@ FactoryBot.define do
 
   factory :instructor, class: 'UserRole' do
     association :role, factory: :role_instructor
-    association :user, factory: :user
+    association :user, factory: :fake_user
     is_active true
   end
   factory :administrator, class: 'UserRole' do
     association :role, factory: :role_admin
-    association :user, factory: :user
+    association :user, factory: :fake_user
     is_active true
   end
 end

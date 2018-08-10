@@ -4,21 +4,26 @@ class CourseDetailController < ApplicationController
   #  Course Details view
   get '/user/coursedetail/:detail_id' do
     begin
-      @coursedetail = CourseDetail.get_by_detail_id(params[:detail_id])
-      @userenrolled = UserEnrollment.get_enrollment(
+      @course_detail = CourseDetail.get_by_detail_id(params[:detail_id])
+      binding.pry
+      @user_enrolled = UserEnrollment.get_enrollment(
         user_id: session[:user_id],
         course_id: @coursedetail.course_id
       )
-      @course = find_course(@coursedetail.course_id)
-      if current_user.id == @course.instructor_id || !@userenrolled.nil?
-        erb :'courses/course_detail_view'
+      locals = {
+        course_id: params[:course_id], action_type: 'Add',
+        last_number: last_number, page_title: 'Add Course Detail', data_table: false
+      }
+      @course = find_course(@course_detail.course_id)
+      if current_user.id == @course.instructor_id || !@user_enrolled.nil?
+        erb :'courses/course_detail_view', locals: locals
       else
         erb :'courses/access_denied'
       end
     rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
+      erb :'/users/error', locals: { user: 'Error:' + e.message, page_title: 'Course Detail', data_table: false }
     rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message }
+      erb :'/users/error', locals: { user: f.message, page_title: 'Course Detail', data_table: false }
     end
   end
 
@@ -33,7 +38,7 @@ class CourseDetailController < ApplicationController
                   end
     locals = {
       course_id: params[:course_id], action_type: 'Add',
-      last_number: last_number
+      last_number: last_number, page_title: 'Add Course Detail', data_table: false
     }
     erb :'/courses/course_detail', locals: locals
   end
@@ -63,10 +68,8 @@ class CourseDetailController < ApplicationController
         flash[:error] = 'Kindly fill in all required fields correctly!'
         redirect to "/coursedetail/#{params[:course_id]}/edit/#{@course_detail.id}"
       end
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
     rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message }
+      erb :'/users/error', locals: { user: f.message, page_title: 'Course Detail', data_table: false }
     end
   end
   #  Course Details Post Add
@@ -96,10 +99,8 @@ class CourseDetailController < ApplicationController
         flash[:error] = 'Kindly fill in all required fields correctly!'
         redirect to "/coursedetail/#{params[:course_id]}/add"
       end
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
     rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message }
+      erb :'/users/error', locals: { user: f.message , page_title: 'Course Detail', data_table: false}
     end
   end
 
@@ -107,7 +108,7 @@ class CourseDetailController < ApplicationController
   get '/instructor/coursedetail/:course_id/edit/:detail_id' do
     @course = find_course(params[:course_id])
     @course_detail = CourseDetail.where(id: params[:detail_id]).first
-    loc = { course_id: params[:course_id], action_type: 'Edit' }
+    loc = { course_id: params[:course_id], action_type: 'Edit', page_title: 'Course Detail', data_table: false }
     erb :'/courses/course_detail', locals: loc
   end
 end

@@ -19,17 +19,17 @@ module SessionHelpers
 
   # Confim if user is admin
   def confirm_admin
-    @confirm_admin ||= UserRole.where('role_id = ? AND user_id = ? AND is_active = ?', 1, session[:user_id], true).first
+    @confirm_admin = true if session[:role_name] == 'Administrator'
   end
 
   # confirm if user is an instructor
   def confirm_instructor
-    @confirm_instructor ||= UserRole.where('role_id = ? AND user_id = ? AND is_active = ?', 2, session[:user_id], true).first
+    @confirm_instructor = true if session[:role_name] == 'Instructor'
   end
 
   # confirm if user is a student
   def student?
-    @student ||= UserRole.where('role_id = ? AND user_id = ? AND is_active = ?', 3, session[:user_id], true).first
+    @student = true if session[:role_name] == 'Student'
   end
   # Find a course based on id
   def find_course(id)
