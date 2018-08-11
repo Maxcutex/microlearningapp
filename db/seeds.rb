@@ -1,5 +1,4 @@
 require 'faker'
-require 'database_cleaner'
 
 DatabaseCleaner.clean_with :truncation
 Role.destroy_all
