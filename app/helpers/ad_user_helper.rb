@@ -3,11 +3,11 @@ module AdUserHelpers
     if @user.save
       add_role(params[:user][:role_type], @user.id)
       flash[:success] = 'Process successfully created!'
-      redirect to '/users'
+      redirect to '/admin/users'
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
       flash[:error] += @user.errors.full_messages
-      redirect to '/users/new'
+      redirect to '/admin/users/new'
     end
   end
 
@@ -15,7 +15,7 @@ module AdUserHelpers
     if @user.save
       edit_role(params[:user][:role_type], @user.id)
       flash[:success] = 'Process successfully updated!'
-      redirect to '/users'
+      redirect to '/admin/users'
     else
       erb :'/users/error', locals: {
         user: @user.errors.full_messages,

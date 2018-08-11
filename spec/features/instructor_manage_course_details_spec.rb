@@ -23,7 +23,6 @@ feature 'Instructor can' do
     fill_in :day_topic, with: 'My New Topic'
     fill_in :day_details, with: '<p>In this topic we will talk about a lot of things</p>'
 
-    # fill_in :action_type, with: 'Add', visible: false
     within '#day_num' do
       find("option[value='#{next_id}']").click
     end
