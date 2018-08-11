@@ -56,7 +56,7 @@ module CourseHelpers
       file = params[:topic_image]
       file_name = file[:filename]
       temp_file = file[:tempfile]
-      File.open("./public/images/#{file_name}", 'wb') do |f|
+      File.open("./public/images/courses/#{file_name}", 'wb') do |f|
         f.write(temp_file.read)
       end
     end
