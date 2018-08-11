@@ -16,7 +16,7 @@ class UserLearntTrack < ActiveRecord::Base
   def self.get_by_user_id(user_id, course_id)
     where(user_id: id, course_id: course_id)
   end
-  
+
   def self.get_last_track_by_user_id(user_id, course_id)
     where(user_id: id, course_id: course_id).order(:day_number).last
   end

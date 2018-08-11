@@ -2,7 +2,7 @@
 class FaqsController < ApplicationController
   get '/admin/managefaqs' do
     begin
-      @faqs = FAQ.all.order(:id)
+      @faqs = FAQ.all_faqs
       page_title = 'Manage Faqs'
       loc = {
         page_title: page_title, data_table: true
@@ -18,7 +18,7 @@ class FaqsController < ApplicationController
 
   get '/admin/managefaqs/view/:id' do
     begin
-      @faq = FAQ.where(id: params[:id]).first
+      @faq = FAQ.get_by_id(params[:id])
       erb :'faqs/view_faq', locals: {
         page_title: 'FAQ View',
         data_table: false
@@ -33,7 +33,7 @@ class FaqsController < ApplicationController
 
   get '/admin/managefaqs/edit/:id' do
     begin
-      @faq = FAQ.where(id: params[:id]).first
+      @faq = FAQ.get_by_id(params[:id])
       erb :'faqs/edit_faq', layout: :layout_admin, locals: {
         page_title: 'FAQ View',
         data_table: false
@@ -44,15 +44,18 @@ class FaqsController < ApplicationController
         data_table: false
       }
     end
-  end 
+  end
 
   post '/postnew' do
     begin
       faqvals = { faq_title: params[:faq_title], faq_description: params[:faq_description] }
       @faqs = FAQ.create(faqvals)
 
-      flash[:error] = 'Something went wrong!!!.' until @faqs.save
-      redirect to '/managefaqss'
+      if @faqs.save
+      else 
+        flash[:error] = 'Something went wrong!!!.'
+      end
+      redirect to '/admin/managefaqs'
     rescue StandardError => f
       erb :'/users/error', locals: {
         user: f.message, page_title: 'Error',
@@ -64,11 +67,13 @@ class FaqsController < ApplicationController
   post '/postedit' do
     begin
       faqvals = { faq_title: params[:faq_title], faq_description: params[:faq_description]}
-      @faqs = FAQ.where(id: params[:id]).first
+      @faqs = FAQ.get_by_id(params[:id])
       @faqs.update(faqvals)
-
-      until @faqs.save
+      if @faqs.save
+        redirect to '/admin/managefaqs'
+      else
         flash[:error] = 'Something went wrong!!!.'
+        redirect to "/admin/managefaqs/edit/#{@faqs.id}"
       end
     rescue StandardError => f
       erb :'/users/error', locals: {

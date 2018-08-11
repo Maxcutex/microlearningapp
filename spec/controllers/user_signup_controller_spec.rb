@@ -92,6 +92,11 @@ describe UserController do
           password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         params = {
           username: 'nili678',
           password: 'iesha'
@@ -99,6 +104,7 @@ describe UserController do
         post '/login', params
         session = {}
         session[:user_id] = user.id
+        session[:role_name] = roles1.role_name
         get '/signup'
         expect(last_response.location).to include('/user/dashboard')
       end

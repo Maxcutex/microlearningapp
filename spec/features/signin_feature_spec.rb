@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-xfeature 'User signs in' do
+feature 'User signs in' do
   # let(:user) { create(:fake_user) }
   # let(:student_role) { create(:role_student) }
   let(:student) { create(:student) }

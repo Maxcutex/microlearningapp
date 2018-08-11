@@ -64,11 +64,9 @@ module CourseHelpers
 
   def save_course_details(url)
     if @course_detail.save
-      binding.pry
       redirect to "/user/courses/view/#{params[:course_id]}"
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
-      binding.pry
       redirect to url
     end
   end

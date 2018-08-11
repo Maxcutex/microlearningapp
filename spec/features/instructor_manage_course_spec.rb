@@ -7,7 +7,7 @@ feature 'Instructor can' do
     @categories = create_list(:category, 10)
   end
 
-  xscenario 'view courses', :js do
+  scenario 'view courses', :js do
     sign_in_with instructor.user.username, instructor.user.password
 
     visit '/instructor/managecourses'
@@ -35,13 +35,13 @@ feature 'Instructor can' do
     # expect(page.body).to have_content('My New Course')
   end
 
-  xscenario 'view exising category', :js do
+  scenario 'view exising category', :js do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/user/courses/view/#{@course.id}"
     expect(page.body).to have_content(@course.name)
   end
 
-  xscenario 'edit category with any category name', :js do
+  scenario 'edit category with any category name', :js do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/instructor/managecourses/#{@course.id}"
     fill_in :course_name, with: 'My Course Edited'

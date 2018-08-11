@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-xfeature 'Register signs in' do
+feature 'Register signs in' do
   before do
    @user =  generate_user_values
   end
