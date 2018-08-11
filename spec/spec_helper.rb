@@ -48,6 +48,7 @@ end
 
 RSpec.configure do |config|
   config.include Features::SessionHelpers, type: :feature
+  config.include Features::Wysihtml5Helper, type: :feature
 end
 
 def app
@@ -60,4 +61,3 @@ end
 
 Capybara.javascript_driver = :chrome
 Capybara.app = app
-

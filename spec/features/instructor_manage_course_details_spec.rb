@@ -5,40 +5,35 @@ feature 'Instructor can' do
   before do
     @course = create(:course)
     @categories = create_list(:category, 10)
-    @course_detail = create(:course_detail)
+    @course_detail = create(:course_detail, course: @course)
   end
 
-  scenario 'view courses details', :js do
+  scenario 'view courses details' do
     sign_in_with instructor.user.username, instructor.user.password
 
     visit "/user/coursedetail/#{@course_detail.id}"
     expect(page).to have_content('Manage Courses')
   end
 
-  scenario 'add course details to a course', :js do
+  scenario 'add course details to a course' do
     sign_in_with instructor.user.username, instructor.user.password
-    visit 'instructor/coursedetail/1/add'
-    click_on 'Add New Course'
-    fill_in :course_name, with: 'My New Course'
-    page.execute_script('$("#course_description").val("Description of my course")')
-    sleep 10
+    visit "/instructor/coursedetail/#{@course.id}/add"
+    last_id = CourseDetail.get_last(@course.id)
+    next_id = last_id.id + 1
+    fill_in :day_topic, with: 'My New Topic'
+    fill_in :day_details, with: '<p>In this topic we will talk about a lot of things</p>'
+
     # fill_in :action_type, with: 'Add', visible: false
-    within '#course_category' do
-      find("option[value='1']").click
+    within '#day_num' do
+      find("option[value='#{next_id}']").click
     end
-    within '#course_level' do
-      find("option[value='2']").click
-    end
-    within '#course_days' do
-      find("option[value='4']").click
-    end
-    check 'is_active'
+    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Add'
-    expect(current_path).to eq('/instructor/managecourses')
+    expect(current_path).to eq("/user/courses/view/#{@course.id}")
     # expect(page.body).to have_content('My New Course')
   end
 
-  scenario 'view exising course detail', :js do
+  scenario 'view exising course detail' do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/user/courses/view/#{@course.id}"
     expect(page.body).to have_content(@course.name)
@@ -46,12 +41,15 @@ feature 'Instructor can' do
 
   scenario 'edit course detail with any category name', :js do
     sign_in_with instructor.user.username, instructor.user.password
-    visit "/instructor/managecourses/#{@course.id}"
-    fill_in :course_name, with: 'My Course Edited'
-    check 'is_active'
+    visit "/instructor/coursedetail/#{@course.id}/edit/#{@course_detail.id}"
+    fill_in :day_topic, with: 'My Edited Topic'
+    fill_in :day_details, with: '<p>Edited this topic we will talk about a lot of things</p>'
+
+    within '#day_num' do
+      find("option[value='#{@course_detail.id}']").click
+    end
+    # attach_file('Image Upload', 'spec/uploads/him.jpg') 
     click_on 'Edit'
-    # find_button('Add').click
-    expect(current_path).to eq('/instructor/managecourses')
-    expect(page.body).to have_content('My Course Edited')
+    expect(current_path).to eq("/user/courses/view/#{@course.id}")
   end
 end

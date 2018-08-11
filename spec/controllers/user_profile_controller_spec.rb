@@ -14,6 +14,11 @@ describe UserProfileController do
           password: 'iesha', password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         visit '/login'
         fill_in(:username, with: 'nili678')
         fill_in(:password, with: 'iesha')
@@ -37,6 +42,11 @@ describe UserProfileController do
           password: 'iesha', password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         visit '/login'
         fill_in(:username, with: 'nili678')
         fill_in(:password, with: 'iesha')

@@ -14,17 +14,7 @@ module UserHelpers
     end
   end
 
-  def check_upload_file_image
-    @file_name = ''
-    unless params[:topic_image].nil?
-      file = params[:topic_image]
-      file_name = file[:filename]
-      temp_file = file[:tempfile]
-      File.open("./public/images/#{file_name}", 'wb') do |f|
-        f.write(temp_file.read)
-      end
-    end
-  end
+  
   
   def set_session_create_values
     session[:user] = params[:user]
