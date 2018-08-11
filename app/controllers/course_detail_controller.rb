@@ -39,7 +39,7 @@ class CourseDetailController < ApplicationController
 
   post '/editcoursedetail' do
     begin
-      check_upload_file_image
+      check_upload_file_image(params[:topic_image])
       fetch_set_course_detail
       save_course_details("/instructor/coursedetail/#{params[:course_id]}/edit/#{@course_detail.id}")
     rescue StandardError => f
@@ -49,7 +49,7 @@ class CourseDetailController < ApplicationController
   #  Course Details Post Add
   post '/postcoursedetail' do
     begin
-      check_upload_file_image
+      check_upload_file_image(params[:topic_image])
       check_if_details_exists
       create_course_detail
       save_course_details("/instructor/coursedetail/#{params[:course_id]}/add")

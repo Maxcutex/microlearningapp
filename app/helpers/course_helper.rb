@@ -16,15 +16,7 @@ module CourseHelpers
   end
 
   def process_file_parameters
-    file_name = ''
-    if params[:course_image]
-      file = params[:course_image]
-      file_name = file[:filename]
-      course_temp_file = file[:tempfile]
-      File.open("./public/images/#{file_name}", 'wb') do |f|
-        f.write(course_temp_file.read)
-      end
-    end
+    check_upload_file_image(params[:course_image])
     parameters = {
       name: params[:course_name],
       description: params[:course_description],
@@ -34,7 +26,7 @@ module CourseHelpers
       no_days: params[:course_days],
       category_id: params[:course_category],
       level: params[:course_level],
-      course_image: file_name
+      course_image: @file_name
     }
   end
 
@@ -50,16 +42,17 @@ module CourseHelpers
     end
   end
 
-  def check_upload_file_image
+  def check_upload_file_image(params_image)
     @file_name = ''
-    unless params[:topic_image].nil?
-      file = params[:topic_image]
-      file_name = file[:filename]
+    unless params_image.nil?
+      file = params_image
+      @file_name = file[:filename]
       temp_file = file[:tempfile]
-      File.open("./public/images/courses/#{file_name}", 'wb') do |f|
+      File.open("./public/images/#{@file_name}", 'wb') do |f|
         f.write(temp_file.read)
       end
     end
+    return @file_name
   end
 
   def save_course_details(url)
