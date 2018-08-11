@@ -4,14 +4,14 @@
     <section class="content-header">
       <h1>
          
-      Add  Courses Topic
+       <%= action_type %>   Courses Topic
          
         
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
         <li><a href="#">Courses</a></li>
-        <li class="active">Add Topic </li>
+        <li class="active"> <%= action_type %>  Topic </li>
       </ol>
     </section>
 
@@ -32,7 +32,7 @@
             <!-- /.box-header -->
             
              
-                <form action="/postcoursedetail" id="postcourse" class="form-horizontal" method="POST" enctype="multipart/form-data">
+                <form action="<%=post_url%>" id="postcourse" class="form-horizontal" method="POST" enctype="multipart/form-data">
                 <div class="box-body">
                 <% if action_type == 'Add'%>
                 <div class="form-group">
@@ -50,8 +50,8 @@
                     <% i = 0 %>
                      <% 30.times do |cd|%>
                       <% i = i +1 %>>
-                          <% if @coursedetailedit %>
-                        <% if @coursedetailedit.day_number == i%>
+                          <% if @course_detail %>
+                        <% if @course_detail.day_number == i%>
                          <option value="<%=i%>" selected >Day <%=i%></option>
                           <% else %>
                          <option value="<%=i%>"  > Day <%=i%></option>
@@ -66,13 +66,13 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="course_name" class="col-sm-2 control-label">Day Topic</label>
+                  <label for="day_topic" class="col-sm-2 control-label">Day Topic</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="day_topic" name="day_topic" placeholder="Topic for the day" value="<%=@coursedetailedit ? @coursedetailedit.day_topic : ''%>">
+                    <input type="text" class="form-control" id="day_topic" name="day_topic" placeholder="Topic for the day" value="<%=@course_detail ? @course_detail.day_topic : ''%>">
                     <input type="hidden" id="action_type" name="action_type" value="<%=action_type%>">
                     <input type="hidden" id="course_id" name="course_id" value="<%=@course ? @course.id : nil%>">
-                    <input type="hidden" id="detail_id" name="detail_id" value="<%=@coursedetailedit ? @coursedetailedit.id : nil%>">
+                    <input type="hidden" id="detail_id" name="detail_id" value="<%=@course_detail ? @course_detail.id : nil%>">
                   </div>
                 </div>
                  
@@ -81,7 +81,7 @@
 
                 <div class="col-sm-10">
                   <textarea class="textarea" placeholder="Topic Details" id="day_details" name="day_details"
-                            style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><%=@coursedetailedit ? @coursedetailedit.day_details : ''%></textarea>
+                            style="width: 100%; height: 125px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"><%=@course_detail ? @course_detail.day_details : ''%></textarea>
                 </div>
                 </div>
                <div class="form-group">

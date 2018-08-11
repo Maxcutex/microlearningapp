@@ -83,33 +83,7 @@ describe UserController do
         post '/signup', xvar
         expect(last_response.location).to include('/signup')
       end
-      it 'signup directs user to dashboard index page' do
-        user_values = {
-          user: {
-            first_name: 'Nili', last_name: 'Ach', username: 'nili678', email: 'niliach@example.com',
-            biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
-            password_confirmation: 'iesha'
-          }
-        }
-        Role.create(
-          role_name: 'Administrator',
-          role_description: 'Administrator on the system'
-        )
-        Role.create(
-          role_name: 'Instructor',
-          role_description: 'instructor on the system'
-        )
-        Role.create(
-          role_name: 'Student',
-          role_description: 'student on the system'
-        )
-        post '/signup', user_values
-
-        expect(last_response.location).to include('/dashboard')
-        # visit '/dashboard'
-        # expect(page.body).to have_text('Dashboard')
-
-      end
+     
       it 'does not let a logged in user view the signup page' do
         user_values = {
           first_name: 'Nili', last_name: 'Ach', username: 'nili678',
@@ -118,6 +92,11 @@ describe UserController do
           password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         params = {
           username: 'nili678',
           password: 'iesha'
@@ -125,8 +104,9 @@ describe UserController do
         post '/login', params
         session = {}
         session[:user_id] = user.id
+        session[:role_name] = roles1.role_name
         get '/signup'
-        expect(last_response.location).to include('/dashboard')
+        expect(last_response.location).to include('/user/dashboard')
       end
     end
   end

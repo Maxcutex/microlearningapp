@@ -28,7 +28,7 @@ class CronTask < ApplicationController
   end
 
   def get_lesson_to_send(course_id, day_number)
-    @topic_day = CourseDetails.where(
+    @topic_day = CourseDetail.where(
       course_id: course_id, day_number: day_number
     ).first
   end

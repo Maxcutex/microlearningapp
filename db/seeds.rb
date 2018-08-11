@@ -93,7 +93,7 @@ CourseCategory.create(
 )
 # courses
 Course.destroy_all
-CourseDetails.destroy_all
+CourseDetail.destroy_all
 id = 0
 20.times do
   id += 1
@@ -117,7 +117,7 @@ id = 0
   looper.times do
     start += 1
     rword = Faker::Lorem.word
-    CourseDetails.create(
+    CourseDetail.create(
       [
         {
           day_number: start,

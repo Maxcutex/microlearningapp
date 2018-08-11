@@ -1,110 +1,74 @@
+require_relative '../helpers/course_helper'
 # course controller
 class CourseDetailController < ApplicationController
+  include CourseHelpers
   @page_title = ''
   #  Course Details view
-  get '/coursedetail/:detail_id' do
+  get '/user/coursedetail/:detail_id' do
     begin
-      @coursedetail = CourseDetails.where(id: params[:detail_id]).first
-      @userenrolled = UserEnrollment.where(
+      @course_detail = CourseDetail.get_by_detail_id(params[:detail_id])
+      @user_enrolled = UserEnrollment.get_enrollment(
         user_id: session[:user_id],
         course_id: @coursedetail.course_id
-      ).first
-      @course = find_course(@coursedetail.course_id)
-      if current_user.id == @course.instructor_id || !@userenrolled.nil?
-        erb :'courses/course_detail_view'
+      )
+      locals = {
+        course_id: params[:course_id], action_type: 'Add',
+        last_number: last_number, page_title: 'Add Course Detail', data_table: false
+      }
+      @course = find_course(@course_detail.course_id)
+      if current_user.id == @course.instructor_id || !@user_enrolled.nil?
+        erb :'courses/course_detail_view', locals: locals
       else
         erb :'courses/access_denied'
       end
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
     rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message }
+      erb :'/users/error', locals: { user: f.message, page_title: 'Course Detail', data_table: false }
     end
   end
 
   #  Course Details Add
-  get '/coursedetail/:course_id/add' do
-    @course = find_course(params[:course_id])
-    @coursedetail = CourseDetails.where(
-      course_id: params[:course_id]
-    ).order(:day_number).last
-    last_number = if @coursedetail.nil?
-                    0
-                  else
-                    @coursedetail.day_number
-                  end
-    loc = {
+  get '/instructor/coursedetail/:course_id/add' do
+    set_page_parameters
+    locals = {
       course_id: params[:course_id], action_type: 'Add',
-      last_number: last_number
+      last_number: @last_number, page_title: 'Add Course Detail',
+      post_url: '/editcoursedetail', data_table: false
     }
-    erb :'/courses/course_detail', locals: loc
+    erb :'/courses/course_detail', locals: locals
   end
 
+  post '/editcoursedetail' do
+    begin
+      check_upload_file_image(params[:topic_image])
+      fetch_set_course_detail
+      save_course_details("/instructor/coursedetail/#{params[:course_id]}/edit/#{@course_detail.id}")
+    rescue StandardError => f
+      erb :'/users/error', locals: { user: f.message, page_title: 'Course Detail', data_table: false }
+    end
+  end
   #  Course Details Post Add
   post '/postcoursedetail' do
-    ce = params[:action_type]
-    file_name = ''
     begin
-      if params[:topic_image]
-        file = params[:topic_image]
-        file_name = file[:filename]
-        temp_file = file[:tempfile]
-        File.open("./public/images/#{file_name}", 'wb') do |f|
-          f.write(temp_file.read)
-        end
-      end
-      @checkdet = CourseDetails.where(
-        day_number: params[:day_num], course_id: params[:course_id]
-      ).first
-
-      if ce == 'Add'
-        unless @checkdet.nil?
-          flash[:error] = 'Topic for the day already exists!'
-          flash[:error_title] = 'Error Adding'
-          redirect to "/coursedetail/#{params[:course_id]}/add"
-        end
-        variables = {
-          day_number: params[:day_num],
-          day_topic: params[:day_topic],
-          day_details: params[:day_details],
-          course_id: params[:course_id],
-          topic_image: file_name
-        }
-        @coursedet = CourseDetails.create(variables)
-
-      else
-        unless @checkdet.nil?
-          flash[:error] = 'Topic for the day already exists!'
-          flash[:error_title] = 'Error Updating'
-          redirect to "/coursedetail/#{params[:course_id]}/edit/#{params[:detail_id]}"
-        end
-        @coursedet = CourseDetails.where(id: params[:detail_id]).first
-        @coursedet.update(
-          day_number: params[:day_num],
-          day_topic: params[:day_topic],
-          day_details: params[:day_details],
-          course_id: params[:course_id],
-          topic_image: file_name
-        )
-      end
-      if @coursedet.save
-        redirect to "/courses/view/#{params[:course_id]}"
-      else
-        flash[:error] = 'Kindly fill in all required fields correctly!'
-        redirect to "/coursedetail/#{params[:course_id]}/add"
-      end
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message }
+      check_upload_file_image(params[:topic_image])
+      check_if_details_exists
+      create_course_detail
+      save_course_details("/instructor/coursedetail/#{params[:course_id]}/add")
     rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message }
+      erb :'/users/error', locals: {
+        user: f.message, page_title: 'ProcessingCourse Detail', data_table: false
+      }
     end
   end
 
   #  Course Details Edit
-  get '/coursedetail/:course_id/edit/:detail_id' do
+  get '/instructor/coursedetail/:course_id/edit/:detail_id' do
     @course = find_course(params[:course_id])
-    @coursedetailedit = CourseDetails.where(id: params[:detail_id]).first
-    loc = { course_id: params[:course_id], action_type: 'Edit' }
-    erb :'/courses/course_detail', locals: loc
+    @course_detail = CourseDetail.get_by_id(params[:detail_id])
+    locals = {
+      course_id: params[:course_id],
+      action_type: 'Edit',
+      page_title: 'Edit Course Detail', post_url: '/editcoursedetail', data_table: false
+    }
+    erb :'/courses/course_detail', locals: locals
   end
 end

@@ -1,26 +1,20 @@
-require_relative '../helpers/action_helper'
+require_relative '../helpers/user_helper'
+require_relative '../helpers/ad_user_helper'
 # Users Management Controller inheriting from application controller
 class UserManageController < ApplicationController
-  include ActionHelpers
+  include UserHelpers
+  include AdUserHelpers
   # Only new user will see the signup page
-  get '/users' do
-    if logged_in?
-      if confirm_admin
-        page_title = 'User Management'
-        @users = User.all
-        erb :'/admin/listusers', locals: {
-          page_title: page_title,
-          data_table: true
-        }
-      else
-        redirect to '/accessdenied'
-      end
-    else
-      redirect to '/login'
-    end
+  get '/admin/users' do
+    page_title = 'User Management'
+    @users = User.all
+    erb :'/admin/listusers', locals: {
+      page_title: page_title,
+      data_table: true
+    }
   end
 
-  get '/users/new' do
+  get '/admin/users/new' do
     page_title = 'User Management - New User'
     erb :'/admin/new_user', locals: {
       page_title: page_title,
@@ -28,7 +22,7 @@ class UserManageController < ApplicationController
     }
   end
 
-  get '/users/edit/:id' do
+  get '/admin/users/edit/:id' do
     page_title = 'User Management - Edit User'
     @user = User.where(id: params[:id]).first
     erb :'/admin/edit_user', locals: {

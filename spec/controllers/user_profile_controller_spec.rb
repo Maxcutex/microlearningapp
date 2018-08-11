@@ -14,13 +14,18 @@ describe UserProfileController do
           password: 'iesha', password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         visit '/login'
         fill_in(:username, with: 'nili678')
         fill_in(:password, with: 'iesha')
         click_button 'Submit'
         session = {}
         session[:user_id] = user.id
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('Nili Ach')
       end
     end
@@ -37,13 +42,18 @@ describe UserProfileController do
           password: 'iesha', password_confirmation: 'iesha'
         }
         user = User.create(user_values)
+        roles1 = Role.create(
+          role_name: 'Administrator',
+          role_description: 'Administrator on the system'
+        )
+        UserRole.create(user_id: user.id, role_id: roles1.id, is_active: true)
         visit '/login'
         fill_in(:username, with: 'nili678')
         fill_in(:password, with: 'iesha')
         click_button 'Submit'
         session = {}
         session[:user_id] = user.id
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('User Profile')
         expect(page.body).to include('Nili Ach')
         expect(page.body).to include('Edit Profile')
@@ -71,7 +81,7 @@ describe UserProfileController do
         session = {}
         session[:user_id] = user.id
 
-        visit '/profile'
+        visit '/user/profile'
         expect(page.body).to include('User Profile')
         expect(page.body).to include('Nili Ach')
         expect(page.body).to include('Edit Profile')

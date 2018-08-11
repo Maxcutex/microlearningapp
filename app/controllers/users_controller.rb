@@ -1,12 +1,12 @@
-require_relative '../helpers/action_helper'
+require_relative '../helpers/user_helper'
 # Users Controller inheriting from application controller
 class UserController < ApplicationController
-  include ActionHelpers
+  include UserHelpers
   @page_title = 'Register for Course'
   # Only new user will see the signup page
   get '/signup' do
     if logged_in?
-      redirect to '/dashboard'
+      redirect to '/user/dashboard'
     else
       class_title = 'register-page'
       loc = { page_title: @page_title, class_title: class_title, data_table: false }
@@ -19,13 +19,13 @@ class UserController < ApplicationController
     set_session_create_values
     upload_image
     process_new
-    save_process('Add', '/dashboard', '/signup')
+    save_process('Add', '/user/dashboard', '/signup')
   end
 
   # User currently logged in will view the dashboard
   get '/login' do
     if logged_in?
-      redirect to '/dashboard'
+      redirect to '/user/dashboard'
     else
       local_values = { page_title: 'Login To App', class_title: 'login-page', data_table: false }
       erb :'/users/login', layout: :layout_login_reg, locals: local_values
@@ -37,11 +37,11 @@ class UserController < ApplicationController
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect to '/dashboard'
+      session[:role_name] = @user.user_role.role.role_name
+      redirect to '/user/dashboard'
     else
       flash[:error] = 'Sorry, invalid username and password.'
       redirect to '/login'
-      # erb :'/users/error', :locals=> { user: @user.errors.full_messages }
     end
   end
 
@@ -56,11 +56,13 @@ class UserController < ApplicationController
   end
 
   # Dashboard View
-  get '/dashboard' do
-    if logged_in?
-      erb :'/users/index', layout: :layout_admin, locals: { page_title: 'Dashboard', data_table: false }
-    else
-      redirect to '/login'
-    end
+  get '/user/dashboard' do
+    erb :'/users/index', layout: :layout_admin, locals: { page_title: 'Dashboard', data_table: false }
+  end
+
+  get '/accessdenied' do
+    erb :'/admin/accessdenied', layout: :layout_admin, locals: {
+      page_title: 'Error', data_table: false
+    }
   end
 end

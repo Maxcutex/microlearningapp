@@ -24,14 +24,14 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li  >
-          <a href="/dashboard">
+          <a href="/user/dashboard">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
            
           </a>
           
         </li>
         <li  >
-          <a href="/courses">
+          <a href="/user/courses">
             <i class="fa fa-list"></i>
             <span>Courses</span>
             <span class="pull-right-container">
@@ -40,19 +40,31 @@
           </a>
           
         </li>
+        <% if student? %>
          <li  >
-          <a href="/mycourses">
+          <a href="/user/mycourses">
             <i class="fa fa-list"></i>
-            <span>My Courses</span>
+            <span>My Enrolled Courses</span>
             <span class="pull-right-container">
               <span class="label bg-green pull-right">0</span>
             </span>
           </a>
           
         </li>
+        <% end %>
         <% if confirm_instructor %>
+        <li  >
+          <a href="/instructor/mycourses">
+            <i class="fa fa-list"></i>
+            <span>Instructor Courses</span>
+            <span class="pull-right-container">
+              <span class="label bg-green pull-right">0</span>
+            </span>
+          </a>
+          
+        </li>
         <li>
-          <a href="/managecourses">
+          <a href="/instructor/managecourses">
             <i class="fa fa-list"></i>
             <span>Manage Courses</span>
             <span class="pull-right-container">
@@ -64,7 +76,7 @@
         <% end %>
         <% if confirm_admin %>
          <li>
-          <a href="/managecategories">
+          <a href="/admin/managecategories">
             <i class="fa fa-list-alt"></i>
             <span>Manage Categories</span>
             <span class="pull-right-container">
@@ -75,7 +87,7 @@
         </li>
         
         <li>
-          <a href="/users">
+          <a href="/admin/users">
             <i class="fa fa-users"></i>
             <span>Manage Users</span>
             <span class="pull-right-container">
@@ -85,7 +97,7 @@
           
         </li>
           <li  >
-          <a href="/managefaqs">
+          <a href="/admin/managefaqs">
             <i class="fa fa-question-circle"></i>
             <span>Manage FAQs</span>
             <span class="pull-right-container">
