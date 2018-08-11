@@ -1,4 +1,3 @@
-require 'pry'
 # Category controller for managing categories
 class CategoryController < ApplicationController
   get '/admin/managecategories' do
