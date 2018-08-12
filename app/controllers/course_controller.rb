@@ -67,13 +67,17 @@ class CourseController < ApplicationController
     if @user_enroll.save
       construct_new_course_mail_send
       construct_instructor_course_mail_send
-      redirect to '/courses'
+      redirect to '/user/courses'
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
       erb :'/users/error', locals: {
-        user: 'Error:' + @course.errors.full_messages
+        user: 'Error:' + @user_enroll.errors.full_messages
       }
     end
+  end
+
+  get '/user/courses/:course_id/unsubscribe' do
+    process_unsubscribe(params[:course_id], session[:user_id])
   end
 
   # View course details and the topic assigned

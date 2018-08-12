@@ -3,6 +3,7 @@ FactoryBot.define do
     name { Faker::Name.first_name }
     description { Faker::Name.last_name }
     level { Faker::Number.between(1, 3) }
+    no_days { Faker::Number.between(1, 26) }
     association :course_category, factory: :category
     association :instructor, factory: :fake_user
 

@@ -13,6 +13,7 @@ use CourseController
 use CourseDetailController
 use UserManageController
 use UserProfileController
+use GuestController
 use FaqsController
 use CategoryController
 run ApplicationController
