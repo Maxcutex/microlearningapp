@@ -1,5 +1,3 @@
-source "https://rubygems.org"
-
 gem 'sinatra'
 gem 'activerecord', :require => 'active_record'
 gem 'sinatra-activerecord', :require => 'sinatra/activerecord'
@@ -23,6 +21,10 @@ gem 'rufo'
 gem 'whenever', require: false
 gem 'coveralls', require: false
 gem 'selenium-webdriver'
+
+group :test do
+  gem 'rspec'
+end
 
 
 group :test,:development do

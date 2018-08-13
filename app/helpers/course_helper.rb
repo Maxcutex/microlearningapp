@@ -55,6 +55,16 @@ module CourseHelpers
     return @file_name
   end
 
+  def process_unsubscribe(course_id, user_id)
+    @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
+    @user_enrollment.is_active = false
+    if @user_enrollment.save
+    else
+      flash[:error] = 'Subscription Unsuccessfull!'
+    end
+    redirect to "/user/courses"
+  end
+
   def save_course_details(url)
     if @course_detail.save
       redirect to "/user/courses/view/#{params[:course_id]}"

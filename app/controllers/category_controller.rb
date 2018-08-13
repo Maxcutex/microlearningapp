@@ -1,19 +1,13 @@
 # Category controller for managing categories
 class CategoryController < ApplicationController
   get '/admin/managecategories' do
-    begin
-      @categories = CourseCategory.all
-      page_title = 'Manage Categories'
-      loc = {
-        category_id: @category ? @category.id : nil,
-        page_title: page_title, data_table: false
-      }
-      erb :'/courses/managecategories', locals: loc
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: { user: 'Error:' + e.message, page_title: 'Error', data_table: false }
-    rescue StandardError => f
-      erb :'/users/error', locals: { user: f.message, page_title: 'Error', data_table: false }
-    end
+    @categories = CourseCategory.all
+    page_title = 'Manage Categories'
+    loc = {
+      category_id: @category ? @category.id : nil,
+      page_title: page_title, data_table: false
+    }
+    erb :'/courses/managecategories', locals: loc
   end
 
   get '/admin/managecategories/new' do
@@ -29,9 +23,13 @@ class CategoryController < ApplicationController
     @category = CourseCategory.get_category_by_id(params[:id]) if params[:id]
     page_title = 'Manage Categories'
     loc = {
-      category_id: @category.id,
+      category_id: @category ? @category.id : nil,
       page_title: page_title, data_table: false
     }
+    if @category.nil?
+      flash[:error] = 'No record found.'
+      redirect to '/admin/managecategories'
+    end
     erb :'/courses/edit_category', locals: loc
   end
 
@@ -42,7 +40,7 @@ class CategoryController < ApplicationController
     end
     @category = CourseCategory.get_category_by_id(params[:id]) if params[:id]
     @category.category_name = params[:category_name]
-    @category.is_active = true
+    @category.is_active = isactive
     save_category
   end
 

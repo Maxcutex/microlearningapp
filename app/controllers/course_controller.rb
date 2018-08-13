@@ -12,35 +12,21 @@ class CourseController < ApplicationController
   end
 
   get '/instructor/managecourses/:id' do
-    begin
-      @course = find_course(params[:id]) if params[:id]
-      @categories = CourseCategory.all
-      loc = { course_id: @course ? @course.id : nil, page_title: 'Manage Courses', data_table: false }
-      erb :'/courses/managecourse_edit', layout: :layout_admin, locals: loc
-    rescue ActiveRecord::RecordNotFound => e
-      erb :'/users/error', locals: {
-        user: 'Error:' + e.message,
-        page_title: 'Error',
-        data_table: false
-      }
-    end
+    @course = find_course(params[:id]) if params[:id]
+    @categories = CourseCategory.all
+    loc = { course_id: @course ? @course.id : nil, page_title: 'Manage Courses', data_table: false }
+    erb :'/courses/managecourse_edit', layout: :layout_admin, locals: loc
   end
 
   post '/postcourse' do
-    begin
-      parameters = process_file_parameters
-      if params[:action_type] == 'Add'
-        @course = Course.create(parameters)
-      else
-        @course = find_course(params[:id]) if params[:id]
-        @course.update(parameters)
-      end
-      save_and_redirect
-    rescue StandardError => e
-      erb :'/users/error', locals: {
-        user: e.message, page_title: 'Error', data_table: false
-      }
+    parameters = process_file_parameters
+    if params[:action_type] == 'Add'
+      @course = Course.create(parameters)
+    else
+      @course = find_course(params[:id]) if params[:id]
+      @course.update(parameters)
     end
+    save_and_redirect
   end
 
   # View all courses
@@ -67,13 +53,17 @@ class CourseController < ApplicationController
     if @user_enroll.save
       construct_new_course_mail_send
       construct_instructor_course_mail_send
-      redirect to '/courses'
+      redirect to '/user/courses'
     else
       flash[:error] = 'Kindly fill in all required fields correctly!'
       erb :'/users/error', locals: {
-        user: 'Error:' + @course.errors.full_messages
+        user: 'Error:' + @user_enroll.errors.full_messages
       }
     end
+  end
+
+  get '/user/courses/:course_id/unsubscribe' do
+    process_unsubscribe(params[:course_id], session[:user_id])
   end
 
   # View course details and the topic assigned

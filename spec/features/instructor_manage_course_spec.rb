@@ -7,14 +7,14 @@ feature 'Instructor can' do
     @categories = create_list(:category, 10)
   end
 
-  scenario 'view courses', :js do
+  scenario 'view courses'do
     sign_in_with instructor.user.username, instructor.user.password
 
     visit '/instructor/managecourses'
     expect(page).to have_content('Manage Courses')
   end
 
-  scenario 'add course with any category name', :js do
+  scenario 'add course with any category name' do
     sign_in_with instructor.user.username, instructor.user.password
     visit '/instructor/managecourses'
     click_on 'Add New Course'
@@ -30,22 +30,30 @@ feature 'Instructor can' do
       find("option[value='4']").click
     end
     check 'is_active'
+    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Add'
     expect(current_path).to eq('/instructor/managecourses')
     # expect(page.body).to have_content('My New Course')
   end
 
-  scenario 'view exising category', :js do
+  scenario 'view exising category' do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/user/courses/view/#{@course.id}"
     expect(page.body).to have_content(@course.name)
   end
+  
+  scenario 'not view non-exising category' do
+    sign_in_with instructor.user.username, instructor.user.password
+    visit "/user/courses/view/24"
+    expect(page.body).to have_content("No record found")
+  end
 
-  scenario 'edit category with any category name', :js do
+  scenario 'edit course with any category name' do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/instructor/managecourses/#{@course.id}"
     fill_in :course_name, with: 'My Course Edited'
     check 'is_active'
+    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Edit'
     # find_button('Add').click
     expect(current_path).to eq('/instructor/managecourses')
