@@ -15,10 +15,7 @@ class User < ActiveRecord::Base
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   def self.all_users
-    order(id: id)
+    order(:id)
   end
 
-  def self.get_by_id(id)
-    where(id: id).first
-  end
 end

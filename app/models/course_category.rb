@@ -4,7 +4,7 @@ class CourseCategory < ActiveRecord::Base
   validates :category_name, presence: true
 
   def self.all_categories
-    order(id)
+    order(:id)
   end
 
   def self.get_category_by_id(id)

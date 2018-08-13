@@ -4,9 +4,6 @@ class CourseDetail < ActiveRecord::Base
 
   validates :day_number, :day_topic, :day_details, :course_id, presence: true
 
-  def self.all_courses
-    order(id)
-  end
 
   def self.get_by_id(id)
     where(id: id).first

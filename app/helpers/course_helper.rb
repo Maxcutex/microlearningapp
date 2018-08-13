@@ -59,6 +59,8 @@ module CourseHelpers
     @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
     @user_enrollment.is_active = false
     if @user_enrollment.save
+      construct_unsuscribe_course_mail_send
+      construct_unsuscribe_instructor_course_mail_send
     else
       flash[:error] = 'Subscription Unsuccessfull!'
     end
@@ -75,9 +77,7 @@ module CourseHelpers
   end
 
   def check_if_details_exists
-    @existing_course_detail = CourseDetail.where(
-      day_number: params[:day_num], course_id: params[:course_id]
-    ).first
+    @existing_course_detail = CourseDetail.get_existing(params[:day_num], params[:course_id])
     unless @existing_course_detail.nil?
       flash[:error] = 'Topic for the day already exists!'
       flash[:error_title] = 'Error Adding'

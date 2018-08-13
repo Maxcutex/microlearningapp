@@ -5,14 +5,6 @@ class UserEnrollment < ActiveRecord::Base
 
   validates :notes, presence: true
 
-  def self.get_by_id(id)
-    where(id: id).first
-  end
-
-  def self.get_by_course_id(course_id)
-    where(course_id: course_id).order(:id)
-  end
-
   def self.get_enrollment(user_id, course_id)
     where(user_id: user_id, course_id: course_id).first
   end
@@ -30,6 +22,6 @@ class UserEnrollment < ActiveRecord::Base
   end
 
   def self.active_user_enrollment(user_id)
-    where(user_id: user_id, is_active:true)
+    where(user_id: user_id, is_active: true)
   end
 end
