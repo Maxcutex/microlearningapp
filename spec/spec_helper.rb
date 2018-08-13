@@ -50,7 +50,6 @@ RSpec.configure do |config|
   for type in [:controller, :feature] do
     config.include Features::SessionHelpers, type: type
   end
-  config.include Features::Wysihtml5Helper, type: :feature
 end
 
 def app

@@ -22,6 +22,10 @@ gem 'whenever', require: false
 gem 'coveralls', require: false
 gem 'selenium-webdriver'
 
+group :test do
+  gem 'rspec'
+end
+
 
 group :test,:development do
   gem 'pry'

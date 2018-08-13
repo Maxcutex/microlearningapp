@@ -4,7 +4,7 @@ feature 'User can', type: :feature do
   let(:course) { create(:course) }
   let(:user_enrollment) { create(:user_enrollment, user: student.user) }
 
-  scenario 'enroll for a course' do
+  scenario 'enroll for a course', :js do
     sign_in_with student.user.username, student.user.password
     session = {}
     session[:user_id] = student.user.id

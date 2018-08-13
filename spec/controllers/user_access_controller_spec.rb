@@ -1,29 +1,50 @@
 require 'spec_helper'
 
 describe 'User Can', type: :controller do
-  let(:instructor) { create(:instructor) }
-  let(:administrator) { create(:administrator) }
-  it 'loads the manage courses page if user is an admin' do
-    sign_in_with instructor.user.username, instructor.user.password
-    visit '/instructor/managecourses'
-    expect(page.status_code).to eq(200)
+  context 'With Instructor Role' do
+    let(:instructor) { create(:instructor) }
+    let(:user_session) {
+      {
+        'rack.session' => {
+        user_id: instructor.user.id, role_name: instructor.role.role_name
+        }
+      }
+    }
+    it 'have access to manage courses' do
+      response = get '/instructor/managecourses', {}, user_session
+      expect(response.status).to eq(200)
+    end
+    it 'not have access to manage users' do
+      get '/admin/users', {}, user_session
+      expect(last_response.location).to include('/accessdenied')
+    end
+    it 'not have access to manage categories' do
+      get '/admin/users', {}, user_session
+      expect(last_response.location).to include('/accessdenied')
+    end
+
+    it 'should redirect to courses page if logged in' do
+      get '/', {}, user_session
+      expect(last_response.location).to include('/user/courses')
+    end
   end
 
-  it 'not load manage courses if not an instructor' do
-    sign_in_with administrator.user.username, administrator.user.password
-    visit '/instructor/managecourses'
-    expect(page.body).to include('You are not allowed access to this page')
-  end
-
-  it 'not load manage categories if not an administrator' do
-    sign_in_with instructor.user.username, instructor.user.password
-    visit '/admin/managecategories'
-    expect(page.body).to include('You are not allowed access to this page')
-  end
-
-  it 'not load list of users if not an administrator' do
-    sign_in_with instructor.user.username, instructor.user.password
-    visit '/admin/users'
-    expect(page.body).to include('You are not allowed access to this page')
+  context 'With Admin' do
+    let(:administrator) { create(:administrator) }
+    let(:user_session) {
+      {
+        'rack.session' => {
+        user_id: administrator.user.id, role_name: administrator.role.role_name
+        }
+      }
+    }
+    it 'should not have access to manage courses' do
+      get '/instructor/managecourses', {}, user_session
+      expect(last_response.location).to include('/accessdenied')
+    end
+    it 'should have access to manage users' do
+      response = get '/admin/users', {}, user_session
+      expect(response.status).to eq(200)
+    end
   end
 end

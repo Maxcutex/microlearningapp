@@ -24,7 +24,7 @@
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title">
-              Edit Category - <%=@category.category_name %></h3>
+              Edit Category - <%=@category ? @category.category_name : nil %></h3>
               
              
             </div>
@@ -36,8 +36,8 @@
                   <label for="category_name" class="col-sm-2 control-label">Name</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name" value="<%=@category.category_name %>">
-                    <input type="hidden" id="id" name="id" value="<%=@category.id%>">
+                    <input type="text" class="form-control" id="category_name" name="category_name" placeholder="Category Name" value="<%=@category ? @category.category_name : nil %>">
+                    <input type="hidden" id="id" name="id" value="<%=@category ? @category.id : nil %>">
                   </div>
                 </div>
                 

@@ -41,8 +41,14 @@ feature 'Instructor can' do
     visit "/user/courses/view/#{@course.id}"
     expect(page.body).to have_content(@course.name)
   end
+  
+  scenario 'not view non-exising category' do
+    sign_in_with instructor.user.username, instructor.user.password
+    visit "/user/courses/view/24"
+    expect(page.body).to have_content("No record found")
+  end
 
-  scenario 'edit course with any category name', :js do
+  scenario 'edit course with any category name' do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/instructor/managecourses/#{@course.id}"
     fill_in :course_name, with: 'My Course Edited'

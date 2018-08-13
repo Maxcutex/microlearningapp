@@ -1,22 +1,4 @@
 module Features
-  module Wysihtml5Helper
-    def fill_in_html name, options
-      options.to_options!.assert_valid_keys :with
-      if Capybara.current_driver == Capybara.javascript_driver
-        # Dip inside capybara session to respect current `within` scope
-        scope = page.send(:current_node).path
-        # Find the textarea based on label name within the given scope
-        query = "$('label:contains(#{name.inspect}) ~ textarea:eq(0)', document.evaluate(#{scope.inspect}, document).iterateNext())"
-        # Make sure the editor is instantiated -- this is us, not wysihtml5
-        wait_until { page.evaluate_script("!!#{query}.data('editor')") }
-        # Set the value using wysihtml5 api
-        page.execute_script %{#{query}.data('editor').setValue(#{options[:with].to_json})}
-      else
-        fill_in name, options
-      end
-    end
-  end
-
   module SessionHelpers
     def generate_user_values
       password = Faker::Internet.password

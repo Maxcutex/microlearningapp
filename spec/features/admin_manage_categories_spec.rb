@@ -19,6 +19,14 @@ feature 'Admin can', type: :feature do
     expect(page.body).to have_content('My Category')
   end
 
+  scenario 'add category without category name throws error', :js do
+    sign_in_with administrator.user.username, administrator.user.password
+    visit '/admin/managecategories/new'
+    check 'is_active'
+    click_on 'Add'
+    expect(page.body).to have_content('Kindly fill in all required fields correctly')
+  end
+
   scenario 'view exising category', :js do
     sign_in_with administrator.user.username, administrator.user.password
     visit '/admin/managecategories/new'
@@ -45,7 +53,6 @@ feature 'Admin can', type: :feature do
     expect(page).to have_content('Edit Category - My Category')
 
     fill_in :category_name, with: 'My New Category'
-    check 'is_active'
     click_on 'Edit'
 
     expect(current_path).to eq('/admin/managecategories')
