@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe CategoryController do
   describe 'Admin Manage Courses' do
-    it 'lets an administrator create a category for courses' do
+    it 'lets an administrator create a category for courses', :js do
       user_values = {
         first_name: 'Nili',
         last_name: 'Ach',

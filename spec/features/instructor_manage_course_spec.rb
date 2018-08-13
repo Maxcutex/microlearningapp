@@ -42,7 +42,7 @@ feature 'Instructor can' do
     expect(page.body).to have_content(@course.name)
   end
 
-  scenario 'edit course with any category name' do
+  scenario 'edit course with any category name', :js do
     sign_in_with instructor.user.username, instructor.user.password
     visit "/instructor/managecourses/#{@course.id}"
     fill_in :course_name, with: 'My Course Edited'

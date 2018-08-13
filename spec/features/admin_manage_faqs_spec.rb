@@ -10,7 +10,7 @@ feature 'Admin can', type: :feature do
     expect(page.body).to have_content('Manage FAQs')
   end
 
-  scenario 'add new faq' do
+  scenario 'add new faq', :js do
     sign_in_with administrator.user.username, administrator.user.password
     visit '/admin/managefaqs'
     fill_in :faq_title, with: 'this is what you should know'
@@ -27,7 +27,7 @@ feature 'Admin can', type: :feature do
     expect(page.body).to have_content(faq.faq_title)
   end
 
-  scenario 'edit faq' do
+  scenario 'edit faq', :js do
     sign_in_with administrator.user.username, administrator.user.password
     visit "/admin/managefaqs/edit/#{faq.id}"
     fill_in :faq_title, with: 'this is what is edited'
