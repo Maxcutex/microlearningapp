@@ -19,7 +19,7 @@ feature 'Admin can', type: :feature do
     expect(page.body).to have_content('My Category')
   end
 
-  scenario 'view exising category', :js do
+  scenario 'view exising category' do
     sign_in_with administrator.user.username, administrator.user.password
     visit '/admin/managecategories/new'
     fill_in :category_name, with: 'My Category2'
@@ -31,7 +31,7 @@ feature 'Admin can', type: :feature do
     expect(page).to have_content('Edit Category - My Category2')
   end
 
-  scenario 'edit category with any category name', :js do
+  scenario 'edit category with any category name' do
     sign_in_with administrator.user.username, administrator.user.password
     visit '/admin/managecategories/new'
     # binding.pry

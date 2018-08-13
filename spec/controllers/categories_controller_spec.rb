@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe CategoryController do
-  describe 'Admin Manage Courses', :js, driver: :chrome do
-    it 'lets an administraator create a category for courses' do
+  describe 'Admin Manage Courses' do
+    it 'lets an administrator create a category for courses' do
       user_values = {
         first_name: 'Nili',
         last_name: 'Ach',

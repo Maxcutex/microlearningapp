@@ -1,4 +1,7 @@
 require 'faker'
+require 'database_cleaner'
+
+DatabaseCleaner.clean_with :truncation
 
 Role.destroy_all
 Role.create(
@@ -44,10 +47,17 @@ User.create(
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
-      first_name: 'Steve', last_name: 'Nuria', username: 'nili6784',
-      email: 'niliach4@example.com',
+      first_name: 'Jay', last_name: 'Bassey', username: 'nili6784',
+      email: 'ennyboy@gmail.com',
       user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha4', password_confirmation: 'iesha4', is_active: true,
+      created_at: DateTime.now, updated_at: DateTime.now
+    },
+    {
+      first_name: 'Eno', last_name: 'Bassey', username: 'eno.bassey',
+      email: 'eno.bassey@andela.com',
+      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      password: 'iesha5', password_confirmation: 'iesha5', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     }
   ]
@@ -60,7 +70,8 @@ UserRole.create(
     { user_id: 1, role_id: 1, is_active: true },
     { user_id: 2, role_id: 2, is_active: true },
     { user_id: 3, role_id: 2, is_active: true },
-    { user_id: 4, role_id: 3, is_active: true }
+    { user_id: 4, role_id: 3, is_active: true },
+    { user_id: 5, role_id: 3, is_active: true }
   ]
 )
 
@@ -152,7 +163,7 @@ UserEnrollment.create(
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 2, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
+      user_id: 5, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
@@ -162,7 +173,7 @@ UserEnrollment.create(
       end_date: Faker::Date.forward(21), is_active: true
     },
     {
-      user_id: 2, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
+      user_id: 5, course_id: Faker::Number.between(1, 20), confirmation: 1, notes: Faker::Lorem.sentence(8, false, 0),
       start_date: Faker::Date.between(2.days.ago, Date.today),
       end_date: Faker::Date.forward(21), is_active: true
     },
