@@ -7,7 +7,7 @@ class UserManageController < ApplicationController
   # Only new user will see the signup page
   get '/admin/users' do
     page_title = 'User Management'
-    @users = User.all
+    @users = User.all_users
     erb :'/admin/listusers', locals: {
       page_title: page_title,
       data_table: true

@@ -1,7 +1,7 @@
 # Category controller for managing categories
 class CategoryController < ApplicationController
   get '/admin/managecategories' do
-    @categories = CourseCategory.all
+    @categories = CourseCategory.all_categories
     page_title = 'Manage Categories'
     loc = {
       category_id: @category ? @category.id : nil,

@@ -10,6 +10,18 @@ describe 'User Can', type: :controller do
         }
       }
     }
+    it 'is redirected to dashboard on viewing login page' do
+      get '/login', {}, user_session
+      expect(last_response.location).to include('/user/dashboard')
+    end
+    it 'is redirected to login after logging out' do
+      get '/logout', {}, user_session
+      expect(last_response.location).to include('/login')
+    end
+    it 'is shown accessdenied when redirected' do
+      response = get '/accessdenied', {}, user_session
+      expect(response.body).to include('You are not allowed access to view this page')
+    end
     it 'have access to manage courses' do
       response = get '/instructor/managecourses', {}, user_session
       expect(response.status).to eq(200)

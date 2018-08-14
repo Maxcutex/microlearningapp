@@ -51,7 +51,7 @@
                      <% 30.times do |cd|%>
                       <% i = i +1 %>>
                           <% if @course_detail %>
-                        <% if @course_detail.day_number == i%>
+                        <% if  @course_detail.day_number == i-1 %>
                          <option value="<%=i%>" selected >Day <%=i%></option>
                           <% else %>
                          <option value="<%=i%>"  > Day <%=i%></option>
