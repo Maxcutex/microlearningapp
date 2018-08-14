@@ -36,9 +36,14 @@ class UserController < ApplicationController
   post '/login' do
     @user = User.find_by(username: params[:username])
     if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      session[:role_name] = @user.user_role.role.role_name
-      redirect to '/user/dashboard'
+      if @user.is_active 
+        session[:user_id] = @user.id
+        session[:role_name] = @user.user_role.role.role_name
+        redirect to '/user/dashboard'
+      else 
+        flash[:error] = 'Sorry, Your account is inactive.'
+        redirect to '/login'
+      end 
     else
       flash[:error] = 'Sorry, invalid username and password.'
       redirect to '/login'

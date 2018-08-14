@@ -16,7 +16,7 @@ describe UserController do
           user_image: 'myimage.jpg',
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
-          password_confirmation: 'stellenbosch'
+          password_confirmation: 'stellenbosch', is_active: true
         }
         xvar = { user: params }
         post '/signup', xvar
@@ -31,7 +31,7 @@ describe UserController do
           user_image: 'myimage.jpg',
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
-          password_confirmation: 'stellenbosch'
+          password_confirmation: 'stellenbosch', is_active: true
         }
         xvar = { user: params }
         post '/signup', xvar
@@ -46,7 +46,7 @@ describe UserController do
           user_image: 'myimage.jpg',
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
-          password_confirmation: 'stellenbosch'
+          password_confirmation: 'stellenbosch', is_active: true
         }
         xvar = { user: params }
         post '/signup', xvar
@@ -61,7 +61,7 @@ describe UserController do
           user_image: 'myimage.jpg',
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
-          password_confirmation: 'stellenbosch'
+          password_confirmation: 'stellenbosch', is_active: true
         }
         xvar = { user: params }
         post '/signup', xvar
@@ -77,7 +77,7 @@ describe UserController do
           user_image: 'myimage.jpg',
           biography: 'asdfa fasdf asf asfd asdf ',
           password: '',
-          password_confirmation: 'stellenbosch'
+          password_confirmation: 'stellenbosch', is_active: true
         }
         xvar = { user: params }
         post '/signup', xvar
@@ -89,7 +89,7 @@ describe UserController do
           first_name: 'Nili', last_name: 'Ach', username: 'nili678',
           email: 'niliach@example.com',
           user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
-          password_confirmation: 'iesha'
+          password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
         roles1 = Role.create(

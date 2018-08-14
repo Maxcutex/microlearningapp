@@ -34,13 +34,13 @@ class CategoryController < ApplicationController
   end
 
   post '/post_edit_category' do
-    isactive = true
+    is_active = true
     if params[:is_active].nil?
-      isactive = false
+      is_active = false
     end
     @category = CourseCategory.get_category_by_id(params[:id]) if params[:id]
     @category.category_name = params[:category_name]
-    @category.is_active = isactive
+    @category.is_active = is_active
     save_category
   end
 

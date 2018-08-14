@@ -1,5 +1,6 @@
 require 'spec_helper'
 feature 'User can', type: :feature do
+  
   let(:student) { create(:student) }
 
   scenario 'edit his/her profile' do

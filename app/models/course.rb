@@ -8,6 +8,9 @@ class Course < ActiveRecord::Base
   def self.all_courses
     order(:id)
   end
+  def self.get_by_id(id)
+    where(id: id).first
+  end
 
   def self.active_courses
     where(is_active: true)

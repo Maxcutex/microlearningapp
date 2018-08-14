@@ -1,6 +1,5 @@
 require 'faker'
 
-
 Role.destroy_all
 Role.create(
   [

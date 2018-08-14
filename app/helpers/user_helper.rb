@@ -27,7 +27,7 @@ module UserHelpers
       username: postuser[:username], email: postuser[:email],
       user_image: @fname, password: postuser[:password],
       password_confirmation: postuser[:password],
-      biography: postuser[:biography], is_active: postuser[:is_active],
+      biography: postuser[:biography], is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     }
     @user = User.new(user)

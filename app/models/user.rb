@@ -18,4 +18,5 @@ class User < ActiveRecord::Base
     order(:id)
   end
 
+  
 end

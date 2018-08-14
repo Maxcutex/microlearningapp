@@ -11,7 +11,7 @@ describe UserProfileController do
           username: 'nili678',
           email: 'niliach@example.com',
           user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-          password: 'iesha', password_confirmation: 'iesha'
+          password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
         roles1 = Role.create(
@@ -23,8 +23,10 @@ describe UserProfileController do
         fill_in(:username, with: 'nili678')
         fill_in(:password, with: 'iesha')
         click_button 'Submit'
+        
         session = {}
         session[:user_id] = user.id
+        session[:role_name] = roles1.role_name
         visit '/user/profile'
         expect(page.body).to include('Nili Ach')
       end
@@ -39,7 +41,7 @@ describe UserProfileController do
           username: 'nili678',
           email: 'niliach@example.com',
           user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-          password: 'iesha', password_confirmation: 'iesha'
+          password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
         roles1 = Role.create(
@@ -52,6 +54,7 @@ describe UserProfileController do
         fill_in(:password, with: 'iesha')
         click_button 'Submit'
         session = {}
+        session[:role_name] = roles1.role_name
         session[:user_id] = user.id
         visit '/user/profile'
         expect(page.body).to include('User Profile')
@@ -66,7 +69,7 @@ describe UserProfileController do
           username: 'nili678',
           email: 'niliach@example.com',
           user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
-          password: 'iesha', password_confirmation: 'iesha'
+          password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
         roles1 = Role.create(
@@ -79,6 +82,7 @@ describe UserProfileController do
         fill_in(:password, with: 'iesha')
         click_button 'Submit'
         session = {}
+        session[:role_name] = roles1.role_name
         session[:user_id] = user.id
 
         visit '/user/profile'
