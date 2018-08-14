@@ -7,9 +7,8 @@ require_relative '../config/environment'
 require 'rack/test'
 require 'capybara/rspec'
 require 'capybara/dsl'
-require "selenium/webdriver"
+require 'selenium/webdriver'
 require 'faker'
-
 
 Dir[File.join(File.dirname(__FILE__), '.', 'factories', '**/*.rb')].sort.each do |file|
   require file

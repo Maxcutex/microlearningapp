@@ -39,7 +39,6 @@ module MailSender
 
     sg = SendGrid::API.new(api_key: ENV['SENDGRID_API_KEY'], host: 'https://api.sendgrid.com')
     sg.client.mail._('send').post(request_body: mail.to_json)
-    
   end
 
   def construct_new_mail_send(recipient, first_name, last_name)

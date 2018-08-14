@@ -37,7 +37,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <a href="/courses/view/<%=course.id%>"><%= course.name%> </a>
+            <a href="/user/courses/view/<%=course.id%>"><%= course.name%> </a>
             <h5>Course name:</h5> <h5> 
            
 
@@ -47,7 +47,7 @@
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>
               <span class="pull-left text-muted">
                <% if course.instructor.id == current_user.id %>
-            <a href="/managecourses/<%=course.id%>"> Manage Course </a>
+            <a href="/instructor/managecourses/<%=course.id%>"> Manage Course </a>
             <% end %>
             </span> <span class="pull-right text-muted"><%=course_difficulty(course.level) %> </span> <span class="pull-right">Level: &nbsp;&nbsp;</span>
             </div>
@@ -97,7 +97,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-            <h5>Course name:</h5> <h5> <a href="/courses/view/<%=course.id%>"><%= course.name%> </a> <%= course.icon%></h5>
+            <h5>Course name:</h5> <h5> <a href="/user/courses/view/<%=course.id%>"><%= course.name%> </a> <%= course.icon%></h5>
               <img class="img-responsive pad" src="/backend/dist/img/photo2.png" alt="Photo">
 
               <div class="pad" style="height:70px;"><p> <%= course.description %></p></div>

@@ -13,4 +13,7 @@ class Course < ActiveRecord::Base
     where(is_active: true)
   end
 
+  def self.active_course_by_instructor(id)
+    where(is_active: true, instructor_id: id)
+  end
 end

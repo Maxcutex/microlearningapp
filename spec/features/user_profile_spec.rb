@@ -15,6 +15,4 @@ feature 'User can', type: :feature do
     click_button 'Submit'
     expect(current_path).to eq('/user/profile')
   end
-
- 
 end

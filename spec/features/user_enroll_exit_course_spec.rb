@@ -21,6 +21,5 @@ feature 'User can', type: :feature do
     sign_in_with student.user.username, student.user.password
     visit "/user/courses/#{user_enrollment.course.id}/unsubscribe"
     expect(current_path).to eq('/user/courses')
-    expect(page).to have_content('Courses')
   end
 end

@@ -17,7 +17,7 @@ module CourseHelpers
 
   def process_file_parameters
     check_upload_file_image(params[:course_image])
-    parameters = {
+    {
       name: params[:course_name],
       description: params[:course_description],
       is_active: params[:is_active],
@@ -58,13 +58,15 @@ module CourseHelpers
   def process_unsubscribe(course_id, user_id)
     @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
     @user_enrollment.is_active = false
+    @course = find_course(course_id)
     if @user_enrollment.save
       construct_unsuscribe_course_mail_send
       construct_unsuscribe_instructor_course_mail_send
+      flash[:success] = 'Subscription Successfull'
     else
       flash[:error] = 'Subscription Unsuccessfull!'
     end
-    redirect to "/user/courses"
+    redirect to '/user/courses'
   end
 
   def save_course_details(url)
@@ -111,9 +113,9 @@ module CourseHelpers
     @course = find_course(params[:course_id])
     @course_detail = CourseDetail.get_last(params[:course_id])
     @last_number = if @course_detail.nil?
-                    0
-                  else
-                    @course_detail.day_number
-                  end
+                     0
+                   else
+                     @course_detail.day_number
+                   end
   end
 end
