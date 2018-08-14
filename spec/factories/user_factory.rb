@@ -12,6 +12,7 @@ FactoryBot.define do
     username 'myusername'
     email 'myemail@email.com'
     password 'aliceno'
+    is_active true
   end
 
   factory :fake_user, parent: :user do
@@ -20,6 +21,7 @@ FactoryBot.define do
     username
     email
     password 'aliceno'
+    is_active true
   end
 
   

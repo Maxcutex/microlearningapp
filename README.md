@@ -24,6 +24,14 @@ Navigate into the cloned project directory.
 
 Edit the `env-sample` file with your gmail creadentials and save it as `.env`
 
+Change the parameters in there to your own settings e.g SEND GRID KEY
+
+On the prompt execute the following 
+```
+export $(cat .env)
+```
+
+
 Execute the following code to install all the application dependencies.
 ```
 bundle install

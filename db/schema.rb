@@ -63,10 +63,9 @@ ActiveRecord::Schema.define(version: 2018_07_20_084623) do
   end
 
   create_table "user_learnt_tracks", force: :cascade do |t|
-    t.integer "user_id"
     t.integer "day_number"
     t.integer "next_day_number"
-    t.integer "course_id"
+    t.integer "user_enrollment_id"
   end
 
   create_table "user_roles", force: :cascade do |t|

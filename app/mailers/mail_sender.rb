@@ -16,7 +16,7 @@ module MailSender
     sg.client.mail._('send').post(request_body: mail.to_json)
   end
 
-  def sendmail_html(recipient, topic, message)
+  def send_mail_html(recipient, topic, message)
     mail = Mail.new
     mail.from = Email.new(email: 'admin@arentus.com')
     mail.subject = topic
