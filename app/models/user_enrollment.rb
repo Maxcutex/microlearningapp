@@ -3,7 +3,7 @@ class UserEnrollment < ActiveRecord::Base
   belongs_to :user
   belongs_to :course
 
-  has_many :user_learnt_tracks, class_name: "UserLearntTrack", foreign_key: "enrollment_id"
+  has_many :user_learnt_tracks, class_name: 'UserLearntTrack', foreign_key: 'enrollment_id'
 
   validates :notes, presence: true
 

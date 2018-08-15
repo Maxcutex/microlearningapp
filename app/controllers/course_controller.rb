@@ -5,10 +5,10 @@ class CourseController < ApplicationController
   include CourseHelpers
   @page_title = ''
   get '/instructor/managecourses' do
-      @courses = Course.all_courses
-      erb :'/courses/managecourse', locals: {
-        page_title: 'Manage Categories', data_table: false
-      }
+    @courses = Course.all_courses
+    erb :'/courses/managecourse', locals: {
+      page_title: 'Manage Categories', data_table: false
+    }
   end
 
   get '/instructor/managecourses/:id' do
@@ -81,8 +81,8 @@ class CourseController < ApplicationController
     @subscribed = UserEnrollment.get_by_user_id(current_user.id).all.map do |user_enroll|
       user_enroll.course_id if user_enroll.user_id == current_user.id
     end
-    @student_courses = @subscribed.compact.map do |c|
-      Course.find_by_id(c)
+    @student_courses = @subscribed.compact.map do |course_id|
+      Course.find_by_id(course_id)
     end
     erb :'/courses/mycourses', locals: {
       page_title: 'My Courses', data_table: false
@@ -95,14 +95,14 @@ class CourseController < ApplicationController
     @courses = Course.all.map do |course|
       course.id if course.instructor_id == current_user.id
     end
-    @instructor_courses = @courses.compact.map do |c|
-      Course.find_by_id(c)
+    @instructor_courses = @courses.compact.map do |course_id|
+      Course.find_by_id(course_id)
     end
     @subscribed = UserEnrollment.get_by_user_id(current_user.id).all.map do |user_enroll|
       user_enroll.course_id if user_enroll.user_id == current_user.id
     end
-    @student_courses = @subscribed.compact.map do |c|
-      Course.find_by_id(c)
+    @student_courses = @subscribed.compact.map do |course_id|
+      Course.find_by_id(course_id)
     end
     erb :'/courses/mycourses', locals: {
       page_title: 'My Courses', data_table: false

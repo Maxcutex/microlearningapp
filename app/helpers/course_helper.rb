@@ -5,28 +5,19 @@ module CourseHelpers
     date = params[:start_date]
     date_end = Date.parse(date).to_date + @course.no_days
     @user_enroll = UserEnrollment.create(
-      confirmation: 1,
-      notes: params[:notes],
-      user_id: session[:user_id],
-      course_id: params[:id],
-      start_date: params[:start_date],
-      end_date: date_end,
-      is_active: true
+      confirmation: 1, notes: params[:notes], user_id: session[:user_id],
+      course_id: params[:id], start_date: params[:start_date],
+      end_date: date_end, is_active: true
     )
   end
 
   def process_file_parameters
     check_upload_file_image(params[:course_image])
     {
-      name: params[:course_name],
-      description: params[:course_description],
-      is_active: params[:is_active],
-      icon: '',
-      instructor_id: session[:user_id],
-      no_days: params[:course_days],
-      category_id: params[:course_category],
-      level: params[:course_level],
-      course_image: @file_name
+      name: params[:course_name], description: params[:course_description],
+      is_active: params[:is_active], icon: '', instructor_id: session[:user_id],
+      no_days: params[:course_days], category_id: params[:course_category],
+      level: params[:course_level], course_image: @file_name
     }
   end
 
@@ -52,12 +43,16 @@ module CourseHelpers
         f.write(temp_file.read)
       end
     end
-    return @file_name
+    @file_name
+  end
+  
+  def get_existing_enrollment(course_id, user_id)
+    @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
+    @user_enrollment.is_active = false
   end
 
   def process_unsubscribe(course_id, user_id)
-    @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
-    @user_enrollment.is_active = false
+    get_existing_enrollment(course_id, user_id)
     @course = find_course(course_id)
     if @user_enrollment.save
       construct_unsuscribe_course_mail_send
@@ -89,11 +84,9 @@ module CourseHelpers
 
   def create_course_detail
     variables = {
-      day_number: params[:day_num],
-      day_topic: params[:day_topic],
+      day_number: params[:day_num], day_topic: params[:day_topic],
       day_details: params[:day_details],
-      course_id: params[:course_id],
-      topic_image: @file_name
+      course_id: params[:course_id], topic_image: @file_name
     }
     @course_detail = CourseDetail.create(variables)
   end
@@ -101,11 +94,9 @@ module CourseHelpers
   def fetch_set_course_detail
     @course_detail = CourseDetail.get_by_id(params[:detail_id])
     @course_detail.update(
-      day_number: params[:day_num],
-      day_topic: params[:day_topic],
+      day_number: params[:day_num], day_topic: params[:day_topic],
       day_details: params[:day_details],
-      course_id: params[:course_id],
-      topic_image: @file_name
+      course_id: params[:course_id], topic_image: @file_name
     )
   end
 

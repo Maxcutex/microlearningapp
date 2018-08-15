@@ -4,11 +4,11 @@ module SessionHelpers
     current_user
   end
 
-  def is_admin?
+  def admin?
     confirm_admin
   end
 
-  def is_instructor?
+  def instructor?
     confirm_instructor
   end
 
