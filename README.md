@@ -37,6 +37,16 @@ Execute the following code to install all the application dependencies.
 bundle install
 ```
 
+Execute the following code to migrate all data tables/object
+```
+rake db:migrate
+```
+
+Execute the following code to seed data
+```
+rake db:seed
+```
+
 Execute the following at the command line
 ```
 rackup
