@@ -30,7 +30,6 @@ feature 'Instructor can' do
       find("option[value='4']").click
     end
     check 'is_active'
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Add'
     expect(current_path).to eq('/instructor/managecourses')
     # expect(page.body).to have_content('My New Course')
@@ -53,7 +52,6 @@ feature 'Instructor can' do
     visit "/instructor/managecourses/#{@course.id}"
     fill_in :course_name, with: 'My Course Edited'
     check 'is_active'
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Edit'
     # find_button('Add').click
     expect(current_path).to eq('/instructor/managecourses')

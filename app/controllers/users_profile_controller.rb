@@ -10,7 +10,6 @@ class UserProfileController < ApplicationController
 
   post '/user/editprofile' do
     params[:user][:is_active] = true
-    upload_image
     process_update(session[:user_id])
     save_process('Edit', '/user/profile', '/user/profile')
   end

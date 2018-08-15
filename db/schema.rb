@@ -25,8 +25,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_084623) do
     t.string "day_topic"
     t.string "day_details"
     t.integer "course_id"
-    t.string "topic_image"
-    t.string "topic_thumbnail"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -37,8 +35,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_084623) do
     t.integer "instructor_id"
     t.integer "no_days"
     t.integer "category_id"
-    t.string "course_image"
-    t.string "course_thumbnail"
     t.boolean "is_active"
   end
 
@@ -79,7 +75,6 @@ ActiveRecord::Schema.define(version: 2018_07_20_084623) do
     t.string "last_name"
     t.string "username"
     t.string "email"
-    t.string "user_image"
     t.string "password_digest"
     t.string "biography"
     t.boolean "is_active"

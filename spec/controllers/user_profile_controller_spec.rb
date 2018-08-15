@@ -10,7 +10,7 @@ describe UserProfileController do
           last_name: 'Ach',
           username: 'nili678',
           email: 'niliach@example.com',
-          user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+          biography: 'asdfa fasdf asf asfd asdf ',
           password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
@@ -40,7 +40,7 @@ describe UserProfileController do
           last_name: 'Ach',
           username: 'nili678',
           email: 'niliach@example.com',
-          user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+          biography: 'asdfa fasdf asf asfd asdf ',
           password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
@@ -68,7 +68,7 @@ describe UserProfileController do
           last_name: 'Ach',
           username: 'nili678',
           email: 'niliach@example.com',
-          user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+          biography: 'asdfa fasdf asf asfd asdf ',
           password: 'iesha', password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)
@@ -92,7 +92,6 @@ describe UserProfileController do
 
         fill_in :first_name, with: 'Editedfirstname'
         fill_in :last_name, with: 'editedlastname'
-        attach_file('Image Upload', 'spec/uploads/him.jpg')
         click_button 'Submit'
       end
     end

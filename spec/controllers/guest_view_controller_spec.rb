@@ -9,9 +9,6 @@ describe GuestController do
     it 'displays a list of menu links' do
       expect(response.body).to include(
         '<a class="nav-item-child nav-item-hover active" href="/">Home</a>',
-        '<a class="nav-item-child nav-item-hover" href="/about">About</a>',
-        '<a class="nav-item-child nav-item-hover" href="/faq">FAQ</a>',
-        '<a class="nav-item-child nav-item-hover" href="/contact">Contact</a>',
         '<a class="nav-item-child nav-item-hover" href="/login">Sign In</a>'
       )
     end

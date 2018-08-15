@@ -1,21 +1,5 @@
 # Module for handling actions to avoid DRY
 module UserHelpers
-  def upload_image
-    if params[:user_image].nil?
-      @fname = ''
-    else
-      file = params[:user_image]
-      file_name = file[:filename]
-      temp_file = file[:tempfile]
-      File.open("./public/images/#{file_name}", 'wb') do |f|
-        f.write(temp_file.read)
-      end
-      @fname = file_name
-    end
-  end
-
-  
-  
   def set_session_create_values
     session[:user] = params[:user]
   end
@@ -25,7 +9,7 @@ module UserHelpers
     user = {
       first_name: postuser[:first_name], last_name: postuser[:last_name],
       username: postuser[:username], email: postuser[:email],
-      user_image: @fname, password: postuser[:password],
+      password: postuser[:password],
       password_confirmation: postuser[:password],
       biography: postuser[:biography], is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
@@ -35,9 +19,7 @@ module UserHelpers
 
   def process_update(id)
     @user = User.find_by_id(id)
-    @user.user_image = @fname
     updated_values = {
-      user_image: @fname,
       first_name: params[:user][:first_name],
       last_name: params[:user][:last_name], is_active: params[:user][:is_active],
       biography: params[:user][:biography], updated_at: DateTime.now
@@ -94,6 +76,4 @@ module UserHelpers
       redirect to page_redirect_error
     end
   end
-
-  
 end

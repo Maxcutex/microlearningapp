@@ -26,7 +26,6 @@ feature 'Instructor can' do
     within '#day_num' do
       find("option[value='#{next_id}']").click
     end
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Add'
     expect(current_path).to eq("/user/courses/view/#{@course.id}")
     # expect(page.body).to have_content('My New Course')
@@ -62,7 +61,6 @@ feature 'Instructor can' do
     within '#day_num' do
       find("option[value='#{@course_detail.id}']").click
     end
-    # attach_file('Image Upload', 'spec/uploads/him.jpg') 
     click_on 'Edit'
     expect(current_path).to eq("/user/courses/view/#{@course.id}")
   end

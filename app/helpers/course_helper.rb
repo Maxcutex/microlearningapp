@@ -12,12 +12,11 @@ module CourseHelpers
   end
 
   def process_file_parameters
-    check_upload_file_image(params[:course_image])
     {
       name: params[:course_name], description: params[:course_description],
       is_active: params[:is_active], icon: '', instructor_id: session[:user_id],
       no_days: params[:course_days], category_id: params[:course_category],
-      level: params[:course_level], course_image: @file_name
+      level: params[:course_level]
     }
   end
 
@@ -33,19 +32,6 @@ module CourseHelpers
     end
   end
 
-  def check_upload_file_image(params_image)
-    @file_name = ''
-    unless params_image.nil?
-      file = params_image
-      @file_name = file[:filename]
-      temp_file = file[:tempfile]
-      File.open("./public/images/#{@file_name}", 'wb') do |f|
-        f.write(temp_file.read)
-      end
-    end
-    @file_name
-  end
-  
   def get_existing_enrollment(course_id, user_id)
     @user_enrollment = UserEnrollment.get_enrollment(user_id, course_id)
     @user_enrollment.is_active = false
@@ -86,7 +72,7 @@ module CourseHelpers
     variables = {
       day_number: params[:day_num], day_topic: params[:day_topic],
       day_details: params[:day_details],
-      course_id: params[:course_id], topic_image: @file_name
+      course_id: params[:course_id]
     }
     @course_detail = CourseDetail.create(variables)
   end
@@ -96,7 +82,7 @@ module CourseHelpers
     @course_detail.update(
       day_number: params[:day_num], day_topic: params[:day_topic],
       day_details: params[:day_details],
-      course_id: params[:course_id], topic_image: @file_name
+      course_id: params[:course_id]
     )
   end
 

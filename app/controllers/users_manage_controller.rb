@@ -32,13 +32,11 @@ class UserManageController < ApplicationController
   end
 
   post '/processuser' do
-    upload_image
     process_new
     save_process_admin
   end
 
   post '/edituser' do
-    upload_image
     process_update(params[:id])
     edit_process_admin
   end

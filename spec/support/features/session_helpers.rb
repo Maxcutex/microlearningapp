@@ -19,7 +19,6 @@ module Features
       fill_in('user_password', with: user_values[:password])
       fill_in('user_password_confirmation', with: user_values[:password])
       fill_in('user_biography', with: user_values[:biography])
-      attach_file('Image Upload', 'spec/uploads/him.jpg')
       click_button 'Register'
     end
 

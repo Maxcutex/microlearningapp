@@ -13,7 +13,7 @@ feature 'Register signs in' do
     user1 = generate_user_values
     user1[:username] = @user[:username]
     sign_up(user1)
-    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Register a new membership')
     expect(page).to have_content('Username has already been taken')
   end
 
@@ -21,7 +21,7 @@ feature 'Register signs in' do
     user1 = generate_user_values
     user1[:email] = @user[:email]
     sign_up(user1)
-    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Register a new membership')
     expect(page).to have_content('Email has already been taken')
   end
   scenario 'with blank password' do
@@ -29,7 +29,7 @@ feature 'Register signs in' do
     user1[:password] = nil
     user1[:password_confirmation] = nil
     sign_up(user1)
-    expect(page).to have_content('Sign in')
+    expect(page).to have_content('Register a new membership')
   end
 
 end

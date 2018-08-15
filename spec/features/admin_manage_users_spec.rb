@@ -22,7 +22,6 @@ feature 'Admin can', type: :feature do
       find("option[value='2']").click
     end
     check 'user[is_active]'
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Add'
     expect(current_path).to eq('/admin/users')
     expect(page.body).to have_content('FirstName')
@@ -44,7 +43,6 @@ feature 'Admin can', type: :feature do
       find("option[value='2']").click
     end
     check 'user[is_active]'
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_on 'Edit'
 
     expect(current_path).to eq('/admin/users')

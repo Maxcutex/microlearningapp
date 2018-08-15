@@ -13,7 +13,7 @@ describe UserController do
           last_name: 'andrian',
           username: 'adri123',
           email: 'adri@example.com',
-          user_image: 'myimage.jpg',
+          
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
           password_confirmation: 'stellenbosch', is_active: true
@@ -28,7 +28,7 @@ describe UserController do
           last_name: '',
           username: 'adri123',
           email: 'adri@example.com',
-          user_image: 'myimage.jpg',
+          
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
           password_confirmation: 'stellenbosch', is_active: true
@@ -43,7 +43,7 @@ describe UserController do
           last_name: 'andrian',
           username: '',
           email: 'adri@example.com',
-          user_image: 'myimage.jpg',
+          
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
           password_confirmation: 'stellenbosch', is_active: true
@@ -58,7 +58,7 @@ describe UserController do
           last_name: 'andrian',
           username: 'adri123',
           email: '',
-          user_image: 'myimage.jpg',
+          
           biography: 'asdfa fasdf asf asfd asdf ',
           password: 'stellenbosch',
           password_confirmation: 'stellenbosch', is_active: true
@@ -74,7 +74,7 @@ describe UserController do
           last_name: 'andrian',
           username: 'adri123',
           email: 'adri@example.com',
-          user_image: 'myimage.jpg',
+          
           biography: 'asdfa fasdf asf asfd asdf ',
           password: '',
           password_confirmation: 'stellenbosch', is_active: true
@@ -88,7 +88,7 @@ describe UserController do
         user_values = {
           first_name: 'Nili', last_name: 'Ach', username: 'nili678',
           email: 'niliach@example.com',
-          user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
+          biography: 'asdfa fasdf asf asfd asdf ', password: 'iesha',
           password_confirmation: 'iesha', is_active:true
         }
         user = User.create(user_values)

@@ -25,35 +25,35 @@ User.create(
     {
       first_name: 'Nili', last_name: 'Ach1', username: 'nili678',
       email: 'niliach1@example.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha1', password_confirmation: 'iesha1', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'David', last_name: 'Plate', username: 'nili6782',
       email: 'niliach2@example.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha2', password_confirmation: 'iesha2', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Femi', last_name: 'Lanre', username: 'nili6783',
       email: 'niliach3@example.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha3', password_confirmation: 'iesha3', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Jay', last_name: 'Bassey', username: 'nili6784',
       email: 'ennyboy@gmail.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha4', password_confirmation: 'iesha4', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Eno', last_name: 'Bassey', username: 'eno.bassey',
       email: 'eno.bassey@andela.com',
-      user_image: 'myimage.jpg', biography: 'asdfa fasdf asf asfd asdf ',
+      biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha5', password_confirmation: 'iesha5', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     }
@@ -112,8 +112,7 @@ id = 0
         icon: '', level: Faker::Number.between(1, 3),
         instructor_id: Faker::Number.between(2, 3),
         no_days: no_days,
-        category_id: Faker::Number.between(1, 6), course_image: '',
-        course_thumbnail: '', is_active: true
+        category_id: Faker::Number.between(1, 6), is_active: true
       }
     ]
   )
@@ -129,9 +128,7 @@ id = 0
           day_number: start,
           day_topic: Faker::Lorem.sentence(7, false, 0),
           day_details: Faker::Lorem.paragraph,
-          course_id: id,
-          topic_image: Faker::Avatar.image(rword, '300x300', 'jpg'),
-          topic_thumbnail: Faker::Avatar.image(rword, '50x50', 'jpg')
+          course_id: id
         }
       ]
     )

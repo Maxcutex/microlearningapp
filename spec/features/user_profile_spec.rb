@@ -12,7 +12,6 @@ feature 'User can', type: :feature do
     visit '/user/profile'
     fill_in 'user[first_name]', with: 'Editedfirstname'
     fill_in 'user[last_name]', with: 'editedlastname'
-    attach_file('Image Upload', 'spec/uploads/him.jpg')
     click_button 'Submit'
     expect(current_path).to eq('/user/profile')
   end

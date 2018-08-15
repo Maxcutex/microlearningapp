@@ -34,14 +34,12 @@ class CourseDetailController < ApplicationController
   end
 
   post '/editcoursedetail' do
-    check_upload_file_image(params[:topic_image])
     fetch_set_course_detail
     save_course_details("/instructor/coursedetail/#{params[:course_id]}/edit/#{@course_detail.id}")
   end
 
   #  Course Details Post Add
   post '/postcoursedetail' do
-    check_upload_file_image(params[:topic_image])
     check_if_details_exists
     create_course_detail
     save_course_details("/instructor/coursedetail/#{params[:course_id]}/add")

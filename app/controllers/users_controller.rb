@@ -17,7 +17,6 @@ class UserController < ApplicationController
   # CREATE a new user based on form information
   post '/signup' do
     set_session_create_values
-    upload_image
     process_new
     save_process('Add', '/user/dashboard', '/signup')
   end
