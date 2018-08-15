@@ -45,14 +45,14 @@ class ApplicationController < Sinatra::Base
   end
 
   def check_if_instructor
-    unless is_instructor?
+    unless instructor?
       flash[:error] = 'You do not have access to this page!'
       redirect to :'/accessdenied'
     end
   end
 
   def check_if_admin
-    unless is_admin?
+    unless admin?
       flash[:error] = 'You do not have access to this page!'
       redirect to :'/accessdenied'
     end
