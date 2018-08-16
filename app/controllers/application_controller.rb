@@ -4,6 +4,7 @@ require 'base64'
 require_relative '../helpers/session_helper'
 require_relative '../mailers/mail_sender'
 require_relative '../helpers/application_helper'
+require 'securerandom'
 
 # Main Controller for the microlearning application
 class ApplicationController < Sinatra::Base
@@ -16,8 +17,8 @@ class ApplicationController < Sinatra::Base
     use Rack::Flash
     set :public_folder, 'public'
     set :views, 'app/views'
-    set :sessions, true
-    set :session_secret, ENV.fetch('SESSION_SECRET')
+    set :sessions, expire_after: 2592000
+    set :session_secret, ENV.fetch('SESSION_SECRET') { SecureRandom.hex(64) }
   end
   before do
     headers 'Content-Type' => 'text/html; charset=utf-8'

@@ -21,6 +21,7 @@ gem 'rufo'
 gem 'whenever', require: false
 gem 'coveralls', require: false
 gem 'selenium-webdriver'
+gem 'sysrandom'
 
 group :test do
   gem 'rspec'

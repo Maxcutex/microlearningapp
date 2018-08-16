@@ -148,6 +148,7 @@ GEM
     sinatra-activerecord (2.0.13)
       activerecord (>= 3.2)
       sinatra (>= 1.0)
+    sysrandom (1.0.5)
     term-ansicolor (1.6.0)
       tins (~> 1.0)
     thin (1.7.2)
@@ -201,6 +202,7 @@ DEPENDENCIES
   simplecov
   sinatra
   sinatra-activerecord
+  sysrandom
   thin
   tux
   whenever
