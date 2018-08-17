@@ -45,14 +45,14 @@ User.create(
     },
     {
       first_name: 'Jay', last_name: 'Bassey', username: 'nili6784',
-      email: 'ennyboy@gmail.com',
+      email: 'ennyboy1@gmail.com',
       biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha4', password_confirmation: 'iesha4', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
     },
     {
       first_name: 'Eno', last_name: 'Bassey', username: 'eno.bassey',
-      email: 'eno.bassey@andela.com',
+      email: 'eno.bassey1@andela.com',
       biography: 'asdfa fasdf asf asfd asdf ',
       password: 'iesha5', password_confirmation: 'iesha5', is_active: true,
       created_at: DateTime.now, updated_at: DateTime.now
